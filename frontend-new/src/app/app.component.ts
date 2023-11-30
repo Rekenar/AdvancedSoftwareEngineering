@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'minigames-hub';
+
+  token: string|undefined;
+
+  constructor() {
+    this.token = undefined;
+  }
+
+  public send(form: NgForm): void {
+    if (form.invalid) {
+      for (const control of Object.keys(form.controls)) {
+        form.controls[control].markAsTouched();
+      }
+      return;
+    }
+
+    console.debug(`Token [${this.token}] generated`);
+  }
 }

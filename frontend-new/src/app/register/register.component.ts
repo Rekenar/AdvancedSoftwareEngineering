@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {catchError, tap} from "rxjs";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import {catchError, tap} from "rxjs";
 export class RegisterComponent implements OnInit{
   username: string = '';
   password: string = '';
-
+  sitekey = environment.siteKey;
   signUpForm: FormGroup = this.formBuilder.group({
     username: [null, [Validators.required, Validators.email]],
     password: [null, [Validators.required, Validators.minLength(8)]],
@@ -28,6 +29,7 @@ export class RegisterComponent implements OnInit{
   register() {
 
     console.log('Registering with username:', this.username, 'email:', 'and password:', this.password);
+
 
     const dataToSend = {
       username: this.username,

@@ -34,9 +34,10 @@
         </mat-form-field>
 
 
-        <div class="form-field">
-          <re-captcha formControlName="recaptchaReactive"></re-captcha>
+        <div class="full-width">
+          <re-captcha [siteKey]="sitekey" formControlName="recaptchaReactive"></re-captcha>
         </div>
+
 
 
         <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
