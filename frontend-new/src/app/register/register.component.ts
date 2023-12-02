@@ -17,7 +17,10 @@ export class RegisterComponent implements OnInit{
   // Hide the password input
   hide = true;
 
-  constructor(private registerService: AuthService,
+  // show if SignUp form is submitted
+  isSignUpFormSubmitted = false;
+
+  constructor(public registerService: AuthService,
               private formBuilder: FormBuilder,
               private changeDetectorRef: ChangeDetectorRef) {
   }
@@ -32,6 +35,8 @@ export class RegisterComponent implements OnInit{
     this.registerService.register(dataToSend).pipe(
       tap(response => {
         console.log('Data sent successfully:', response);
+        this.isSignUpFormSubmitted = true;
+        this.registerService.isSignUpSuccessful = true;
       }),
       catchError(error => {
         console.error('Error sending data:', error);
