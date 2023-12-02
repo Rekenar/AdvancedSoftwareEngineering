@@ -111,6 +111,6 @@ public class UserController {
 
         // TODO -> sending success Mail
 
-        return ResponseEntity.ok(SuccessMessages.REGISTRATION_SUCCSESS_MAIL_SENT.getMessage() + " with Link: " + confirmUrl);
+        return ResponseEntity.ok(SuccessMessages.REGISTRATION_SUCCSESS_MAIL_SENT.getMessage());
     }
 }

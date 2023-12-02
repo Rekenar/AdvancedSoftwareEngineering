@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControlOptions, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../auth.service";
+import {AuthService} from "../services/auth.service";
 import {catchError, tap} from "rxjs";
 import {environment} from "../../environments/environment";
 import { ChangeDetectorRef } from '@angular/core';

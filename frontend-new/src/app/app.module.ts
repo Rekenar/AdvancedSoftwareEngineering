@@ -16,6 +16,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -27,22 +28,23 @@ import {MatIconModule} from "@angular/material/icon";
     ContentAreaComponent,
     TopBarComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        HttpClientModule,
-        MatButtonModule,
-        FormsModule,
-        RecaptchaFormsModule,
-        RecaptchaModule,
-        MatIconModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    HttpClientModule,
+    MatButtonModule,
+    FormsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
+    MatIconModule,
+    MatToolbarModule
 
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

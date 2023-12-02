@@ -6,10 +6,12 @@ describe('ContentAreaComponent', () => {
   let component: ContentAreaComponent;
   let fixture: ComponentFixture<ContentAreaComponent>;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContentAreaComponent]
-    });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [ContentAreaComponent]
+    })
+    .compileComponents();
+    
     fixture = TestBed.createComponent(ContentAreaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

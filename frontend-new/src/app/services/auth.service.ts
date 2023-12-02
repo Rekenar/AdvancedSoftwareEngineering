@@ -23,4 +23,8 @@ export class AuthService {
     }
     return this.http.post<any>(`${this.apiUrl}/users/register`, data, HTTP_OPTIONS);
   }
+
+  confirmSignUp(token: string) {
+    return this.http.put(`${this.apiUrl}/users/confirm-sign-up?token=${token}`, HTTP_OPTIONS);
+  }
 }
