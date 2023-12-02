@@ -11,40 +11,18 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit{
-  username: string = '';
-  password: string = '';
   sitekey = environment.siteKey;
-  signUpForm: FormGroup = this.formBuilder.group({
-    username: [null, [Validators.required, Validators.email]],
-    password: [null, [Validators.required, Validators.minLength(8)]],
-    confirmPassword: [null, [Validators.required, Validators.minLength(8)]],
-    recaptchaReactive: [null, [Validators.required]],
-  }, {validator: [ this.emailValidator, this.passwordMatchValidator('password', 'confirmPassword')]} as AbstractControlOptions);
+  signUpForm: FormGroup;
 
   // Hide the password input
   hide = true;
-
-
 
   constructor(private registerService: AuthService,
               private formBuilder: FormBuilder,
               private changeDetectorRef: ChangeDetectorRef) {
   }
 
-  /*register() {
-    const dataToSend = {
-      username: this.signUpForm.value.username,
-      password: this.signUpForm.value.password
-    };
-
-    console.log('Registering with: ' +  JSON.stringify(dataToSend));
-
-    this.registerService.register(this.signUpForm.value);
-  }*/
-
   register() {
-
-    console.log('Registering with username:', this.username, 'email:', 'and password:', this.password);
 
     const dataToSend = {
       username: this.signUpForm.value.username,

@@ -37,39 +37,32 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<UserEntity> user = userRepo.findByUsername(username);
-        try {
-            user.orElseThrow(() -> new Exception("Not found: " + username));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return user.map(UserDetailsDTO::new).get();
+        return user.map(UserDetailsDTO::new).orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
     }
+
 
     public Long loadUserIdByUsername(String username) throws Exception {
-        Optional<UserEntity> userEntityOptional = userRepo.findByUsername(username);
-        userEntityOptional.orElseThrow(Exception::new);
-
-        return userEntityOptional.get().getId();
+        return userRepo.findByUsername(username)
+                .map(UserEntity::getId)
+                .orElseThrow(() -> new Exception("User not found: " + username));
     }
+
 
     @Transactional
     public UserEntity createUser(UserDetailsDTO dto) {
-        Optional<UserEntity> user = userRepo.findByUsername(dto.getUsername());
-        user.ifPresent(e -> {
+        if (userRepo.findByUsername(dto.getUsername()).isPresent()) {
             try {
                 throw new Exception(); // BadCredentials
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-        });
+        }
 
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(dto.getUsername());
         userEntity.setPassword(passwordEncoder.encode(dto.getPassword()));
-        UserEntity createdUser = userRepo.save(userEntity);
 
-        return userRepo.save(createdUser);
+        return userRepo.save(userEntity);
     }
 
     @Transactional

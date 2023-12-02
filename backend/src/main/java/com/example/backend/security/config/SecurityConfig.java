@@ -1,5 +1,6 @@
 package com.example.backend.security.config;
 
+import com.example.backend.security.JwtAuthenticationEntryPoint;
 import com.example.backend.security.filters.JwtAuthenticationFilter;
 import com.example.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class SecurityConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
     @Bean
     public JwtAuthenticationFilter authenticationTokenFilterBean() {
         return new JwtAuthenticationFilter();
@@ -55,6 +59,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // do not create a session! -> use jwt
+                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and() // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
@@ -89,7 +94,6 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Collections.singletonList("*"));
-//        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://gecko2-dev.iid.aau.at:8089", "http://gecko2-dev.iid.aau.at:4200", "http://localhost:8089"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

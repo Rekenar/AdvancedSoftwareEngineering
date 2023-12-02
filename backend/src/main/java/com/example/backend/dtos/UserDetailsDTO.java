@@ -5,9 +5,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UserDetailsDTO implements UserDetails {
     @Email
@@ -23,6 +27,8 @@ public class UserDetailsDTO implements UserDetails {
 
     private boolean isDeleted = false;
 
+    private List<GrantedAuthority> authorities; // is needed to be able to generate a valid UsernamePasswordAuthenticationToken -> https://stackoverflow.com/questions/71292800/not-able-to-log-in-authentication-failed-in-spring-security-with-good-credenti
+
     public UserDetailsDTO() {
     }
 
@@ -35,7 +41,7 @@ public class UserDetailsDTO implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
@@ -50,22 +56,22 @@ public class UserDetailsDTO implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return isEnabled;
     }
 
     public boolean isDeleted() {
