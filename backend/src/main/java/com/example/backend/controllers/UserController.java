@@ -1,8 +1,10 @@
 package com.example.backend.controllers;
 
 import com.example.backend.Exceptions.TokenNotFoundException;
+import com.example.backend.dtos.SignUpSuccessDTO;
 import com.example.backend.dtos.UserDetailsDTO;
 import com.example.backend.messages.SuccessMessages;
+import com.example.backend.models.ConfirmSignUpTokenEntity;
 import com.example.backend.models.UserEntity;
 import com.example.backend.security.jwt.JwtUtil;
 import com.example.backend.security.models.AuthenticationRequest;
@@ -77,19 +79,19 @@ public class UserController {
     /**
      * CREATING USER BEFORE SIGN UP PROCESS
      */
-    @PostMapping("/sign-up")
+    @PostMapping("/register")
     @PreAuthorize("permitAll()")
-    public ResponseEntity<String> createUser(@Valid @RequestBody UserDetailsDTO dto) {
+    public ResponseEntity<SignUpSuccessDTO> createUser(@Valid @RequestBody UserDetailsDTO dto) {
         UserEntity user = userService.createUser(dto);
         String token = UUID.randomUUID().toString();
-        confirmSignUpTokenService.createConfirmSignUpTokenForUser(user, token);
+        ConfirmSignUpTokenEntity confirmSignUpToken = confirmSignUpTokenService.createConfirmSignUpTokenForUser(user, token);
 
         // Send confirmation email to user
         String confirmUrl = frontendUrl + "users/confirm-sign-up?token=" + token;
 
         // TODO -> sending success Mail
 
-        return ResponseEntity.ok(SuccessMessages.CONFIRM_REGISTRATION_MAIL_SENT.getMessage() + " with Link: " + confirmUrl);
+        return ResponseEntity.ok(confirmSignUpTokenService.getSignupTokenSuccessBody(confirmUrl));
     }
 
 

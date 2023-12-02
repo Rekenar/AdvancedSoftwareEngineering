@@ -16,17 +16,4 @@ public enum SuccessMessages {
     public String getMessage() {
         return "{ \"message\":\"" + message + "\"}";
     }
-
-    public String getCode() {
-        return code;
-    }
-
-    public static String getMessageByCode(String code) {
-        for (SuccessMessages successMessage : SuccessMessages.values()) {
-            if (successMessage.getCode().equals(code)) {
-                return successMessage.getMessage();
-            }
-        }
-        return "{ \"message\":\"Code not found.\"}";
-    }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
+
+const HTTP_OPTIONS = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,11 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/login`, data);
   }
 
-  register(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/register`, data);
+  register(credentials: any) {
+    let data = {
+      username: credentials.username,
+      password: credentials.password
+    }
+    return this.http.post<any>(`${this.apiUrl}/users/register`, data, HTTP_OPTIONS);
   }
 }

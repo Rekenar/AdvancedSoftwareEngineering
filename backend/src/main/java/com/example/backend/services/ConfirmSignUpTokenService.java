@@ -1,4 +1,6 @@
 package com.example.backend.services;
+import com.example.backend.dtos.SignUpSuccessDTO;
+import com.example.backend.messages.SuccessMessages;
 import com.example.backend.models.ConfirmSignUpTokenEntity;
 import com.example.backend.models.UserEntity;
 import com.example.backend.repositories.ConfirmSignUpTokenRepo;
@@ -31,7 +33,7 @@ public class ConfirmSignUpTokenService {
     }
 
     @Transactional
-    public void createConfirmSignUpTokenForUser(UserEntity user, String token) {
+    public ConfirmSignUpTokenEntity createConfirmSignUpTokenForUser(UserEntity user, String token) {
         ConfirmSignUpTokenEntity confirmSignUpTokenEntity = new ConfirmSignUpTokenEntity();
         confirmSignUpTokenEntity.setToken(token);
         confirmSignUpTokenEntity.setUser(user);
@@ -43,7 +45,7 @@ public class ConfirmSignUpTokenService {
 
         confirmSignUpTokenEntity.setExpiryDate(calendar.getTime());
 
-        confirmSignUpTokenRepo.save(confirmSignUpTokenEntity);
+        return confirmSignUpTokenRepo.save(confirmSignUpTokenEntity);
     }
 
     @Transactional
@@ -58,5 +60,13 @@ public class ConfirmSignUpTokenService {
         confirmRegistrationTokenEntity.orElseThrow(Exception::new); // PasswordResetTokenNotFoundException
 
         return confirmRegistrationTokenEntity.get().getUser();
+    }
+
+    public SignUpSuccessDTO getSignupTokenSuccessBody(String confirmUrl){
+        return new SignUpSuccessDTO(
+                SuccessMessages.CONFIRM_REGISTRATION_MAIL_SENT.getMessage(),
+                confirmUrl
+        );
+
     }
 }
