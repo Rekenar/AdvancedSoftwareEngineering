@@ -1,0 +1,13 @@
+.card{
+  min-width: 250px;
+  width: 95%;
+  max-width: 500px;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 2rem 1rem;
+}
+
+.text {
+  text-align: center;
+  margin-top: 2rem;
+}

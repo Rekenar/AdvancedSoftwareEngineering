@@ -24,13 +24,10 @@ export class LoginComponent {
   constructor(private loginService: AuthService) { }
 
   login() {
-    console.log('Logging in with username:', this.username, 'and password:', this.password);
-    const dataToSend = {
-      username: this.username,
-      password: this.password
-    };
+    console.log('login pressed');
+  
 
-    this.loginService.login(dataToSend).pipe(
+    this.loginService.hello().pipe(
       tap(response => {
         console.log('Data sent successfully:', response);
       }),

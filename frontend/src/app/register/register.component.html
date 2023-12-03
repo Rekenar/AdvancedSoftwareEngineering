@@ -4,14 +4,44 @@
       <mat-card-title>Register</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form>
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+      <form [formGroup]="signUpForm" (ngSubmit)="register()">
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="username" required>
+          <mat-error *ngIf="signUpForm.get('username')?.hasError('required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="signUpForm.get('username')?.hasError('email')">
+            Invalid email format
+          </mat-error>
         </mat-form-field>
-        <mat-form-field class="full-width">
-          <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" placeholder="username" required>
+          <mat-error *ngIf="signUpForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" (click)="register()">Register</button>
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="password" placeholder="username" required>
+          <mat-error *ngIf="signUpForm.get('confirmPassword')?.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+
+        <!--
+        <div class="form-field">
+          <re-captcha formControlName="recaptchaReactive"></re-captcha>
+        </div>
+        -->
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="signUpForm.invalid">
+          Register
+        </button>
       </form>
     </mat-card-content>
   </mat-card>

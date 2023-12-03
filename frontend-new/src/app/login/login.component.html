@@ -1,0 +1,46 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" placeholder="username" required>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('username')?.hasError('invalidEmail')">
+            Invalid email format
+          </mat-error>
+        </mat-form-field>
+
+        <!--password-->
+        <mat-form-field class="full-width" appearance="outline">
+          <mat-label> Password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required minlength="8">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">
+            Password must be at least 8 characters long
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Login</button>
+      </form>
+      <br>
+      <p>Dont't have an account? <a routerLink="/register">Create one now!</a></p>
+      <mat-divider></mat-divider>
+      <div class="links">
+        <a routerLink="/home">Home</a>
+        <a routerLink="/password-reset">Reset password (not working by now)</a> <!-- todo implement component with routing-->
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
