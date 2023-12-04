@@ -31,6 +31,34 @@ export class AlmostMapComponent {
 
 
   timeLeftString: string ="10";
+  timeLeft: number = 10;
+  timerInterval: any;
+
+
+  // Timer functions 
+
+  startTimer() {
+    this.timerInterval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        let tmp = Math.round((this.timeLeft - 0.1) * 10) / 10;
+        let tmpstring = tmp.toFixed(1);
+        this.timeLeftString = tmpstring;
+        this.timeLeft = parseFloat(tmpstring);
+      } else {
+        this.pauseTimer(false);
+      }
+    }, 100);
+  }
+
+  pauseTimer(reset: boolean) {
+    clearInterval(this.timerInterval);
+    if (reset){
+      this.timeLeft=10;
+    }else{
+      this.timeLeft=0;
+    }
+  }
+
 
   //onClick functions 
 
@@ -41,7 +69,7 @@ export class AlmostMapComponent {
       this.map.removeLayer(this.marker);
     }
 
-
+    this.startTimer();
     this.nextDisabled = true;
     this.round++;
     this.map.setView([55.00, 15.00], 4);
@@ -77,6 +105,8 @@ export class AlmostMapComponent {
         
         this.nextDisabled = false;
         this.activeRound = false;
+
+        this.pauseTimer(true);
       }
     });
   }
