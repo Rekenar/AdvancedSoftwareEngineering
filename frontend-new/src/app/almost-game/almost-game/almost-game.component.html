@@ -1,1 +1,5 @@
-<p>almost-game works!</p>
+<div id="almost-game">
+    <app-almost-start *ngIf="menu" (startClick)="onStartClick()" (attrClick)="onShowAttrClick()"></app-almost-start>
+    <app-almost-map *ngIf="started" (quitClick)="onBackClick()"></app-almost-map>
+    <app-almost-attr *ngIf="attr" (backClick)="onBackClick()"></app-almost-attr>
+</div>

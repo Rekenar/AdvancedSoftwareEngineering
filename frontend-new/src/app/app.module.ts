@@ -8,6 +8,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ContentAreaComponent } from './content-area/content-area.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+
+import { AlmostGameComponent } from './almost-game/almost-game/almost-game.component';
+import { AlmostMapComponent } from './almost-game/almost-map/almost-map.component';
+import { AlmostStartComponent } from './almost-game/almost-start/almost-start.component';
+import { AlmostAttrComponent } from './almost-game/almost-attr/almost-attr.component';
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
@@ -43,8 +49,11 @@ import {MatListModule} from "@angular/material/list";
         RecaptchaModule,
         MatIconModule,
         MatToolbarModule,
-        MatListModule
-
+        MatListModule,
+        AlmostGameComponent,
+        AlmostAttrComponent,
+        AlmostStartComponent,
+        AlmostMapComponent
 
     ],
   providers: [],
