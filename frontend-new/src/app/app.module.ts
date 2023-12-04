@@ -13,6 +13,9 @@ import { AlmostGameComponent } from './almost-game/almost-game/almost-game.compo
 import { AlmostMapComponent } from './almost-game/almost-map/almost-map.component';
 import { AlmostStartComponent } from './almost-game/almost-start/almost-start.component';
 import { AlmostAttrComponent } from './almost-game/almost-attr/almost-attr.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
 
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -54,6 +57,7 @@ import {MatListModule} from "@angular/material/list";
         AlmostAttrComponent,
         AlmostStartComponent,
         AlmostMapComponent,
+        LeafletModule
 
     ],
   providers: [],

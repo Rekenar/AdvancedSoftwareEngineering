@@ -1,5 +1,4 @@
 import { Component,Output,EventEmitter } from '@angular/core';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet'; 
 
 
@@ -7,7 +6,7 @@ import * as L from 'leaflet';
 @Component({
   selector: 'app-almost-map',
   standalone: true,
-  imports: [LeafletModule],
+  imports: [],
   templateUrl: './almost-map.component.html',
   styleUrl: './almost-map.component.css'
 })
@@ -15,6 +14,11 @@ export class AlmostMapComponent {
   @Output() quitClick = new EventEmitter<void>();
 
   map!: L.Map;
+  marker?: L.Marker;
+  myIcon = L.icon({
+    iconUrl: '../../../assets/images/marker.png',
+    iconSize: [30, 30],
+  });
 
   round:number=0;
   infoString:String = "Ready?";
@@ -23,6 +27,7 @@ export class AlmostMapComponent {
   // 0 = Before start, 1 = game active, 2 = game ended
   status:number = 0;
   statusButton:Array<String> =  ["Start","Next","Restart"];
+  activeRound:Boolean = false;
 
 
   timeLeftString: string ="10";
@@ -30,7 +35,16 @@ export class AlmostMapComponent {
   //onClick functions 
 
   nextClicked() {
+    this.status = 1;
+    this.activeRound = true;
+    if (this.marker) {
+      this.map.removeLayer(this.marker);
+    }
 
+
+    this.nextDisabled = true;
+    this.round++;
+    this.map.setView([55.00, 15.00], 4);
   }
 
   quitClicked() {
@@ -51,7 +65,21 @@ export class AlmostMapComponent {
   }
 
   addClickable(map:L.Map){
-
+    map.on('click', (e) => {  
+      if(this.activeRound){
+        if(this.marker){
+            map.removeLayer(this.marker);
+        }
+        let popLocation= e.latlng;
+        console.log(popLocation);
+        this.marker = L.marker(e.latlng,{icon:this.myIcon});
+        map.addLayer(this.marker);
+        
+        this.nextDisabled = false;
+        this.activeRound = false;
+      }
+    });
   }
+
 
 }
