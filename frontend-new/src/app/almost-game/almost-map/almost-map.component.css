@@ -1,0 +1,54 @@
+#map {
+    margin: 0 auto;
+    height: 85vh;
+    width: 65vw;
+}
+
+
+button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
+#map-ui {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color:lightgray;
+    height:10vh;
+}
+
+#ui-el {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+}
+
+p {
+    font-size: large;
+    font-family: Constantia;
+}
+
+.count-div {
+    width: 100%;
+    font-size: 16px;
+    color: #333;
+    padding: 10px 14px;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    box-shadow: 0 0 15px rgb(0 0 0 / 20%);
+    border-radius: 5px;
+    line-height: 120%;
+    border: 1px solid grey;
+}
+
+#tile-attr {
+    font-size: large;
+    background-color:rgba(255, 255, 255, 0.4);
+}
+
+.leaflet-container {
+    cursor: crosshair;
+}

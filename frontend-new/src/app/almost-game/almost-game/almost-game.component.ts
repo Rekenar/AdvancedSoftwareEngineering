@@ -13,12 +13,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './almost-game.component.css'
 })
 export class AlmostGameComponent {
+
+
   menu = true;
   started = false;
   attr = false;
   
   onStartClick() {
-
+    this.menu=false;
+    this.started = true;
   }
 
   onShowAttrClick(){
