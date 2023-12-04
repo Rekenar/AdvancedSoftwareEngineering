@@ -22,11 +22,14 @@ export class AlmostGameComponent {
   }
 
   onShowAttrClick(){
-
+    this.menu=false;
+    this.attr = true;
   }
 
   onBackClick(){
-
+    this.started = false;
+    this.attr = false;
+    this.menu = true;
   }
 
 }
