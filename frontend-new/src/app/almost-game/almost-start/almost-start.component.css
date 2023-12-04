@@ -1,0 +1,35 @@
+#logo-image {
+    margin-top: 5%;
+    width: 40%;
+}
+
+#start-menu {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    background-image: url("../../../assets/images/earth-nasa.jpg");
+    background-size: cover;
+    height: 95vh;
+    width: 65vw;
+}
+
+#image-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+img {
+    margin: 5% auto;
+    max-width: 50%;
+    height: auto;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    appearance: none;
+    background-color: inherit;
+}
+
