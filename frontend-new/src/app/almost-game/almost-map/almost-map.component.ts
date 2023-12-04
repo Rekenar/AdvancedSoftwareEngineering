@@ -108,6 +108,12 @@ export class AlmostMapComponent {
 
         this.pauseTimer(true);
       }
+      if(this.round == 10){
+
+        this.status = 2;
+
+        this.round = 0;
+      }
     });
   }
 
