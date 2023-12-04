@@ -53,7 +53,7 @@ import {MatListModule} from "@angular/material/list";
         AlmostGameComponent,
         AlmostAttrComponent,
         AlmostStartComponent,
-        AlmostMapComponent
+        AlmostMapComponent,
 
     ],
   providers: [],

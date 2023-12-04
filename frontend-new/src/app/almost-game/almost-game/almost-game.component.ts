@@ -14,7 +14,6 @@ import { CommonModule } from '@angular/common';
 })
 export class AlmostGameComponent {
 
-
   menu = true;
   started = false;
   attr = false;
