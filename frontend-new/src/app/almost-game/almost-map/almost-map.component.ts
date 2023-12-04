@@ -15,6 +15,8 @@ export class AlmostMapComponent {
 
   map!: L.Map;
   marker?: L.Marker;
+  cityMarker?: L.CircleMarker;
+  distanceLine?: L.Polyline;
   myIcon = L.icon({
     iconUrl: '../../../assets/images/marker.png',
     iconSize: [30, 30],
@@ -214,6 +216,13 @@ export class AlmostMapComponent {
     if (this.marker) {
       this.map.removeLayer(this.marker);
     }
+    if (this.cityMarker){
+      this.map.removeLayer(this.cityMarker);
+    }
+    if (this.distanceLine){
+      this.map.removeLayer(this.distanceLine);
+    }
+
 
     this.startTimer();
     this.curCityData = this.exampleCities[this.round]
@@ -254,27 +263,17 @@ export class AlmostMapComponent {
         this.nextDisabled = false;
         this.activeRound = false;
 
-        this.calculateDistance();
+        this.showDistance(this.map);
         this.giveFeedback();
         this.pauseTimer(true);
       }
       if(this.round == 10){
-
+        this.infoString = "Good job! Score: " + this.score;
         this.status = 2;
-
+        this.score = 0;
         this.round = 0;
       }
     });
-  }
-
-  calculateDistance(){
-    if (this.marker){
-      let cityLatLng = L.latLng(this.curCityData.geometry.coordinates[1], this.curCityData.geometry.coordinates[0]);
-      let markerLatLng = this.marker.getLatLng();
-      let tmpdistance = cityLatLng.distanceTo(markerLatLng);
-      //this.marker.bindPopup("Distance: " + (tmpdistance / 1000).toFixed(0) + "km");
-      this.distance = tmpdistance;
-    }
   }
 
   giveFeedback() {
@@ -312,6 +311,34 @@ export class AlmostMapComponent {
     this.score += roundScore;
     this.infoString = feedback;
   }
+
+  showDistance(map: L.Map) {
+    if (this.marker) {
+      const cityLatLng = L.latLng(this.curCityData.geometry.coordinates[1], this.curCityData.geometry.coordinates[0]);
+      this.cityMarker = L.circleMarker(cityLatLng, { color: "green" });
+      this.cityMarker.bindPopup(this.curCityData.properties.capital,{autoClose:false});
+      const markerLatLng = this.marker.getLatLng();
+      if (markerLatLng) {
+        this.distance = cityLatLng.distanceTo(markerLatLng);
+      }
+      this.marker.bindPopup("Distance: " + (this.distance / 1000).toFixed(0) + "km");
+      map.addLayer(this.cityMarker);
+      this.cityMarker.openPopup();
+      this.marker.openPopup();
+      let lineLoc: L.LatLngTuple[] = [];
+      let x = cityLatLng.lat;
+      let y = cityLatLng.lng;
+      lineLoc.push([x, y]);
+    
+      x = this.marker.getLatLng().lat;
+      y = this.marker.getLatLng().lng;
+    
+      lineLoc.push([x, y]);
+      this.distanceLine = L.polyline(lineLoc as L.LatLngExpression[], { color: 'red' }).addTo(map);
+      map.fitBounds(this.distanceLine.getBounds());
+    }
+  }
+
 
 
 }
