@@ -22,6 +22,7 @@ export class AlmostMapComponent {
 
   round:number=0;
   infoString:String = "Ready?";
+  curCityData:any = {};
   nextDisabled:Boolean = false;
 
   // 0 = Before start, 1 = game active, 2 = game ended
@@ -33,6 +34,149 @@ export class AlmostMapComponent {
   timeLeftString: string ="10";
   timeLeft: number = 10;
   timerInterval: any;
+
+  exampleCities = [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          19.82,
+          41.33
+        ]
+      },
+      "properties": {
+        "capital": "Tirana",
+        "country": "Albania"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1.52,
+          42.51
+        ]
+      },
+      "properties": {
+        "capital": "Andorra la Vella",
+        "country": "Andorra"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.37,
+          48.21
+        ]
+      },
+      "properties": {
+        "capital": "Vienna",
+        "country": "Austria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          27.57,
+          53.9
+        ]
+      },
+      "properties": {
+        "capital": "Minsk",
+        "country": "Belarus"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          4.35,
+          50.85
+        ]
+      },
+      "properties": {
+        "capital": "Brussels",
+        "country": "Belgium"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          18.36,
+          43.85
+        ]
+      },
+      "properties": {
+        "capital": "Sarajevo",
+        "country": "Bosnia and Herzegovina"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          23.32,
+          42.7
+        ]
+      },
+      "properties": {
+        "capital": "Sofia",
+        "country": "Bulgaria"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.98,
+          45.81
+        ]
+      },
+      "properties": {
+        "capital": "Zagreb",
+        "country": "Croatia"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          33.37,
+          35.17
+        ]
+      },
+      "properties": {
+        "capital": "Nicosia",
+        "country": "Cyprus"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.42,
+          50.09
+        ]
+      },
+      "properties": {
+        "capital": "Prague",
+        "country": "Czech Republic"
+      }
+    }
+  ];
 
 
   // Timer functions 
@@ -70,6 +214,8 @@ export class AlmostMapComponent {
     }
 
     this.startTimer();
+    this.curCityData = this.exampleCities[this.round]
+    this.infoString = "City: " + this.curCityData.properties.capital;
     this.nextDisabled = true;
     this.round++;
     this.map.setView([55.00, 15.00], 4);
