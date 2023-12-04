@@ -21,6 +21,8 @@ export class AlmostMapComponent {
   });
 
   round:number=0;
+  score:number=0;
+  distance: number = 0;
   infoString:String = "Ready?";
   curCityData:any = {};
   nextDisabled:Boolean = false;
@@ -252,6 +254,8 @@ export class AlmostMapComponent {
         this.nextDisabled = false;
         this.activeRound = false;
 
+        this.calculateDistance();
+        this.giveFeedback();
         this.pauseTimer(true);
       }
       if(this.round == 10){
@@ -261,6 +265,52 @@ export class AlmostMapComponent {
         this.round = 0;
       }
     });
+  }
+
+  calculateDistance(){
+    if (this.marker){
+      let cityLatLng = L.latLng(this.curCityData.geometry.coordinates[1], this.curCityData.geometry.coordinates[0]);
+      let markerLatLng = this.marker.getLatLng();
+      let tmpdistance = cityLatLng.distanceTo(markerLatLng);
+      //this.marker.bindPopup("Distance: " + (tmpdistance / 1000).toFixed(0) + "km");
+      this.distance = tmpdistance;
+    }
+  }
+
+  giveFeedback() {
+    let feedback:string = "";
+    let distanceKm = this.distance/1000;
+    let roundScore:number=0;
+    let timeScore:number=0;
+    let distanceScore:number=0;
+    timeScore = (this.timeLeft>1)?(this.timeLeft):1;
+    if (this.timeLeft < 2){
+      feedback += "sleepy & ";
+    }else if(this.timeLeft < 5){
+      feedback += "slow & ";
+    }else if(this.timeLeft < 8){
+      feedback += "quick & ";
+    }else{
+      feedback += "turbo & ";
+    }
+    if(distanceKm < 100){
+      feedback += "almost!";
+      distanceScore = 10;
+    }else if(distanceKm < 301){
+      feedback += "close";
+      distanceScore = 7;
+    }else if(distanceKm < 701){
+      feedback += "miss";
+      distanceScore = 3;
+    }else{
+      feedback += ":(";
+      distanceScore=1;
+    }
+
+    roundScore = (timeScore* distanceScore)/10;
+
+    this.score += roundScore;
+    this.infoString = feedback;
   }
 
 
