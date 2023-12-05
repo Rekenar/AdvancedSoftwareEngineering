@@ -1,22 +1,21 @@
 package com.example.backend.services;
 
+import com.example.backend.models.AlmostCityEntity;
 import com.example.backend.models.HelloEntity;
-import com.example.backend.repositories.AlmostGameRepo;
-import com.example.backend.repositories.HelloRepo;
+import com.example.backend.repositories.AlmostCityRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class AlmostGameService {
+public class AlmostCityService {
 
     @Autowired
-    private AlmostGameRepo almostGameRepo;
+    private AlmostCityRepo almostCityRepo;
 
-    public List<HelloEntity> loadAllHelloEntities(){
-        return almostGameRepo.findAll();
+    public List<AlmostCityEntity> loadSampleCities(){
+        return almostCityRepo.sampleCities();
     }
-    
+
 }

@@ -1,5 +1,6 @@
 import { Component,Output,EventEmitter } from '@angular/core';
 import * as L from 'leaflet'; 
+import { AlmostGameService } from 'src/app/services/almost-game.service';
 
 
 
@@ -12,7 +13,11 @@ import * as L from 'leaflet';
 })
 export class AlmostMapComponent {
   @Output() quitClick = new EventEmitter<void>();
-
+  
+  constructor(private almostGameService:AlmostGameService) {
+    
+  }
+  
   map!: L.Map;
   marker?: L.Marker;
   cityMarker?: L.CircleMarker;
@@ -21,7 +26,8 @@ export class AlmostMapComponent {
     iconUrl: '../../../assets/images/marker.png',
     iconSize: [30, 30],
   });
-
+  
+  cityData: Array<Object>;
   round:number=0;
   score:number=0;
   distance: number = 0;
@@ -31,156 +37,13 @@ export class AlmostMapComponent {
 
   // 0 = Before start, 1 = game active, 2 = game ended
   status:number = 0;
-  statusButton:Array<String> =  ["Start","Next","Restart"];
+  statusButton:Array<String> =  ["Start","Next","Restart","Loading"];
   activeRound:Boolean = false;
 
 
   timeLeftString: string ="10";
   timeLeft: number = 10;
   timerInterval: any;
-
-  exampleCities = [
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          19.82,
-          41.33
-        ]
-      },
-      "properties": {
-        "capital": "Tirana",
-        "country": "Albania"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          1.52,
-          42.51
-        ]
-      },
-      "properties": {
-        "capital": "Andorra la Vella",
-        "country": "Andorra"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          16.37,
-          48.21
-        ]
-      },
-      "properties": {
-        "capital": "Vienna",
-        "country": "Austria"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          27.57,
-          53.9
-        ]
-      },
-      "properties": {
-        "capital": "Minsk",
-        "country": "Belarus"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          4.35,
-          50.85
-        ]
-      },
-      "properties": {
-        "capital": "Brussels",
-        "country": "Belgium"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          18.36,
-          43.85
-        ]
-      },
-      "properties": {
-        "capital": "Sarajevo",
-        "country": "Bosnia and Herzegovina"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          23.32,
-          42.7
-        ]
-      },
-      "properties": {
-        "capital": "Sofia",
-        "country": "Bulgaria"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          15.98,
-          45.81
-        ]
-      },
-      "properties": {
-        "capital": "Zagreb",
-        "country": "Croatia"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          33.37,
-          35.17
-        ]
-      },
-      "properties": {
-        "capital": "Nicosia",
-        "country": "Cyprus"
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          14.42,
-          50.09
-        ]
-      },
-      "properties": {
-        "capital": "Prague",
-        "country": "Czech Republic"
-      }
-    }
-  ];
 
 
   // Timer functions 
@@ -225,8 +88,8 @@ export class AlmostMapComponent {
 
 
     this.startTimer();
-    this.curCityData = this.exampleCities[this.round]
-    this.infoString = "City: " + this.curCityData.properties.capital;
+    this.curCityData = this.cityData[this.round]
+    this.infoString = "City: " + this.curCityData.city;
     this.nextDisabled = true;
     this.round++;
     this.map.setView([55.00, 15.00], 4);
@@ -238,13 +101,35 @@ export class AlmostMapComponent {
     
   }
 
+  resampleCities(start:boolean){
+    if(start){
+      this.almostGameService.getCitySample().subscribe((response) => {
+        this.cityData = response;
+        this.status = 0;
+        this.nextDisabled = false;
+        });
+    }else{
+      this.almostGameService.getCitySample().subscribe((response) => {
+        this.cityData = response;
+        this.status = 2;
+        this.nextDisabled = false;
+        });
+    }
+  }
+
   ngOnInit() {
+    this.status = 3;
+    this.nextDisabled = true;
     this.map = L.map('map').setView([55.00, 15.00], 4);
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
       maxZoom:8
     }).addTo(this.map);
 
     this.addClickable(this.map);
+
+    this.resampleCities(true);
+
+    console.log("hello?");
 
     // this.marker = L.marker([51.505, -0.09], { icon: this.myIcon }).addTo(this.map);
   }
@@ -268,10 +153,12 @@ export class AlmostMapComponent {
         this.pauseTimer(true);
       }
       if(this.round == 10){
-        this.infoString = "Good job! Score: " + this.score;
-        this.status = 2;
+        this.nextDisabled = true;
+        this.infoString = "Good job! Score: " + Math.round(this.score * 100) / 100;
+        this.status = 3;
         this.score = 0;
         this.round = 0;
+        this.resampleCities(false);
       }
     });
   }
@@ -314,9 +201,9 @@ export class AlmostMapComponent {
 
   showDistance(map: L.Map) {
     if (this.marker) {
-      const cityLatLng = L.latLng(this.curCityData.geometry.coordinates[1], this.curCityData.geometry.coordinates[0]);
+      const cityLatLng = L.latLng(this.curCityData.latitude, this.curCityData.longitude);
       this.cityMarker = L.circleMarker(cityLatLng, { color: "green" });
-      this.cityMarker.bindPopup(this.curCityData.properties.capital,{autoClose:false});
+      this.cityMarker.bindPopup(this.curCityData.city,{autoClose:false});
       const markerLatLng = this.marker.getLatLng();
       if (markerLatLng) {
         this.distance = cityLatLng.distanceTo(markerLatLng);
