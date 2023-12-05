@@ -18,6 +18,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
+import {AsteroidComponent} from "./asteroid/asteroid.component";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {MatListModule} from "@angular/material/list";
         RecaptchaModule,
         MatIconModule,
         MatToolbarModule,
-        MatListModule
+        MatListModule,
+        AsteroidComponent
 
 
     ],
