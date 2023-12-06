@@ -17,6 +17,32 @@ export class Asteroid {
     this.asteroidSize = asteroidSize;
   }
 
+  getHitbox(): Path2D {
+    let radius = 40;
+    const path = new Path2D();
+
+    if(this.asteroidSize == AsteroidEnum.small){
+      path.arc(this.x, this.y, radius, 0, 2 * Math.PI);
+    }
+    else if(this.asteroidSize == AsteroidEnum.medium){
+      path.arc(this.x, this.y, radius * 2, 0, 2 * Math.PI);
+    }
+    else if(this.asteroidSize == AsteroidEnum.big){
+      path.arc(this.x, this.y, radius * 3, 0, 2 * Math.PI);
+    }
+    return path;
+  }
+
+  collidesWith(otherObject: { getHitbox(): Path2D, getX:number, getY:number }, context: CanvasRenderingContext2D): boolean {
+    const asteroidHitbox = this.getHitbox();
+    const otherObjectHitbox = otherObject.getHitbox();
+    const otherObjectX = otherObject.getX;
+    const otherObjectY = otherObject.getY;
+
+    return context.isPointInPath(otherObjectHitbox, this.x, this.y) || context.isPointInPath(asteroidHitbox, otherObjectX, otherObjectY);
+  }
+
+
   updateAsteroids(width: number, height: number) {
     let movementX = Math.sin(this.angle) * this.speed;
     let movementY = Math.cos(this.angle) * this.speed;
@@ -57,7 +83,7 @@ export class Asteroid {
       path = this.drawAsteroidPath(2);
     }
     else if(this.asteroidSize == AsteroidEnum.big){
-      path = this.drawAsteroidPath(2);
+      path = this.drawAsteroidPath(3);
     }
 
     context.save();

@@ -23,6 +23,4 @@ public class BackendApplication {
             System.out.println(jdbc.getJdbcUrl());
         };
     }
-
-
 }

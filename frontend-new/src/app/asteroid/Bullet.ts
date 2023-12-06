@@ -11,11 +11,17 @@ export class Bullet {
     this.angle = angle;
   }
 
+  getHitbox(): Path2D {
+    const path = new Path2D();
+    path.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+    return path;
+  }
+
   drawBullet(context: CanvasRenderingContext2D) {
-      context.fillStyle = '#FFFFFF';
-      context.beginPath();
-      context.arc(this.x, this.y, 3, 0, 2 * Math.PI);
-      context.fill();
+    let path = new Path2D()
+    path.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+    context.fillStyle = '#FFFFFF';
+    context.fill(path);
   }
 
 

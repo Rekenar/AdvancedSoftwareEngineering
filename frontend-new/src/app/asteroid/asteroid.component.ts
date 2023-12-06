@@ -1,5 +1,5 @@
 import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
-import {CommonModule, Time} from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {Asteroid} from "./Asteroid";
 import {Spaceship} from "./Spaceship";
 
@@ -12,7 +12,7 @@ import {Spaceship} from "./Spaceship";
 })
 
 export class AsteroidComponent implements OnInit{
-  private spaceShip:Spaceship;
+  private readonly spaceShip:Spaceship;
 
   private context:CanvasRenderingContext2D;
 
@@ -22,9 +22,13 @@ export class AsteroidComponent implements OnInit{
 
   private gameRunning = false;
 
-  private counter = 0;
+  private isShot:boolean = false;
 
-  private possibleShots = 0;
+  private isHit: boolean = false;
+
+  private score = 0;
+
+
 
   constructor(private el: ElementRef, private renderer: Renderer2) {
     this.context = {} as CanvasRenderingContext2D;
@@ -53,12 +57,11 @@ export class AsteroidComponent implements OnInit{
       if(this.gameRunning) return;
       canvas.width = window.innerWidth * 0.99;
       canvas.height = window.innerHeight * 0.90;
-      this.draw();
-      this.spaceShip = new Spaceship(canvas.width / 2, canvas.height / 2, 0, 0, 0);
-      this.spaceShip.drawSpaceship(this.context);
+      this.drawBackground();
       this.context.fillStyle = '#666666';
       this.context.font = '30px Arial';
       this.context.fillText('Press any key to start', this.context.canvas.width / 4, this.context.canvas.height / 2);
+      this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height);
     };
 
     // Initial canvas setup
@@ -68,21 +71,22 @@ export class AsteroidComponent implements OnInit{
     window.addEventListener('resize', resizeCanvas);
   }
 
+  private drawBackground() {
+    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    this.context.fillStyle = '#000000';
+    this.context.fillRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+  }
+
 
   private gameLoop() {
-    if(!this.gameRunning) {
+    if(!this.gameRunning || this.spaceShip.getLives <= 0) {
+      this.gameOverScreen();
       return;
     }
 
+    this.update();
+
     this.draw();
-
-    this.updateSpaceship();
-    this.updateBullets();
-    this.updateAsteroids();
-
-
-
-    this.bulletShootTimer();
 
 
     setTimeout(() => this.gameLoop(), 1000 / 60); // 60 frames per second
@@ -90,44 +94,55 @@ export class AsteroidComponent implements OnInit{
 
 
 
-  private bulletShootTimer(){
-
-    if( this.possibleShots == 0 ){
-      this.possibleShots = 20;
-    }
-
-    this.counter++;
-  }
-
-
   private draw() {
-    this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+    this.drawBackground();
 
-    this.context.fillStyle = '#000000';
-    this.context.fillRect(0, 0, this.context.canvas.width, this.context.canvas.height);
+
+    this.asteroids.forEach(asteroid => asteroid.drawAsteroid(this.context));
+
+
+    this.spaceShip.draw(this.context);
+
+
+    this.drawScore();
+
   }
 
+
+  private update() {
+    this.updateSpaceship();
+    this.updateAsteroids();
+  }
 
 
   private updateSpaceship() {
     this.spaceShip.updateSpaceship(this.pressedKeys, this.context.canvas.width, this.context.canvas.height);
-    this.spaceShip.drawSpaceship(this.context);
-    this.spaceShip.drawThrust(this.context);
-  }
-
-  private updateBullets() {
-    for (const bullet of this.spaceShip.getBullets) {
-      if(bullet.updateBullet(this.context.canvas.width, this.context.canvas.height)) this.spaceShip.getBullets.splice(this.spaceShip.getBullets.indexOf(bullet), 1);
-      bullet.drawBullet(this.context);
-    }
   }
 
 
   private updateAsteroids() {
-    let count = 0;
     for(const asteroid of this.asteroids){
       asteroid.updateAsteroids(this.context.canvas.width, this.context.canvas.height);
-      asteroid.drawAsteroid(this.context);
+
+
+      if(!this.isHit){
+        if(asteroid.collidesWith(this.spaceShip, this.context)){
+          this.spaceShip.setLives = this.spaceShip.getLives - 1;
+          this.isHit = true;
+          setTimeout(() => this.isHit = false, 2000);
+          this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height);
+        }
+      }
+
+      for(const bullet of this.spaceShip.getBullets) {
+        if(asteroid.collidesWith(bullet, this.context)) {
+
+          this.asteroids.splice(this.asteroids.indexOf(asteroid), 1);
+          this.score += 1;
+          this.spaceShip.getBullets.splice(this.spaceShip.getBullets.indexOf(bullet), 1);
+          break;
+        }
+      }
     }
   }
 
@@ -137,11 +152,9 @@ export class AsteroidComponent implements OnInit{
   @HostListener('window:keydown', ['$event'])
   handleKeyDown(event: KeyboardEvent) {
     this.pressedKeys.add(event.key);
-    if(event.key === ' ') {
-      if(this.possibleShots > 0){
-        this.spaceShip.shoot();
-        this.possibleShots--;
-      }
+    if(event.key === ' ' &&  !this.isShot) {
+      this.isShot = true;
+      this.spaceShip.shoot();
     }
   }
 
@@ -150,6 +163,10 @@ export class AsteroidComponent implements OnInit{
     this.pressedKeys.delete(event.key);
     if(event.key === 'ArrowUp') {
       this.spaceShip.setMoving(false);
+    }
+
+    if(event.key === ' ' &&  this.isShot) {
+      this.isShot = false;
     }
   }
 
@@ -160,6 +177,20 @@ export class AsteroidComponent implements OnInit{
     }
   }
 
+  private drawScore() {
+    this.context.fillStyle = '#FFFFFF';
+    this.context.font = '30px Arial';
+    this.context.textAlign = 'center';
+    this.context.fillText('Score: ' + this.score, this.context.canvas.width/2, 50);
+  }
+  private gameOverScreen() {
+    this.drawBackground()
+    this.context.fillStyle = '#FFFFFF';
+    this.context.font = '30px Arial';
+    this.context.textAlign = 'center';
+    this.context.fillText('Game Over', this.context.canvas.width/2, this.context.canvas.height/2);
+    this.context.fillText('Score: ' + this.score, this.context.canvas.width/2, this.context.canvas.height/2 + 50)
+  }
 }
 
 
