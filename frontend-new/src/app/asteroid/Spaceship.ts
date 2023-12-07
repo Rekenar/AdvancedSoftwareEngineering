@@ -19,7 +19,7 @@ export class Spaceship{
     this.angle = angle;
     this.rotation = rotation;
     this.moving = false;
-    this.shots = 20;
+    this.shots = 10;
     this.isReloading = false;
     this.lives = 3;
   }
@@ -161,7 +161,7 @@ export class Spaceship{
   }
 
   rotate(pressedKeys: Set<string>){
-    const rotationIncrement = 0.05;
+    const rotationIncrement = 0.07;
 
     if (pressedKeys.has('ArrowLeft')) {
       this.rotation -= rotationIncrement;
@@ -174,7 +174,7 @@ export class Spaceship{
 
   shoot() {
     if(!this.isReloading){
-      const speed = 5; // Adjust the bullet speed as needed
+      const speed = 10; // Adjust the bullet speed as needed
       const angle = this.rotation; // Use the spaceship's current rotation angle
 
       const bullet = new Bullet(this.x, this.y, speed, angle);
@@ -183,7 +183,7 @@ export class Spaceship{
       if(this.shots <= 0 ){
         this.isReloading = true;
         setTimeout(() => {
-          this.shots = 20;
+          this.shots = 10;
           this.isReloading = false;
         }, 1000);
       }

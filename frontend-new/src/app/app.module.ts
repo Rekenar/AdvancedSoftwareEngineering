@@ -19,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import {AsteroidComponent} from "./asteroid/asteroid.component";
+import {PreviewComponent} from "./preview/preview.component";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {AsteroidComponent} from "./asteroid/asteroid.component";
         MatIconModule,
         MatToolbarModule,
         MatListModule,
-        AsteroidComponent
+        AsteroidComponent,
+        PreviewComponent
 
 
     ],

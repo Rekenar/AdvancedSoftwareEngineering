@@ -2,6 +2,15 @@ import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/c
 import {CommonModule} from '@angular/common';
 import {Asteroid} from "./Asteroid";
 import {Spaceship} from "./Spaceship";
+import {AsteroidEnum} from "./asteroid.enum";
+
+//todo: Add Menu with start button and settings for sound and color of spaceship and asteroids and bullets
+//todo: Add Highscore
+//todo: Add Sound
+//todo: Maybe add different spaceships
+//todo: Maybe add enemies
+
+
 
 @Component({
   selector: 'app-asteroid',
@@ -136,9 +145,27 @@ export class AsteroidComponent implements OnInit{
 
       for(const bullet of this.spaceShip.getBullets) {
         if(asteroid.collidesWith(bullet, this.context)) {
+          let angleRandom = Math.random() * 0.5;
 
+          switch(asteroid.getSize){
+            case AsteroidEnum.small: {
+              this.score += 10;
+              break;
+            }
+            case AsteroidEnum.medium: {
+              this.score += 5;
+              this.asteroids.push(new Asteroid(asteroid.getX+50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle*angleRandom, asteroid.getRotation, AsteroidEnum.small));
+              this.asteroids.push(new Asteroid(asteroid.getX-50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle, asteroid.getRotation, AsteroidEnum.small));
+              break;
+            }
+            case AsteroidEnum.big: {
+              this.score += 2;
+              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle*angleRandom, asteroid.getRotation, AsteroidEnum.medium));
+              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle, asteroid.getRotation, AsteroidEnum.medium));
+              break;
+            }
+          }
           this.asteroids.splice(this.asteroids.indexOf(asteroid), 1);
-          this.score += 1;
           this.spaceShip.getBullets.splice(this.spaceShip.getBullets.indexOf(bullet), 1);
           break;
         }
@@ -172,9 +199,15 @@ export class AsteroidComponent implements OnInit{
 
   private createAsteroid() {
     for(let i = 0; i < 10; i++){
-      const asteroid = new Asteroid(Math.pow(5,i), i, 1.5, -0.1*i, 0.1, 0);
-      this.asteroids.push(asteroid);
+      let random = Math.random() * -Math.PI*2;
+      let randomX = Math.random() * this.context.canvas.width;
+      let randomY = Math.random() * this.context.canvas.height;
+      let randomSize = Math.floor(Math.random() * 3);
+
+      this.asteroids.push(new Asteroid(randomX, randomY,1,random,0,randomSize));
     }
+
+    //this.asteroids.push(new Asteroid(100, 100, 1, -Math.PI/2, 0, AsteroidEnum.big));
   }
 
   private drawScore() {
@@ -202,3 +235,11 @@ export class AsteroidComponent implements OnInit{
 
 
 //Asteroid(id, x-coordinate, y-coordinate, speed, angle, rotation, size) for DB
+//Where angle is pointed at random point on the canvas
+//Where rotation starts with 0
+//Where size is 0 = small, 1 = medium, 2 = big
+//Where speed is between 0.5 and 1.5 for all asteroids
+//X and Y coordinates are random and not on the canvas
+//Get new Asteroids every 15 seconds
+
+

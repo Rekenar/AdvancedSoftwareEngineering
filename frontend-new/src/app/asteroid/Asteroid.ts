@@ -151,6 +151,29 @@ export class Asteroid {
     return path;
   }
 
+  get getX(): number {
+    return this.x;
+  }
+
+  get getY(): number {
+    return this.y;
+  }
+
+  get getSpeed(): number {
+    return this.speed;
+  }
+
+  get getAngle(): number {
+    return this.angle;
+  }
+
+  get getRotation(): number {
+    return this.rotation;
+  }
+
+  get getSize(): AsteroidEnum {
+    return this.asteroidSize;
+  }
 
 }
 
