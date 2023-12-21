@@ -36,7 +36,11 @@ import {MatListModule} from "@angular/material/list";
     LoginComponent,
     RegisterComponent,
     ContentAreaComponent,
-    TopBarComponent
+    TopBarComponent,
+    AlmostGameComponent,
+    AlmostAttrComponent,
+    AlmostStartComponent,
+    AlmostMapComponent,
   ],
     imports: [
         BrowserModule,
@@ -53,10 +57,6 @@ import {MatListModule} from "@angular/material/list";
         MatIconModule,
         MatToolbarModule,
         MatListModule,
-        AlmostGameComponent,
-        AlmostAttrComponent,
-        AlmostStartComponent,
-        AlmostMapComponent,
         LeafletModule
 
     ],

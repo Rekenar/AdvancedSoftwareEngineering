@@ -6,8 +6,6 @@ import { AlmostGameService } from 'src/app/services/almost-game.service';
 
 @Component({
   selector: 'app-almost-map',
-  standalone: true,
-  imports: [],
   templateUrl: './almost-map.component.html',
   styleUrl: './almost-map.component.css'
 })
