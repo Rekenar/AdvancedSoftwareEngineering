@@ -127,9 +127,7 @@ export class AlmostMapComponent {
 
     this.resampleCities(true);
 
-    console.log("hello?");
 
-    // this.marker = L.marker([51.505, -0.09], { icon: this.myIcon }).addTo(this.map);
   }
 
   addClickable(map:L.Map){
