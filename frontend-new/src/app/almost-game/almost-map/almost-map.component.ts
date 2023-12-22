@@ -1,4 +1,4 @@
-import { Component,Output,EventEmitter } from '@angular/core';
+import { Component,Output,EventEmitter, Input } from '@angular/core';
 import * as L from 'leaflet'; 
 import { AlmostGameService } from 'src/app/services/almost-game.service';
 
@@ -10,9 +10,11 @@ import { AlmostGameService } from 'src/app/services/almost-game.service';
   styleUrl: './almost-map.component.css'
 })
 export class AlmostMapComponent {
+
   @Output() quitClick = new EventEmitter<void>();
+  @Input() modeData: any = {earth:true,capitals:true};
   
-  constructor(private almostGameService:AlmostGameService) {
+  constructor(private almostGameService: AlmostGameService) {
     
   }
   
@@ -119,14 +121,21 @@ export class AlmostMapComponent {
     this.status = 3;
     this.nextDisabled = true;
     this.map = L.map('map').setView([55.00, 15.00], 4);
-    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-      maxZoom:8
-    }).addTo(this.map);
+
+    if(this.modeData.earth){
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        maxZoom:8
+      }).addTo(this.map);
+    }else{
+      L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner_background/{z}/{x}/{y}{r}.png', {
+        maxZoom: 8,
+      }).addTo(this.map);
+    }
 
     this.addClickable(this.map);
 
     this.resampleCities(true);
-
+    console.log(this.modeData)
 
   }
 

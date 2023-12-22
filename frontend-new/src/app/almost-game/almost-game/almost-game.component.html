@@ -1,11 +1,12 @@
 <div id="almost-game">
-    <div id="start-menu" *ngIf="menu || attr">
-        <button id="back-button" (click)="onBackClick()" *ngIf="attr"><img src="../../assets/images/back.png" alt="back"  id="back-text" /></button>
+    <div id="start-menu" *ngIf="menu || attr || mode">
+        <button id="back-button" (click)="onBackClick()" *ngIf="attr || mode"><img src="../../assets/images/back.png" alt="back"  id="back-text" /></button>
         <div id="image-div">
             <img src="../../../assets/images/logo.png" alt="almost-logo" id="logo-image">
         </div>
         <app-almost-start *ngIf="menu" (startClick)="onStartClick()" (attrClick)="onShowAttrClick()"></app-almost-start>    
         <app-almost-attr *ngIf="attr" (backClick)="onBackClick()"></app-almost-attr>
+        <app-almost-mode *ngIf="mode" (modeClick)="onModeClick($event)"></app-almost-mode>
     </div>
-    <app-almost-map *ngIf="started" (quitClick)="onBackClick()"></app-almost-map>
+    <app-almost-map *ngIf="started" (quitClick)="onBackClick()" [modeData]="modeData"></app-almost-map>
 </div>

@@ -25,7 +25,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 50%;
+  height: 30%;
+  padding-bottom: 2%;
 }
 
 #logo-image {
@@ -43,10 +44,11 @@ button {
   cursor: pointer;
   appearance: none;
   background-color: inherit;
+  cursor: url('../../../assets/images/marker-cursor.png'), auto;
 }
 
 img {
-  margin: 5% auto;
+  margin: 1% auto;
   max-width: 50%;
   height: auto;
 }

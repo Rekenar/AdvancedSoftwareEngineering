@@ -27,6 +27,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
+import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {MatListModule} from "@angular/material/list";
     AlmostAttrComponent,
     AlmostStartComponent,
     AlmostMapComponent,
+    AlmostModeComponent
   ],
     imports: [
         BrowserModule,

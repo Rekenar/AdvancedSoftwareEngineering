@@ -13,7 +13,7 @@ img {
     max-width: 50%;
     height: auto;
     background-color:rgba(255, 255, 255, 0.4);
-
+    padding: 2%;
 }
 
 button {
@@ -21,6 +21,7 @@ button {
     cursor: pointer;
     appearance: none;
     background-color: inherit;
+    cursor: url('../../../assets/images/marker-cursor.png'), auto;
 }
 
 #attr-button {

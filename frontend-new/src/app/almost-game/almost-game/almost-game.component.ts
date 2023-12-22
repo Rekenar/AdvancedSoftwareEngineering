@@ -10,10 +10,12 @@ export class AlmostGameComponent {
   menu = true;
   started = false;
   attr = false;
+  mode = false;
+  modeData:object;
   
   onStartClick() {
     this.menu=false;
-    this.started = true;
+    this.mode=true;
   }
 
   onShowAttrClick(){
@@ -24,7 +26,15 @@ export class AlmostGameComponent {
   onBackClick(){
     this.started = false;
     this.attr = false;
+    this.mode = false;
     this.menu = true;
   }
+
+  onModeClick(modeData:object){
+    this.mode=false;
+    this.modeData = modeData;
+    this.started = true;
+  }
+
 
 }
