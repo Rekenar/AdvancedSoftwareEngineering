@@ -18,8 +18,14 @@ public class AlmostCityController {
     private AlmostCityService almostCityService;
 
     @GetMapping("/cities")
-    public ResponseEntity<List<AlmostCityEntity>> loadAllAlmostCityEntities() {
+    public ResponseEntity<List<AlmostCityEntity>> loadAlmostCityEntities() {
         List<AlmostCityEntity> hellos = almostCityService.loadSampleCities();
+        return ResponseEntity.ok(hellos);
+    }
+
+    @GetMapping("/capitals")
+    public ResponseEntity<List<AlmostCityEntity>> loadAlmostCityCapitalEntities() {
+        List<AlmostCityEntity> hellos = almostCityService.loadSampleCapitals();
         return ResponseEntity.ok(hellos);
     }
 

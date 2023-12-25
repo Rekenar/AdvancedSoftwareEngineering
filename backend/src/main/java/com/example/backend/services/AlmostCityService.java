@@ -18,4 +18,8 @@ public class AlmostCityService {
         return almostCityRepo.sampleCities();
     }
 
+    public List<AlmostCityEntity> loadSampleCapitals(){
+        return almostCityRepo.sampleCapitals();
+    }
+
 }

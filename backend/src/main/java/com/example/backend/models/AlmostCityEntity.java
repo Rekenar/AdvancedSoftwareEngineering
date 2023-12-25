@@ -19,6 +19,9 @@ public class AlmostCityEntity {
     @Column(name = "city", nullable = false)
     private String city;
 
+    @Column(name="capital",nullable = false)
+    private Boolean capital;
+
     public Long getId() {
         return id;
     }
@@ -48,5 +51,13 @@ public class AlmostCityEntity {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Boolean getCapital() {
+        return capital;
+    }
+
+    public void setCapital(Boolean capital) {
+        this.capital = capital;
     }
 }

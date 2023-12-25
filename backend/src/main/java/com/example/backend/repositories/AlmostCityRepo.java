@@ -13,4 +13,7 @@ public interface AlmostCityRepo extends JpaRepository<AlmostCityEntity, Long> {
 
     @Query(value = "SELECT * FROM almost_game_capitals ORDER BY RAND() LIMIT 10", nativeQuery = true)
     List<AlmostCityEntity> sampleCities();
+
+    @Query(value = "SELECT * FROM almost_game_capitals WHERE capital=true ORDER BY RAND() LIMIT 10", nativeQuery = true)
+    List<AlmostCityEntity> sampleCapitals();
 }

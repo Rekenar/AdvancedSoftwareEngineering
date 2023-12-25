@@ -15,4 +15,9 @@ export class AlmostGameService {
   getCitySample (): Observable<object[]> {
     return this.http.get<object[]>(`${this.apiUrl}/almost/cities`, {headers: new HttpHeaders({'Content-Type': 'application/json','Authorization' : 'Bearer ' + this.loginService.getToken()})});
   }
+
+  getCapitalSample (): Observable<object[]> {
+    return this.http.get<object[]>(`${this.apiUrl}/almost/capitals`, {headers: new HttpHeaders({'Content-Type': 'application/json','Authorization' : 'Bearer ' + this.loginService.getToken()})});
+  }
+
 }

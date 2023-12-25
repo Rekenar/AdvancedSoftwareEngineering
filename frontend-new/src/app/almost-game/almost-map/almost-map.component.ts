@@ -102,19 +102,22 @@ export class AlmostMapComponent {
   }
 
   resampleCities(start:boolean){
-    if(start){
-      this.almostGameService.getCitySample().subscribe((response) => {
-        this.cityData = response;
-        this.status = 0;
-        this.nextDisabled = false;
-        });
+    if(this.modeData.capitals){
+      this.almostGameService.getCapitalSample().subscribe((response) => {
+        this.cityData = response;      
+      });
     }else{
       this.almostGameService.getCitySample().subscribe((response) => {
-        this.cityData = response;
-        this.status = 2;
-        this.nextDisabled = false;
-        });
+        this.cityData = response;      
+      });
     }
+    this.nextDisabled = false;
+    if(start){
+      this.status = 0;
+    }else{
+      this.status = 2;
+    }
+    
   }
 
   ngOnInit() {
