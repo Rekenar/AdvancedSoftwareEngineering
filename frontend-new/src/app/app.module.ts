@@ -18,8 +18,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
-import {SnakegameComponent} from "./snakegame/snakegame.component";
-
+import {SnakegameModule} from "./snakegame/snakegame.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +27,7 @@ import {SnakegameComponent} from "./snakegame/snakegame.component";
     LoginComponent,
     RegisterComponent,
     ContentAreaComponent,
-    TopBarComponent
+    TopBarComponent,
   ],
     imports: [
         BrowserModule,
@@ -45,7 +44,7 @@ import {SnakegameComponent} from "./snakegame/snakegame.component";
         MatIconModule,
         MatToolbarModule,
         MatListModule,
-        SnakegameComponent
+        SnakegameModule
     ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,26 @@
+/* board.component.css */
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr); /* Adjust based on gridSize */
+  grid-template-rows: repeat(10, 1fr); /* Adjust based on gridSize */
+  gap: 2px; /* Adjust based on your preference */
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 30px; /* Adjust based on your preference */
+  height: 30px; /* Adjust based on your preference */
+  border: 1px solid #ccc;
+  box-sizing: border-box; /* Include padding and border in the cell size */
+}
+
+.snake {
+  background-color: #2ecc71; /* Adjust based on your preference */
+}
+
+.food {
+  background-color: #e74c3c; /* Adjust based on your preference */
+}
