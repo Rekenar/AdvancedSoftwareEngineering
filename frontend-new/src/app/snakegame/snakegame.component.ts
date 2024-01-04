@@ -11,9 +11,8 @@ export class SnakegameComponent {
     { row: 0, col: 0 },
     { row: 0, col: 1 },
     { row: 0, col: 2 }
-    // Initial snake positions, adjust as needed
-  ];
-  foodPosition: { row: number; col: number } = { row: 5, col: 5 }; // Initial food position
+  ]; // Initial snake position
+  foodPosition: { row: number; col: number } = { row: 10, col: 10 }; // Initial food position
 
   // Logic for handling user input, updating snake position, and checking for collisions can go here
 }

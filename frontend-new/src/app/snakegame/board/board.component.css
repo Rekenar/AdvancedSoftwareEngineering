@@ -1,18 +1,23 @@
 /* board.component.css */
-.board {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Adjust based on gridSize */
-  grid-template-rows: repeat(10, 1fr); /* Adjust based on gridSize */
-  gap: 2px; /* Adjust based on your preference */
+.board-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  height: 100vh; /* Adjust based on your preference */
 }
 
-.row {
-  display: flex;
+.board {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr); /* Increase the number of columns */
+  grid-template-rows: repeat(20, 1fr); /* Increase the number of rows */
+  gap: 2px; /* Adjust based on your preference */
+  width: 450px; /* Adjust based on your preference */
+  height: 450px; /* Adjust based on your preference */
 }
 
 .cell {
-  width: 30px; /* Adjust based on your preference */
-  height: 30px; /* Adjust based on your preference */
+  width: 20px; /* Adjust based on your preference */
+  height: 20px; /* Adjust based on your preference */
   border: 1px solid #ccc;
   box-sizing: border-box; /* Include padding and border in the cell size */
 }

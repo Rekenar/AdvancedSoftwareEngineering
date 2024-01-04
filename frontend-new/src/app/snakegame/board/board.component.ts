@@ -10,7 +10,7 @@ export class BoardComponent implements OnInit {
   @Input() snakePosition: { row: number, col: number }[];
   @Input() foodPosition: { row: number, col: number };
 
-  gridSize = 10; // Adjust this based on your preference
+  gridSize = 20;
 
   ngOnInit() {
     // Additional initialization logic if needed
