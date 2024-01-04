@@ -1,0 +1,33 @@
+/* snakegame.component.css */
+.game-container {
+  position: relative;
+}
+
+.game-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure the overlay is on top of other elements */
+}
+
+.overlay-content {
+  text-align: center;
+  color: white;
+}
+
+.score-container {
+  position: absolute;
+  top: 100%; /* Position it just below the board */
+  left: 50%;
+  transform: translateX(-50%);
+  color: black; /* Change the text color to black or another contrasting color */
+  font-size: 18px;
+}
+
+/* Add any additional styles based on your design */

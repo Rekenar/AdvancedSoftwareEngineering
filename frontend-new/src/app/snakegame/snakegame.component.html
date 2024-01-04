@@ -1,7 +1,23 @@
 <!-- snakegame.component.html -->
-<app-board
-  [snakePosition]="snakePosition"
-  [foodPosition]="foodPosition"
-></app-board>
+<div class="game-container" *ngIf="!isGameOver">
+  <!-- Your game content here -->
+  <app-board
+    [snakePosition]="snakePosition"
+    [foodPosition]="foodPosition"
+  ></app-board>
 
-<button (click)="updateGame()">Update Game</button>
+  <!-- Display the score below the board -->
+  <div class="score-container">
+    <p>Score: {{ score }}</p>
+  </div>
+</div>
+
+<div class="game-overlay" *ngIf="isGameOver">
+  <!-- Game-over overlay content -->
+  <div class="overlay-content">
+    <h1>Game Over!</h1>
+    <p>Your final score: {{ score }}</p>
+    <!-- You can add more elements, buttons, or links for restarting the game or navigating to other screens -->
+    <button (click)="resetGame()">Restart</button>
+  </div>
+</div>

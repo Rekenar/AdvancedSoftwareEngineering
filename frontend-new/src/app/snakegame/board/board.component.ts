@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent {
-  @Input() gridSize = 20;
+  @Input() gridSize = 15;
   @Input() snakePosition: { row: number, col: number }[] = [{ row: 0, col: 0 }];
   @Input() foodPosition: { row: number, col: number } = { row: 5, col: 5 };
 

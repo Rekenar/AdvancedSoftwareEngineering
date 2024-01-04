@@ -8,17 +8,18 @@
 
 .board {
   display: grid;
-  grid-template-columns: repeat(20, 1fr); /* Increase the number of columns */
-  grid-template-rows: repeat(20, 1fr); /* Increase the number of rows */
+  grid-template-columns: repeat(15, 1fr); /* Increase the number of columns */
+  grid-template-rows: repeat(15, 1fr); /* Increase the number of rows */
   gap: 2px; /* Adjust based on your preference */
-  width: 450px; /* Adjust based on your preference */
-  height: 450px; /* Adjust based on your preference */
+  /*width: 320px; !* Adjust based on your preference *!*/
+  /*height: 320px; /* Adjust based on your preference */
 }
 
 .cell {
-  width: 20px; /* Adjust based on your preference */
-  height: 20px; /* Adjust based on your preference */
+  width: 25px; /* Adjust based on your preference */
+  height: 25px; /* Adjust based on your preference */
   border: 1px solid #ccc;
+  background-color: snow;
   box-sizing: border-box; /* Include padding and border in the cell size */
 }
 
