@@ -18,7 +18,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
-import {AsequizComponent} from "./asequiz/asequiz.component";
+import {SnakegameComponent} from "./snakegame/snakegame.component";
 
 
 @NgModule({
@@ -45,9 +45,7 @@ import {AsequizComponent} from "./asequiz/asequiz.component";
         MatIconModule,
         MatToolbarModule,
         MatListModule,
-        AsequizComponent
-
-
+        SnakegameComponent
     ],
   providers: [],
   bootstrap: [AppComponent]
