@@ -128,6 +128,7 @@ export class SnakegameComponent {
     this.direction = 'right';
     this.isGameOver = false; // Reset game over state
     // Add any other game state resets if needed
+    this.score = 0;
   }
 
 

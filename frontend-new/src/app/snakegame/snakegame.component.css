@@ -1,6 +1,15 @@
 /* snakegame.component.css */
 .game-container {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /*height: 100vh;*/
+}
+
+.score-container {
+  /*margin-top: 10px;*/
+  color: black;
+  font-size: 18px;
 }
 
 .game-overlay {
@@ -19,15 +28,6 @@
 .overlay-content {
   text-align: center;
   color: white;
-}
-
-.score-container {
-  position: absolute;
-  top: 100%; /* Position it just below the board */
-  left: 50%;
-  transform: translateX(-50%);
-  color: black; /* Change the text color to black or another contrasting color */
-  font-size: 18px;
 }
 
 /* Add any additional styles based on your design */

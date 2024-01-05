@@ -3,7 +3,8 @@
   margin-top: 40px;
   display: flex;
   justify-content: center;
-  height: 100vh; /* Adjust based on your preference */
+  height: 400px;
+  /*height: 100vh;*/ /* Adjust based on your preference */
 }
 
 .board {
