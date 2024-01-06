@@ -60,7 +60,7 @@ import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.compo
         MatIconModule,
         MatToolbarModule,
         MatListModule,
-        SnakegameModule
+        SnakegameModule,
         LeafletModule
     ],
   providers: [],
