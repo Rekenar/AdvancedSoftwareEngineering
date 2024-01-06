@@ -1,5 +1,4 @@
-// snakegame.component.ts
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-snakegame',
@@ -11,19 +10,29 @@ export class SnakegameComponent {
   snakePosition: { row: number, col: number }[] = [{ row: 0, col: 0 }];
   foodPosition: { row: number, col: number } = { row: 5, col: 5 };
   direction: 'up' | 'down' | 'left' | 'right' = 'right'; // Initial direction
-  score = 0; // New variable to track the score
+  score = 0;
 
   isGameStarted: boolean = false;
-  isGameOver = false; // New variable to track game over state
-
-  ngOnInit(): void {
-    // Start the game loop only if isGameStarted is true
-  }
+  isGameOver = false;
+  gameInterval: any;
 
   startGame() {
     this.isGameStarted = true;
-    // Add any additional logic to start or reset your game here
-    setInterval(() => this.updateGame(), 200); // Adjust the interval based on your preference
+
+    this.initializeGame();
+
+    this.gameInterval = setInterval(() => this.updateGame(), 200);
+  }
+
+
+  initializeGame(): void {
+    // Reset the snake and food positions
+    this.snakePosition  = [{ row: 0, col: 0 }];
+    this.foodPosition = { row: 5, col: 5 };
+
+    this.direction = 'right';
+    this.isGameOver = false;
+    this.score = 0;
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -53,6 +62,11 @@ export class SnakegameComponent {
   }
 
   updateGame(): void {
+    if (this.isGameOver) {
+      clearInterval(this.gameInterval); // Stop the game loop
+      return;
+    }
+
     // Update snake position based on the current direction
     const head = { ...this.snakePosition[0] };
     switch (this.direction) {
@@ -73,9 +87,8 @@ export class SnakegameComponent {
     // Add the new head to the front of the snake
     this.snakePosition.unshift(head);
 
-    // Check for collisions with the board edges (you can refine this logic)
+    // Check for collisions with the board edges
     if (head.row < 0 || head.row >= this.gridSize || head.col < 0 || head.col >= this.gridSize) {
-      // Game over logic (you can handle this based on your requirements)
       console.log('Game Over - Collision with board edges');
 
       this.showGameOverOverlay();
@@ -89,7 +102,7 @@ export class SnakegameComponent {
       return; // Stop further processing since the game is over
     }
 
-    // Check for collisions with food (you can refine this logic)
+    // Check for collisions with food
     if (head.row === this.foodPosition.row && head.col === this.foodPosition.col) {
       // Handle snake eating food
       console.log('Snake ate the food!');
@@ -97,8 +110,7 @@ export class SnakegameComponent {
       // Generate a new random food position
       this.generateRandomFoodPosition();
 
-      this.score += 10; // Adjust the score increment based on your preference
-      // You can implement logic to increase the snake's length
+      this.score += 10;
     } else {
       // Remove the tail if the snake hasn't eaten food
       this.snakePosition.pop();
@@ -133,10 +145,19 @@ export class SnakegameComponent {
     // Reset the direction and any other game state variables
     this.direction = 'right';
     this.isGameOver = false; // Reset game over state
-    // Add any other game state resets if needed
     this.score = 0;
+
+    this.startGame();
   }
 
+  exitGame() {
+    console.log('Exiting the game');
 
+    this.snakePosition  = [{ row: 0, col: 0 }];
+    this.foodPosition = { row: 5, col: 5 };
+
+    this.isGameStarted = false;
+    this.isGameOver = false;
+  }
 
 }
