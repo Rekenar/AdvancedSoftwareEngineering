@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - development
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 jobs:
   build:
@@ -23,5 +25,6 @@ jobs:
       - name: Build and Analyze with SonarCloud
         run: mvn clean verify sonar:sonar
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
