@@ -13,10 +13,16 @@ export class SnakegameComponent {
   direction: 'up' | 'down' | 'left' | 'right' = 'right'; // Initial direction
   score = 0; // New variable to track the score
 
+  isGameStarted: boolean = false;
   isGameOver = false; // New variable to track game over state
 
   ngOnInit(): void {
-    // Start the game loop
+    // Start the game loop only if isGameStarted is true
+  }
+
+  startGame() {
+    this.isGameStarted = true;
+    // Add any additional logic to start or reset your game here
     setInterval(() => this.updateGame(), 200); // Adjust the interval based on your preference
   }
 
