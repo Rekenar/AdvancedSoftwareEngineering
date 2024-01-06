@@ -1,5 +1,8 @@
 <!-- snakegame.component.html -->
 <div class="game-container" *ngIf="!isGameOver">
+  <!-- Start button -->
+  <button class="start-button" *ngIf="!isGameStarted" (click)="startGame()">Start Game</button>
+
   <!-- Your game content here -->
   <app-board
     [snakePosition]="snakePosition"
@@ -19,5 +22,8 @@
     <p>Your final score: {{ score }}</p>
     <!-- You can add more elements, buttons, or links for restarting the game or navigating to other screens -->
     <button (click)="resetGame()">Restart</button>
+
+    <!-- Exit button -->
+    <button (click)="exitGame()">Exit Game</button>
   </div>
 </div>

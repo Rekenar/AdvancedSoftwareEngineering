@@ -1,14 +1,21 @@
 /* snakegame.component.css */
+.start-button {
+  margin-top: 10px; /* Adjust the margin-top value based on your preference */
+}
+
 .game-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   /*height: 100vh;*/
+  background-image: url('../../assets/snakegame/snakegame-bg.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+  background-size: cover; /* Adjust based on your preference */
+  background-position: center; /* Adjust based on your preference */
 }
 
 .score-container {
   /*margin-top: 10px;*/
-  color: black;
+  color: white;
   font-size: 18px;
 }
 
