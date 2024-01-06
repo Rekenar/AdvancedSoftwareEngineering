@@ -28,16 +28,16 @@ jobs:
         with:
           node-version: '21.1.0'
 
-      - name: Navigate to project directory
-        run: cd frontend-new
-
       - name: Install dependencies
+        working-directory: ./frontend-new
         run: npm install
 
       - name: Build and test
+        working-directory: ./frontend-new
         run: npm run build -- --prod
 
       - name: Run tests
+        working-directory: ./frontend-new
         run: npm run test
 
 
