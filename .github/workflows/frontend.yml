@@ -21,7 +21,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - '21.1'
+          - '21.1.0'
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -33,9 +33,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm --prefix /frontend-new clean-install
-
-      - name: build and test
         run: |
-          npm --prefix /frontend-new run build --if-present
-          npm --prefix /frontend-new test
+          npm ci --prefix frontend-new
+          npm --prefix frontend-new run build --if-present
+          npm --prefix frontend-new test
