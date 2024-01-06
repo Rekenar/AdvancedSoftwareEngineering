@@ -33,7 +33,7 @@ jobs:
         cache: maven
 
     - name: Create MySQL container
-      run: docker-compose up -d mysql
+      run: docker-compose -f backend/docker-compose.yml up -d mysql
 
     - name: Build with Maven
       run: mvn -B package --file backend/pom.xml
