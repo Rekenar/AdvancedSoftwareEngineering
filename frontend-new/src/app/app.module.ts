@@ -8,6 +8,15 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ContentAreaComponent } from './content-area/content-area.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
+
+import { AlmostGameComponent } from './almost-game/almost-game/almost-game.component';
+import { AlmostMapComponent } from './almost-game/almost-map/almost-map.component';
+import { AlmostStartComponent } from './almost-game/almost-start/almost-start.component';
+import { AlmostAttrComponent } from './almost-game/almost-attr/almost-attr.component';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
+
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatCardModule} from "@angular/material/card";
@@ -19,6 +28,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import {SnakegameModule} from "./snakegame/snakegame.module";
+import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +39,11 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
     RegisterComponent,
     ContentAreaComponent,
     TopBarComponent,
+    AlmostGameComponent,
+    AlmostAttrComponent,
+    AlmostStartComponent,
+    AlmostMapComponent,
+    AlmostModeComponent
   ],
     imports: [
         BrowserModule,
@@ -45,6 +61,7 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
         MatToolbarModule,
         MatListModule,
         SnakegameModule
+        LeafletModule
     ],
   providers: [],
   bootstrap: [AppComponent]
