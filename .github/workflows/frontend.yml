@@ -18,24 +18,27 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version:
-          - '21.1.0'
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Change directory to frontend-new
-        run: cd frontend-new
-
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          node-version: '21.1.0'
+
+      - name: Navigate to project directory
+        run: cd frontend-new
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and test
+        run: npm run build -- --prod
+
+      - name: Run tests
+        run: npm run test
 
 
 
