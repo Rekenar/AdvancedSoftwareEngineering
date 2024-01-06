@@ -22,8 +22,14 @@ jobs:
           distribution: 'adopt'
           java-version: '21'
 
+      - name: List Repository Contents
+        run: ls -R
+
       - name: Change directory to backend
         run: cd backend
+
+      - name: List Repository Contents
+        run: ls -R
 
       - name: Build and Analyze with SonarCloud
         run: mvn clean verify sonar:sonar

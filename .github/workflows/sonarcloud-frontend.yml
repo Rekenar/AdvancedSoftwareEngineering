@@ -23,8 +23,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: List Repository Contents
+        run: ls -R
+
       - name: Change directory to frontend
         run: cd frontend-new
+
+      - name: List Repository Contents
+        run: ls -R
 
       - name: Build and Analyze Frontend with SonarCloud
         run: npm run sonar
