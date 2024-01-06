@@ -8,34 +8,17 @@ on:
   pull_request:
     types: [ opened, synchronize, reopened ]
 jobs:
-  build:
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-
     steps:
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v3
         with:
-          node-version: '21.1'
-
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: List Repository Contents
-        run: ls -R
-
-      - name: Change directory to frontend
-        run: cd frontend-new
-
-      - name: List Repository Contents
-        run: ls -R
-
-      - name: Build and Analyze Frontend with SonarCloud
-        run: npm run sonar
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
 
