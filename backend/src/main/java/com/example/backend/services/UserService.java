@@ -72,4 +72,11 @@ public class UserService implements UserDetailsService {
         // remove the token after enabling the user
         confirmSignUpTokenService.deleteConfirmSignUpToken(token);
     }
+
+    public UserDetailsDTO convertUserDetailsToUserDetailsDTO(UserDetails user) {
+        UserDetailsDTO dto = new UserDetailsDTO();
+        dto.setUsername(user.getUsername());
+        dto.setPassword(user.getPassword());
+        return dto;
+    }
 }

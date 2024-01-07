@@ -1,9 +1,14 @@
 package com.example.backend.models;
 
+import com.example.backend.repositories.UserRepo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "users")
@@ -67,5 +72,35 @@ public class UserEntity {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+}
+
+
+@Component
+class UserEntityLoader implements CommandLineRunner {
+
+    @Autowired
+    UserRepo userRepo;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    /**
+     *
+     * creates default user with id=1, username=user@user.at, password=user1234
+     */
+    @Override
+    public void run(String... args) {
+        String username = "user@user.at";
+        if (userRepo.findByUsername(username).isEmpty()) {
+            UserEntity entity = new UserEntity();
+            entity.setId(1L);
+            entity.setUsername(username);
+            entity.setEnabled(true);
+            entity.setPassword(passwordEncoder.encode("user1234"));
+            entity.setDeleted(false);
+            userRepo.save(entity);
+        }
+
     }
 }
