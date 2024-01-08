@@ -6,6 +6,7 @@ import com.example.backend.repositories.UserRepo;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,11 +52,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserEntity createUser(UserDetailsDTO dto) {
         if (userRepo.findByUsername(dto.getUsername()).isPresent()) {
-            try {
-                throw new Exception(); // BadCredentials
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
+            throw new BadCredentialsException("Username already exists!");
         }
 
         UserEntity userEntity = new UserEntity();
