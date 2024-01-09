@@ -1,7 +1,6 @@
 package com.example.backend.repositories;
 
 import com.example.backend.models.AlmostCityEntity;
-import com.example.backend.models.HelloEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

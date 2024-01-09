@@ -1,7 +1,6 @@
 package com.example.backend.controllers;
 
 import com.example.backend.models.AlmostCityEntity;
-import com.example.backend.models.HelloEntity;
 import com.example.backend.services.AlmostCityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
