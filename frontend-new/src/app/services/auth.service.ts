@@ -24,6 +24,7 @@ export class AuthService {
       username: credentials.username,
       password: credentials.password
     }
+    console.log(data)
     return this.http.post<any>(`${this.apiUrl}/users/login`, data, HTTP_OPTIONS);
   }
 

@@ -59,7 +59,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and() // do not create a session! -> use jwt
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and() // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
+                //.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and() // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
@@ -75,6 +75,29 @@ public class SecurityConfig {
 
         return http.build();
     }
+
+    // try to remove deprecations
+    /*@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        return http
+                .cors(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // do not create a session! -> use jwt
+                .exceptionHandling((exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)) // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
+                .authorizeHttpRequests(auth -> auth
+                                .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/users/confirm-sign-up**").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/api/users/reset-password**").permitAll()
+                                .requestMatchers(HttpMethod.PUT, "/api/users/update-password").permitAll()
+                                .anyRequest().authenticated() // any other request needs to be authenticated!
+                        //.anyRequest().permitAll()
+                )
+                //.and().formLogin().disable(); // type of login, that Spring should do
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class) // adding the authenticationTokenFilterBean() before the UsernamePasswordAuthFilter
+
+                .build();
+    }*/
 
 
     @Autowired

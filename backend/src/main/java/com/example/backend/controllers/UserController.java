@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,11 +25,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.LinkedList;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -53,58 +54,51 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @PostMapping("/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    @PostMapping("/login") // creating Authentication Token
+    public ResponseEntity<?> login(@RequestBody AuthenticationRequest authenticationRequest) {
+        logger.info("HELLO FROM LOGIN");
         logger.info(authenticationRequest.getUsername());
         logger.info(authenticationRequest.getPassword());
         try {
             logger.info("Before authenticationManager.authenticate");
             logger.info("Username: {}", authenticationRequest.getUsername());
-            logger.info("Password: {}", authenticationRequest.getPassword());
-            //List<GrantedAuthority> grantedAuthorityList = new LinkedList<>();
-            //grantedAuthorityList.add(new SimpleGrantedAuthority("ROLE_USER"));
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword());
-            logger.info("token: {}", usernamePasswordAuthenticationToken);
-            Authentication authentication = null;
-            try {
-                authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-                // Successful authentication logic here
-            } catch (AuthenticationException e) {
-                // Failed authentication logic here
-                logger.error("Authentication failed: {}", e.getMessage());
-            }
-            logger.info("After authenticationManager.authenticate");
-            try {
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            } catch (Exception e){
-                logger.warn("stuff happened");
-            }
+            Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+
+            // Successful authentication logic here
+            SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.info("Authentication successful");
+
+            final UserDetailsDTO userDetails = (UserDetailsDTO) userService.loadUserByUsername(authenticationRequest.getUsername());
+            final boolean isEnabled = userDetails.isEnabled();
+            if (!isEnabled) {
+                logger.error("User is not enabled");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not enabled");
+            }
+
+            final String token = jwtUtil.generateToken(userDetails);
+
+            return ResponseEntity.ok(new AuthenticationResponse(
+                    token,
+                    userService.loadUserIdByUsername(userDetails.getUsername()),
+                    userDetails.getUsername(),
+                    (List<GrantedAuthority>) userDetails.getAuthorities(), // ROLES are set here
+                    jwtUtil.extractExpiration(token),
+                    jwtUtil.getEXPIRATION_TIME() - 10));
         } catch (BadCredentialsException e) {
             logger.error("Authentication failed: Incorrect username or password", e);
-            throw new Exception("Incorrect username or password", e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect username or password");
+        } catch (Exception e) {
+            logger.error("Authentication failed: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
         }
-        logger.warn("now here");
-        final UserDetailsDTO userDetails = (UserDetailsDTO) userService.loadUserByUsername(authenticationRequest.getUsername());
-        final boolean isEnabled = userDetails.isEnabled();
-        if (!isEnabled) throw new Exception("user not enabled");
-
-        final String token = jwtUtil.generateToken(userDetails);
-
-        final String username = userDetails.getUsername();
-
-        return ResponseEntity.ok(new AuthenticationResponse(
-                token,
-                userService.loadUserIdByUsername(username),
-                username,
-                (List<GrantedAuthority>) userDetails.getAuthorities(), // ROLES are set here
-                jwtUtil.extractExpiration(token),
-                jwtUtil.getEXPIRATION_TIME() - 10));
     }
+
 
 
     /**
      * CREATING USER BEFORE SIGN UP PROCESS
+     * setting @is_enabled to false -> login not allowed
      */
     @PostMapping("/register")
     @PreAuthorize("permitAll()")
@@ -124,6 +118,7 @@ public class UserController {
 
     /**
      * USER SIGN UP PROCESS
+     * setting @is_enabled to true -> allow login
      */
     @PutMapping("/confirm-sign-up")
     public ResponseEntity<String> confirmRegistration(@RequestParam("token") String token) throws Exception {
@@ -140,4 +135,13 @@ public class UserController {
 
         return ResponseEntity.ok(SuccessMessages.REGISTRATION_SUCCSESS_MAIL_SENT.getMessage());
     }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDetailsDTO> getUserById(@PathVariable("username") String username) throws Exception {
+        UserDetails user = userService.loadUserByUsername(username);
+        UserDetailsDTO dto = userService.convertUserDetailsToUserDetailsDTO(user);
+        return ResponseEntity.ok(dto);
+    }
+
+
 }
