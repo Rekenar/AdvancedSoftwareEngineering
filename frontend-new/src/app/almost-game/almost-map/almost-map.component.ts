@@ -148,9 +148,10 @@ export class AlmostMapComponent {
         if(this.marker){
             map.removeLayer(this.marker);
         }
-        let popLocation= e.latlng;
+        let popLocation= e.latlng.wrap();
+
         console.log(popLocation);
-        this.marker = L.marker(e.latlng,{icon:this.myIcon});
+        this.marker = L.marker(popLocation,{icon:this.myIcon});
         map.addLayer(this.marker);
         
         this.nextDisabled = false;
