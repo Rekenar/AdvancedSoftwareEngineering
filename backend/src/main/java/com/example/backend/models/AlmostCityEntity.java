@@ -92,17 +92,14 @@ class AlmostCityEntityLoader implements CommandLineRunner {
     public void run(String... args) throws IOException {
         if (almostCityRepo.count() == 0) {
             loadData();
-        }else{
-            System.out.println("Paris");
         }
     }
 
-    private void loadData() throws IOException {
+    void loadData() throws IOException {
         Resource resource = new ClassPathResource("/cities.sql");
         byte[] bytes = FileCopyUtils.copyToByteArray(resource.getInputStream());
         String sqlStatements = new String(bytes, StandardCharsets.UTF_8);
 
-        // Execute SQL statements
         jdbcTemplate.execute(sqlStatements);
     }
 }

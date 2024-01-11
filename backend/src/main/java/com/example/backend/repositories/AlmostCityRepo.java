@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 public interface AlmostCityRepo extends JpaRepository<AlmostCityEntity, Long> {
 
-    Optional<AlmostCityEntity> findByCity(String city);
-
     @Query(value = "SELECT * FROM almost_game_capitals ORDER BY RAND() LIMIT 10", nativeQuery = true)
     List<AlmostCityEntity> sampleCities();
 
