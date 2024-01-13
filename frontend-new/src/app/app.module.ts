@@ -28,6 +28,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
+import {PasswordResetComponent} from "./password-reset/password-reset.component";
 
 
 @NgModule({
@@ -42,26 +43,27 @@ import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.compo
     AlmostAttrComponent,
     AlmostStartComponent,
     AlmostMapComponent,
-    AlmostModeComponent
+    AlmostModeComponent,
+    PasswordResetComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        HttpClientModule,
-        MatButtonModule,
-        FormsModule,
-        RecaptchaFormsModule,
-        RecaptchaModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatListModule,
-        LeafletModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    HttpClientModule,
+    MatButtonModule,
+    FormsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    LeafletModule
 
-    ],
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
