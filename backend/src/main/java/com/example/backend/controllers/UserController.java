@@ -1,15 +1,20 @@
 package com.example.backend.controllers;
 
 import com.example.backend.Exceptions.TokenNotFoundException;
+import com.example.backend.dtos.PasswordDTO;
 import com.example.backend.dtos.SignUpSuccessDTO;
 import com.example.backend.dtos.UserDetailsDTO;
+import com.example.backend.dtos.UsernameDTO;
+import com.example.backend.messages.ErrorMessages;
 import com.example.backend.messages.SuccessMessages;
 import com.example.backend.models.ConfirmSignUpTokenEntity;
+import com.example.backend.models.PasswordResetTokenEntity;
 import com.example.backend.models.UserEntity;
 import com.example.backend.security.jwt.JwtUtil;
 import com.example.backend.security.models.AuthenticationRequest;
 import com.example.backend.security.models.AuthenticationResponse;
 import com.example.backend.services.ConfirmSignUpTokenService;
+import com.example.backend.services.PasswordResetService;
 import com.example.backend.services.UserService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -30,7 +35,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -48,6 +55,9 @@ public class UserController {
 
     @Autowired
     ConfirmSignUpTokenService confirmSignUpTokenService;
+
+    @Autowired
+    PasswordResetService passwordResetService;
 
     @Value("${FRONTEND_URL}")
     private String frontendUrl;
@@ -141,6 +151,30 @@ public class UserController {
         UserDetails user = userService.loadUserByUsername(username);
         UserDetailsDTO dto = userService.convertUserDetailsToUserDetailsDTO(user);
         return ResponseEntity.ok(dto);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@Valid @RequestBody UsernameDTO dto) {
+        UserEntity user = userService.loadUserEntityByUsername(dto.getUsername());
+        String token = UUID.randomUUID().toString();
+        passwordResetService.setPasswordResetToken(user, token);
+
+        // TODO -> sending Mail wir PW-reset Link
+
+        return ResponseEntity.ok(SuccessMessages.PASSWORD_RESET_LINK_SENT.getMessage());
+    }
+
+    @PutMapping("/reset-password")
+    public ResponseEntity<?> validateTokenAndResetPassword(@Valid @RequestBody PasswordDTO passwordDto) {
+        if (!passwordResetService.validatePasswordResetToken(passwordDto.getToken())) {
+            return ResponseEntity.ok(ErrorMessages.PASSWORD_RESET_TOKEN_NOT_FOUND.getMessage());
+        }
+
+        UserEntity user = passwordResetService.loadUserByPasswordResetToken(passwordDto.getToken());
+        passwordResetService.changePassword(user, passwordDto.getNewPassword());
+
+        passwordResetService.deletePasswordResetTokenForUser(passwordDto.getToken());
+        return ResponseEntity.ok(SuccessMessages.PASSWORD_UPDATE_SUCCESSFUL.getMessage());
     }
 
 

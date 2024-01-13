@@ -2,7 +2,7 @@ package com.example.backend.messages;
 
 public enum ErrorMessages {
 
-    CONFIRM_REGISTRATION_MAIL_SENT("Confirm Registration Token not exists!", "CONFIRM_REGISTRATION_TOKEN_NOT_EXISTS");
+    PASSWORD_RESET_TOKEN_NOT_FOUND("Password reset token not found!", "PASSWORD_RESET_TOKEN_NOT_FOUND");
 
 
     private final String message;
@@ -14,7 +14,7 @@ public enum ErrorMessages {
     }
 
     public String getMessage() {
-        return "{ \"message\":\"" + message + "\"}";
+        return message;
     }
 
     public String getCode() {
