@@ -8,9 +8,9 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_USER: user
+      MYSQL_USER: root
       MYSQL_DATABASE: 'minigameshub_mysql_db'
-      MYSQL_PASSWORD: user
+      MYSQL_PASSWORD: 123456
       MYSQL_ROOT_PASSWORD: 123456
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 123456
