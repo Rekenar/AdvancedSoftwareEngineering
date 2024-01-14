@@ -8,12 +8,6 @@ import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-confirm-sign-up',
-  standalone: true,
-  imports: [
-    MatCardModule,
-    RouterLink,
-    NgIf
-  ],
   templateUrl: './confirm-sign-up.component.html',
   styleUrl: './confirm-sign-up.component.css'
 })

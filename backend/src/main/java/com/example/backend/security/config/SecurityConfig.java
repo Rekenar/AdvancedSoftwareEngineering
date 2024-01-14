@@ -87,7 +87,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/users/confirm-sign-up**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/register**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/reset-password").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users/reset-password").permitAll()
                         .anyRequest().authenticated() // any other request needs to be authenticated!

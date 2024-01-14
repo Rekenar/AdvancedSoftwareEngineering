@@ -29,6 +29,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
 import {PasswordResetComponent} from "./password-reset/password-reset.component";
+import {ConfirmSignUpComponent} from "./confirm-sign-up/confirm-sign-up.component";
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import {PasswordResetComponent} from "./password-reset/password-reset.component"
     AlmostStartComponent,
     AlmostMapComponent,
     AlmostModeComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    ConfirmSignUpComponent
   ],
   imports: [
     BrowserModule,

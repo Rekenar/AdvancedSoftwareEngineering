@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
-  { path: 'users/confirm-sign-up', component: ConfirmSignUpComponent},
+  { path: 'users/register', component: ConfirmSignUpComponent},
   { path: 'users/reset-password', component: PasswordResetComponent}
 ];
 

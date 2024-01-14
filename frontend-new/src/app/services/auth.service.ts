@@ -37,7 +37,7 @@ export class AuthService {
   }
 
   confirmSignUp(token: string) {
-    return this.http.put(`${API_URL}/users/confirm-sign-up?token=${token}`, HTTP_OPTIONS);
+    return this.http.put(`${API_URL}/users/register?token=${token}`, HTTP_OPTIONS);
   }
 
   get isLoggedIn(): boolean {

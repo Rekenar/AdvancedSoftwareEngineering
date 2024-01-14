@@ -5,6 +5,7 @@ import com.example.backend.dtos.PasswordDTO;
 import com.example.backend.dtos.SignUpSuccessDTO;
 import com.example.backend.dtos.UserDetailsDTO;
 import com.example.backend.dtos.UsernameDTO;
+import com.example.backend.mail.MailEvent;
 import com.example.backend.messages.ErrorMessages;
 import com.example.backend.messages.SuccessMessages;
 import com.example.backend.models.ConfirmSignUpTokenEntity;
@@ -21,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,6 +60,9 @@ public class UserController {
 
     @Autowired
     PasswordResetService passwordResetService;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     @Value("${FRONTEND_URL}")
     private String frontendUrl;
@@ -115,12 +120,14 @@ public class UserController {
     public ResponseEntity<SignUpSuccessDTO> createUser(@Valid @RequestBody UserDetailsDTO dto) {
         UserEntity user = userService.createUser(dto);
         String token = UUID.randomUUID().toString();
-        ConfirmSignUpTokenEntity confirmSignUpToken = confirmSignUpTokenService.createConfirmSignUpTokenForUser(user, token);
+        confirmSignUpTokenService.createConfirmSignUpTokenForUser(user, token);
 
-        // Send confirmation email to user
-        String confirmUrl = frontendUrl + "users/confirm-sign-up?token=" + token;
-
-        // TODO -> sending success Mail
+        // Send confirmation email
+        String confirmUrl = frontendUrl + "users/register?token=" + token;
+        MailEvent event = new MailEvent(this, user.getUsername(), "MinigamesHUB: Confirm registration",
+                Map.of("username", user.getUsername(), "confirmUrl", confirmUrl),
+                "register-email.html");
+        applicationEventPublisher.publishEvent(event);
 
         return ResponseEntity.ok(confirmSignUpTokenService.getSignupTokenSuccessBody(confirmUrl));
     }
@@ -130,7 +137,7 @@ public class UserController {
      * USER SIGN UP PROCESS
      * setting @is_enabled to true -> allow login
      */
-    @PutMapping("/confirm-sign-up")
+    @PutMapping("/register")
     public ResponseEntity<String> confirmRegistration(@RequestParam("token") String token) throws Exception {
         if (!confirmSignUpTokenService.validateConfirmPasswordToken(token)) {
             throw new TokenNotFoundException("CONFIRM_REGISTRATION_TOKEN_NOT_EXISTS");
@@ -138,10 +145,12 @@ public class UserController {
         UserEntity user = confirmSignUpTokenService.loadUserByConfirmSignUpToken(token);
         userService.confirmUserSignUp(user, token);
 
-        // Send confirmation email to user
-        String confirmUrl = frontendUrl + "users/confirm-sign-up?token=" + token;
-
-        // TODO -> sending success Mail
+        // Send registration successful Email
+        String confirmUrl = frontendUrl + "users/register?token=" + token;
+        MailEvent event = new MailEvent(this, user.getUsername(), "MinigamesHUB: Confirm registration",
+                Map.of("username", user.getUsername(), "confirmUrl", confirmUrl),
+                "register-success-email.html");
+        applicationEventPublisher.publishEvent(event);
 
         return ResponseEntity.ok(SuccessMessages.REGISTRATION_SUCCSESS_MAIL_SENT.getMessage());
     }

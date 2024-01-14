@@ -19,6 +19,22 @@ spring:
           new_generator_mappings: false
         dialect: org.hibernate.dialect.MySQL8Dialect # Allows Hibernate to generate SQL optimized for a particular DBMS
 
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ase.minigameshub@gmail.com
+    password: sqooqnsnetaqdyhv
+    protocol: smtp
+    tls: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+
 SIGN_UP_TOKEN_EXPIRY_IN_HOURS: "3"
 SECRET: "ajf98f3j4029roisSUUHDkad93290??hZzuI2"
 FRONTEND_URL: "http://localhost:4200/"

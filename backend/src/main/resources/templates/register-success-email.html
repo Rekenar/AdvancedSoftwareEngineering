@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to MinigamesHUB</title>
+    <style type="text/css">
+        body {
+            font-family: Ubuntu, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            font-size: 14px;
+            margin: 0;
+            padding: 0;
+            background-color: #E9ECEF;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .content-table {
+            margin: 0 auto;
+            max-width: 600px;
+            background-color: #FFFFFF;
+        }
+
+        .content-table td {
+            padding: 15px;
+            border: 7px solid #9E9E9E;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <table class="content-table" role="presentation">
+        <tr>
+            <td>
+                <h2>Welcome to MinigamesHUB!</h2>
+                <p th:text="'Hello ' + ${username} + ','"></p>
+                <p>Thank you for registering for MinigamesHUB! Your account has been successfully created.</p>
+                <p>Now you can enjoy our exciting range of minigames and connect with other gamers around the world.</p>
+                <p>If you have any questions or need assistance, feel free to contact our support team.</p>
+                <p>Best regards,<br>Your MinigamesHUB Team</p>
+            </td>
+        </tr>
+    </table>
+    <table class="content-table" role="presentation">
+        <tr>
+            <td>
+                <p>Need help? Contact our support team at <a href="mailto:ase.minigameshub@gmail.com">ase.minigameshub@gmail.com</a></p>
+                <p>MinigamesHUB</p>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
