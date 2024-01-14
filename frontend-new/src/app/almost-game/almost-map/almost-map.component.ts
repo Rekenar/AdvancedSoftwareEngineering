@@ -101,7 +101,7 @@ export class AlmostMapComponent {
     
   }
 
-  resampleCities(start:boolean){
+  resampleCities(){
     if(this.modeData.capitals){
       this.almostGameService.getCapitalSample().subscribe((response) => {
         this.cityData = response;      
@@ -110,12 +110,6 @@ export class AlmostMapComponent {
       this.almostGameService.getCitySample().subscribe((response) => {
         this.cityData = response;      
       });
-    }
-    this.nextDisabled = false;
-    if(start){
-      this.status = 0;
-    }else{
-      this.status = 2;
     }
     
   }
@@ -134,12 +128,12 @@ export class AlmostMapComponent {
         maxZoom: 8,
       }).addTo(this.map);
     }
-
+    
     this.addClickable(this.map);
 
-    this.resampleCities(true);
-    console.log(this.modeData)
-
+    this.resampleCities();
+    this.status = 0;
+    this.nextDisabled = false;
   }
 
   addClickable(map:L.Map){
@@ -150,7 +144,6 @@ export class AlmostMapComponent {
         }
         let popLocation= e.latlng.wrap();
 
-        console.log(popLocation);
         this.marker = L.marker(popLocation,{icon:this.myIcon});
         map.addLayer(this.marker);
         
@@ -163,11 +156,15 @@ export class AlmostMapComponent {
       }
       if(this.round == 10){
         this.nextDisabled = true;
-        this.infoString = "Good job! Score: " + Math.round(this.score * 100) / 100;
-        this.status = 3;
+        this.score = Math.round(this.score * 100) / 100;
+        this.infoString = "Good job! Score: " + this.score;
+        this.almostGameService.postScore(Math.round(this.score));
         this.score = 0;
         this.round = 0;
-        this.resampleCities(false);
+        this.resampleCities();
+        this.nextDisabled = false;
+        this.status = 2;
+        
       }
     });
   }
@@ -201,9 +198,9 @@ export class AlmostMapComponent {
       feedback += ":(";
       distanceScore=1;
     }
-
-    roundScore = (timeScore* distanceScore)/10;
-
+    roundScore = ((timeScore+2)* distanceScore)/10
+    roundScore = roundScore > 10 ? 10 : roundScore;
+    console.log(roundScore)
     this.score += roundScore;
     this.infoString = feedback;
   }
