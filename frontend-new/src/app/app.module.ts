@@ -27,6 +27,7 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
+import {SnakegameModule} from "./snakegame/snakegame.module";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
 
 
@@ -59,8 +60,8 @@ import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.compo
         MatIconModule,
         MatToolbarModule,
         MatListModule,
+        SnakegameModule,
         LeafletModule
-
     ],
   providers: [],
   bootstrap: [AppComponent]
