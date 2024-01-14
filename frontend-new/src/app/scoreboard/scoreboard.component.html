@@ -1,0 +1,52 @@
+<html>
+<!-- Todo Change Names to game Names -->
+<mat-toolbar>
+  <button (click)="applyGameFilter('Almost Game')" mat-raised-button>Almost-Game</button>
+  <button (click)="applyGameFilter('2')" mat-raised-button>Game 2</button>
+  <button (click)="applyGameFilter('Snake')" mat-raised-button>Snake</button>
+  <button (click)="applyGameFilter('4')" mat-raised-button>Game 4</button>
+  <button (click)="applyGameFilter('Asteroid')" mat-raised-button>Asteroid</button>
+  <button (click)="applyGameFilter('6')" mat-raised-button>Game 6</button>
+  <span class="spacer"></span>
+  <button (click)="applyGameFilter('')" mat-raised-button>Clear Filter</button>
+</mat-toolbar>
+
+
+<div class="mat-elevation-z8">
+  <table [dataSource]="dataSource" mat-table matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Position</th>
+      <td *matCellDef="let element" mat-cell> {{ element.id }}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="game">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Game</th>
+      <td *matCellDef="let element" mat-cell> {{ element.game }}</td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="username">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Username</th>
+      <td *matCellDef="let element" mat-cell> {{ element.username }}</td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="score">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Score</th>
+      <td *matCellDef="let element" mat-cell> {{ element.score }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef mat-header-cell mat-sort-header> Date</th>
+      <td *matCellDef="let element" mat-cell> {{ element.date }}</td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+</html>
