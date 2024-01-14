@@ -67,7 +67,12 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/users/reset-password**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/users/update-password").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/workshops/upcoming").permitAll()
+<<<<<<< HEAD
                 .requestMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
+=======
+                .requestMatchers(HttpMethod.GET, "/scores/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/scores/**").authenticated()
+>>>>>>> development
                 .anyRequest().authenticated() // any other request needs to be authenticated!
                 //.anyRequest().permitAll()
                 .and().formLogin().disable(); // type of login, that Spring should do

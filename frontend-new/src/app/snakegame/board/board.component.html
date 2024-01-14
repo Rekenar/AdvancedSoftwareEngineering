@@ -1,0 +1,10 @@
+<div class="board-container">
+  <div class="board">
+    <div *ngFor="let row of getRows(); let rowIndex = index" class="row">
+      <div *ngFor="let col of getColumns(); let colIndex = index" class="cell"
+           [class.snake]="isSnakeCell(rowIndex, colIndex)"
+           [class.food]="isFoodCell(rowIndex, colIndex)">
+      </div>
+    </div>
+  </div>
+</div>

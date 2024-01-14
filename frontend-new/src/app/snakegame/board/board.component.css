@@ -1,0 +1,32 @@
+.board-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  /*height: 100vh;*/
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  gap: 2px;
+  /*width: 320px;*/
+  /*height: 320px;*/
+}
+
+.cell {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #ccc;
+  background-color: snow;
+  box-sizing: border-box; /* Include padding and border in the cell size */
+}
+
+.snake {
+  background-color: #2ecc71;
+}
+
+.food {
+  background-color: #e74c3c;
+}

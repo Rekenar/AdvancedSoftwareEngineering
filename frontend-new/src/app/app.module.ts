@@ -27,7 +27,9 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
+import {SnakegameModule} from "./snakegame/snakegame.module";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
+import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
 
 
 @NgModule({
@@ -44,24 +46,27 @@ import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.compo
     AlmostMapComponent,
     AlmostModeComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        HttpClientModule,
-        MatButtonModule,
-        FormsModule,
-        RecaptchaFormsModule,
-        RecaptchaModule,
-        MatIconModule,
-        MatToolbarModule,
-        MatListModule,
-        LeafletModule
 
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    HttpClientModule,
+    MatButtonModule,
+    FormsModule,
+    RecaptchaFormsModule,
+    RecaptchaModule,
+    MatIconModule,
+    MatToolbarModule,
+    MatListModule,
+    SnakegameModule,
+    LeafletModule,
+    ScoreboardComponent
+  ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
