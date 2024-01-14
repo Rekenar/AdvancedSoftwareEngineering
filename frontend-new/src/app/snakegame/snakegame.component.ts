@@ -21,7 +21,7 @@ export class SnakegameComponent {
 
     this.initializeGame();
 
-    this.gameInterval = setInterval(() => this.updateGame(), 200);
+    this.gameInterval = setInterval(() => this.updateGame(), 180);
   }
 
 
