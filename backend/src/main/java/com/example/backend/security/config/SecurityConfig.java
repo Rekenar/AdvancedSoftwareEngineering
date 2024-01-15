@@ -67,6 +67,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/api/users/confirm-sign-up**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/api/users/reset-password**").permitAll()
+                .requestMatchers(HttpMethod.GET, "/scores/**").authenticated()
+                .requestMatchers(HttpMethod.POST, "/scores/**").authenticated()
                 .anyRequest().authenticated() // any other request needs to be authenticated!
                 //.anyRequest().permitAll()
                 .and().formLogin().disable(); // type of login, that Spring should do
@@ -90,6 +92,8 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/users/register**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/reset-password").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/scores/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/scores/**").authenticated()
                         .anyRequest().authenticated() // any other request needs to be authenticated!
                 )
                 //.anyRequest().permitAll()
