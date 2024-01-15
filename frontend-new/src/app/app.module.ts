@@ -27,10 +27,12 @@ import {RecaptchaFormsModule, RecaptchaModule} from "ng-recaptcha";
 import {MatIconModule} from "@angular/material/icon";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatListModule} from "@angular/material/list";
+import {SnakegameModule} from "./snakegame/snakegame.module";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
 import {PasswordResetComponent} from "./password-reset/password-reset.component";
 import {ConfirmSignUpComponent} from "./confirm-sign-up/confirm-sign-up.component";
 import {ChangePasswordComponent} from "./change-password/change-password.component";
+import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
 
 
 @NgModule({
@@ -50,6 +52,7 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
     ConfirmSignUpComponent,
     ChangePasswordComponent
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -65,9 +68,12 @@ import {ChangePasswordComponent} from "./change-password/change-password.compone
     MatIconModule,
     MatToolbarModule,
     MatListModule,
-    LeafletModule
+    SnakegameModule,
+    LeafletModule,
+    ScoreboardComponent
 
   ],
+
   providers: [],
   bootstrap: [AppComponent]
 })
