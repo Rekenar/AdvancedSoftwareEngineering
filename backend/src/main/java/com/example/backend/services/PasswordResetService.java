@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class PasswordResetService {
@@ -62,9 +61,14 @@ public class PasswordResetService {
     }
 
     @Transactional
-    public void deletePasswordResetTokenForUser(String token) {
+    public void deletePasswordResetTokenByToken(String token) {
         PasswordResetTokenEntity entity = passwordResetTokenRepo.findByToken(token)
                 .orElseThrow(() -> new TokenNotFoundException(ErrorMessages.PASSWORD_RESET_TOKEN_NOT_FOUND.getCode()));
         passwordResetTokenRepo.delete(entity);
+    }
+
+    @Transactional
+    public void deletePasswordResetTokenByUsername(String username) {
+        passwordResetTokenRepo.findByUserUsername(username).ifPresent(passwordResetTokenRepo::delete);
     }
 }

@@ -8,8 +8,6 @@ import com.example.backend.dtos.UsernameDTO;
 import com.example.backend.mail.MailEvent;
 import com.example.backend.messages.ErrorMessages;
 import com.example.backend.messages.SuccessMessages;
-import com.example.backend.models.ConfirmSignUpTokenEntity;
-import com.example.backend.models.PasswordResetTokenEntity;
 import com.example.backend.models.UserEntity;
 import com.example.backend.security.jwt.JwtUtil;
 import com.example.backend.security.models.AuthenticationRequest;
@@ -30,14 +28,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -93,6 +89,9 @@ public class UserController {
 
             final String token = jwtUtil.generateToken(userDetails);
 
+            // remove all unused PasswordResetToken
+            passwordResetService.deletePasswordResetTokenByUsername(userDetails.getUsername());
+
             return ResponseEntity.ok(new AuthenticationResponse(
                     token,
                     userService.loadUserIdByUsername(userDetails.getUsername()),
@@ -108,7 +107,6 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");
         }
     }
-
 
 
     /**
@@ -164,11 +162,17 @@ public class UserController {
 
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@Valid @RequestBody UsernameDTO dto) {
+        passwordResetService.deletePasswordResetTokenByUsername(dto.getUsername());
         UserEntity user = userService.loadUserEntityByUsername(dto.getUsername());
         String token = UUID.randomUUID().toString();
         passwordResetService.setPasswordResetToken(user, token);
 
-        // TODO -> sending Mail wir PW-reset Link
+        // sending Mail wir PW-reset Link
+        String resetPasswordUrl = frontendUrl + "users/change-password?token=" + token;
+        MailEvent event = new MailEvent(this, user.getUsername(), "MinigamesHUB: Reset password",
+                Map.of("username", user.getUsername(), "resetPasswordUrl", resetPasswordUrl),
+                "reset-password-email.html");
+        applicationEventPublisher.publishEvent(event);
 
         return ResponseEntity.ok(SuccessMessages.PASSWORD_RESET_LINK_SENT.getMessage());
     }
@@ -176,13 +180,12 @@ public class UserController {
     @PutMapping("/reset-password")
     public ResponseEntity<?> validateTokenAndResetPassword(@Valid @RequestBody PasswordDTO passwordDto) {
         if (!passwordResetService.validatePasswordResetToken(passwordDto.getToken())) {
-            return ResponseEntity.ok(ErrorMessages.PASSWORD_RESET_TOKEN_NOT_FOUND.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorMessages.PASSWORD_RESET_TOKEN_NOT_FOUND.getMessage());
         }
-
         UserEntity user = passwordResetService.loadUserByPasswordResetToken(passwordDto.getToken());
         passwordResetService.changePassword(user, passwordDto.getNewPassword());
 
-        passwordResetService.deletePasswordResetTokenForUser(passwordDto.getToken());
+        passwordResetService.deletePasswordResetTokenByToken(passwordDto.getToken());
         return ResponseEntity.ok(SuccessMessages.PASSWORD_UPDATE_SUCCESSFUL.getMessage());
     }
 

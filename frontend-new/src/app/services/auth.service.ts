@@ -71,4 +71,18 @@ export class AuthService {
         username: credentials.username
       }, HTTP_OPTIONS);
   }
+
+  changePassword(credentials: any, token: string) {
+    localStorage.removeItem(EXPIRATION_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+    console.log(credentials)
+    console.log(token)
+    return this.http.put(`${API_URL}/users/reset-password`,
+      {
+        token,
+        newPassword: credentials.newPassword
+      }, HTTP_OPTIONS);
+  }
+
+
 }
