@@ -33,3 +33,4 @@ build/
 .vscode/
 
 ./backend/database
+./backend/src/main/resources/secrets.yml
