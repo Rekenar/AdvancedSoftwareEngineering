@@ -35,6 +35,7 @@ build/
 ./backend/database
 ./backend/src/main/resources/secrets.yml
 
+./backend/.DS_Store
 ./backend/src/main/java/.DS_Store
 ./backend/src/main/java/com/.DS_Store
 ./backend/src/main/java/com/example/.DS_Store
