@@ -21,8 +21,7 @@ export class RegisterComponent implements OnInit{
   isSignUpFormSubmitted = false;
 
   constructor(public registerService: AuthService,
-              private formBuilder: FormBuilder,
-              private changeDetectorRef: ChangeDetectorRef) {
+              private formBuilder: FormBuilder) {
   }
 
   register() {

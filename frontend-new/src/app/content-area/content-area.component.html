@@ -1,5 +1,6 @@
 <div *ngIf="sharedData == Game.Game1">
   <h1>Game 1</h1>
+  <app-almost-game></app-almost-game>
 </div>
 
 <div *ngIf="sharedData == Game.Game2">
@@ -7,7 +8,7 @@
 </div>
 
 <div *ngIf="sharedData == Game.Game3">
-  <h1>Game 3</h1>
+  <app-snakegame></app-snakegame>
 </div>
 
 <div *ngIf="sharedData == Game.Game4">
@@ -23,11 +24,15 @@
   </app-asteroid>
 </div>
 
-<div *ngIf="sharedData == Game.NoGame">
-<app-preview>
 
-</app-preview>
+<div *ngIf="sharedData == Game.NoGame">
+  <app-preview>
+
+  </app-preview>
 </div>
 
 
+<div *ngIf="sharedData == Game.Scoreboard">
+  <app-scoreboard></app-scoreboard>
+</div>
 

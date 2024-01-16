@@ -1,0 +1,31 @@
+mat-toolbar button {
+  display: flex;
+  justify-content: flex-start;
+  margin: 8px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.example-container {
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 15%;
+  margin-top: 10px;
+  margin-left: 42.5%;
+  padding: 0 0 0 0;
+}
+
+td, th {
+  width: 20%;
+}
+
