@@ -34,3 +34,4 @@ build/
 
 ./backend/database
 ./backend/src/main/resources/secrets.yml
+.DS_Store
