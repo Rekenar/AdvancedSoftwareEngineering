@@ -8,9 +8,11 @@ export class Spaceship{
   private rotation: number;
   private moving: boolean;
   private bullets: Bullet[] = [];
+  private pieces: any[] = [];
   private shots:number;
   private isReloading: Boolean;
   private lives: number;
+  private isDestroyed: boolean;
 
   constructor(x: number, y: number, speed: number, angle:number, rotation:number) {
     this.x = x;
@@ -22,6 +24,7 @@ export class Spaceship{
     this.shots = 10;
     this.isReloading = false;
     this.lives = 3;
+    this.isDestroyed = false;
   }
 
   getHitbox(): Path2D {
@@ -32,6 +35,7 @@ export class Spaceship{
 
 
   updateSpaceship(pressedKeys: Set<string>, width: number, height: number) {
+    if(this.isDestroyed) return;
     this.rotate(pressedKeys);
     this.move(pressedKeys, width, height);
     this.bullets.forEach(bullet => {
@@ -43,15 +47,23 @@ export class Spaceship{
 
 
   draw(context: CanvasRenderingContext2D) {
-    this.drawSpaceship(context);
-    this.drawThrust(context);
+
+    if(this.isDestroyed) {
+      setTimeout(() => this.isDestroyed = false, 2000);
+    }else{
+      this.drawSpaceship(context);
+      this.drawThrust(context);
+    }
+
     this.drawAmmunition(context);
     this.drawLives(context);
     this.bullets.forEach(bullet => bullet.drawBullet(context));
   }
 
   private drawSpaceship(context: CanvasRenderingContext2D) {
-    let path = new Path2D();
+    let pathSideRight = new Path2D();
+    let pathSideLeft = new Path2D();
+    let pathSideMiddle = new Path2D();
     // Save the current transformation state
     context.save();
 
@@ -64,19 +76,24 @@ export class Spaceship{
     //draw the spaceship
     context.beginPath();
 
-    path.moveTo(-15, -37.5);
-    path.lineTo(0, 0);
-    path.lineTo(15, -37.5);
-    path.moveTo(-11, -27.5);
-    path.lineTo(11, -27.5);
+    pathSideRight.moveTo(-15, -37.5);
+    pathSideRight.lineTo(0, 0);
+
+    pathSideLeft.moveTo(15, -37.5);
+    pathSideLeft.lineTo(0, 0);
+
+    pathSideMiddle.moveTo(-11, -27.5);
+    pathSideMiddle.lineTo(11, -27.5);
 
 
     context.lineWidth = 2;
     context.strokeStyle = '#666666';
-    context.stroke(path);
-
+    context.stroke(pathSideRight);
+    context.stroke(pathSideLeft);
+    context.stroke(pathSideMiddle);
     context.restore();
   }
+
 
   private drawThrust(context: CanvasRenderingContext2D) {
     if(!this.moving) return;
@@ -189,6 +206,28 @@ export class Spaceship{
       }
     }
   }
+
+  loseLife() {
+    if (this.lives > 0) {
+      this.isDestroyed = true;
+      let path = new Path2D();
+
+      path.moveTo(0, -27.5);
+      path.lineTo(10, -27.5);
+
+
+
+
+
+      this.lives--;
+
+    }
+  }
+
+
+
+
+
 
   get getX(): number {
     return this.x;

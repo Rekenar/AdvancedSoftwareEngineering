@@ -51,6 +51,7 @@ export class AsteroidComponent implements OnInit{
     this.renderer.listen('window', 'keydown', (event) => this.handleKeyDown(event));
 
     this.createAsteroid();
+    this.renderer.listen('window', 'click', (event) => this.handleClickEvent(event));
     const keydownListener = () => {
       this.gameRunning = true;
       this.gameLoop();
@@ -69,7 +70,8 @@ export class AsteroidComponent implements OnInit{
       this.drawBackground();
       this.context.fillStyle = '#666666';
       this.context.font = '30px Arial';
-      this.context.fillText('Press any key to start', this.context.canvas.width / 4, this.context.canvas.height / 2);
+      this.context.textAlign = 'center';
+      this.context.fillText('Press any key to start', this.context.canvas.width / 2, this.context.canvas.height / 2);
       this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height);
     };
 
@@ -78,6 +80,20 @@ export class AsteroidComponent implements OnInit{
 
     // Redraw canvas on resize
     window.addEventListener('resize', resizeCanvas);
+  }
+
+  private createStartScreen() {
+    //Create Start Screen with buttons for start and settings
+
+
+  }
+
+
+  private handleClickEvent(event: MouseEvent) {
+    //Check if mouse is over start button or settings button
+    //If mouse is over start button, start game
+    //If mouse is over settings button, open settings
+
   }
 
   private drawBackground() {
@@ -136,16 +152,19 @@ export class AsteroidComponent implements OnInit{
 
       if(!this.isHit){
         if(asteroid.collidesWith(this.spaceShip, this.context)){
-          this.spaceShip.setLives = this.spaceShip.getLives - 1;
+          this.spaceShip.loseLife();
           this.isHit = true;
-          setTimeout(() => this.isHit = false, 2000);
-          this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height);
+          setTimeout(() => {
+            this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height)
+            this.isHit = false
+          }, 2000);
+
         }
       }
 
       for(const bullet of this.spaceShip.getBullets) {
         if(asteroid.collidesWith(bullet, this.context)) {
-          let angleRandom = Math.random() * 0.5;
+
 
           switch(asteroid.getSize){
             case AsteroidEnum.small: {
@@ -154,14 +173,14 @@ export class AsteroidComponent implements OnInit{
             }
             case AsteroidEnum.medium: {
               this.score += 5;
-              this.asteroids.push(new Asteroid(asteroid.getX+50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle*angleRandom, asteroid.getRotation, AsteroidEnum.small));
-              this.asteroids.push(new Asteroid(asteroid.getX-50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle, asteroid.getRotation, AsteroidEnum.small));
+              this.asteroids.push(new Asteroid(asteroid.getX+50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * -Math.PI/2, asteroid.getRotation, AsteroidEnum.small));
+              this.asteroids.push(new Asteroid(asteroid.getX-50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* Math.PI/2, asteroid.getRotation, AsteroidEnum.small));
               break;
             }
             case AsteroidEnum.big: {
               this.score += 2;
-              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle*angleRandom, asteroid.getRotation, AsteroidEnum.medium));
-              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle, asteroid.getRotation, AsteroidEnum.medium));
+              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* -Math.PI/2, asteroid.getRotation, AsteroidEnum.medium));
+              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* Math.PI/2, asteroid.getRotation, AsteroidEnum.medium));
               break;
             }
           }
