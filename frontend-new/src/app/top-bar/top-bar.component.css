@@ -1,3 +1,7 @@
+mat-toolbar {
+  height: 7.5vh;
+}
+
 mat-toolbar button {
   display: flex;
   justify-content: flex-start;
