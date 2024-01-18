@@ -30,6 +30,9 @@ import {MatListModule} from "@angular/material/list";
 import {SnakegameModule} from "./snakegame/snakegame.module";
 import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.component';
 import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
+import { GameComponent } from './typing-game/game/game.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+
 
 
 @NgModule({
@@ -44,7 +47,8 @@ import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
     AlmostAttrComponent,
     AlmostStartComponent,
     AlmostMapComponent,
-    AlmostModeComponent
+    AlmostModeComponent,
+    GameComponent
   ],
 
   imports: [
@@ -64,7 +68,8 @@ import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
     MatListModule,
     SnakegameModule,
     LeafletModule,
-    ScoreboardComponent
+    ScoreboardComponent,
+    TooltipModule.forRoot()
   ],
 
   providers: [],
