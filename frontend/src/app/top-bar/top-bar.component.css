@@ -1,9 +1,0 @@
-mat-toolbar button {
-  display: flex;
-  justify-content: flex-start;
-  margin: 8px;
-}
-
-.spacer {
-  flex: 1;
-}
