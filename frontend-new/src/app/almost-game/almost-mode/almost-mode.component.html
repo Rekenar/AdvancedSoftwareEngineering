@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="column">    
+        <div *ngIf="view1; else difficulty1">
+            <button (click)="setMode(false)">
+                <img src="../../../assets/images/borders.png" alt="Borders tiles">
+                <p>Blank mode</p>
+            </button>
+        </div>
+        <ng-template #difficulty1>
+            <button (click)="setDifficulty(true)">
+                <img src="../../../assets/images/capitals.jpg" alt="Borders tiles">
+                <p>Capitals are enough!</p>
+            </button>
+        </ng-template>
+    </div>
+    <div class="column">   
+        <div *ngIf="view1; else difficulty2">
+            <button (click)="setMode(true)">
+                <img src="../../../assets/images/relief.png" alt="Relief tiles">
+                <p>Earth mode</p>
+            </button>
+        </div>
+        <ng-template #difficulty2>
+            <button (click)="setDifficulty(false)">
+                <img src="../../../assets/images/cities.jpg" alt="Borders tiles">
+                <p>I want more cities!</p>
+            </button>
+        </ng-template>
+    </div>
+</div>

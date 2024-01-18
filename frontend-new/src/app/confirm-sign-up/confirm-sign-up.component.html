@@ -1,0 +1,28 @@
+<div class = "text">
+  <h1> Registration - MinigamesHUB </h1>
+</div>
+
+<mat-card class="card" *ngIf="!isConfirmSignUpFailed">
+  <mat-card-header>
+    <mat-card-title>Registration was successful</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Thank you for your registration, you can now login</p>
+    <div class="link">
+      <a routerLink="/login">Go to Login</a>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<!--token is expired-->
+<mat-card class="card" *ngIf="isConfirmSignUpFailed">
+  <mat-card-header>
+    <mat-card-title>Registration not successful</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Something went wrong. Please try signing up again.</p>
+    <div class="link">
+      <a routerLink="/register">Back to Registration</a>
+    </div>
+  </mat-card-content>
+</mat-card>

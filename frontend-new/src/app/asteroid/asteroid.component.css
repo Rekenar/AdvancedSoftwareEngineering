@@ -1,0 +1,10 @@
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#gameCanvas {
+  border: 5px solid #666666; /* Add a border to visualize the canvas */
+}
