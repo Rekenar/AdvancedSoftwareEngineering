@@ -95,6 +95,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/users/register**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/users/reset-password").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/api/users/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
                         .requestMatchers(HttpMethod.GET, "/scores/**").authenticated()
                         .requestMatchers(HttpMethod.POST, "/scores/**").authenticated()
                         .anyRequest().authenticated() // any other request needs to be authenticated!
