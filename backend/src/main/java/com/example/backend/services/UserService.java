@@ -76,4 +76,11 @@ public class UserService implements UserDetailsService {
         dto.setPassword(user.getPassword());
         return dto;
     }
+
+    public UserEntity loadUserEntityByUsername(String username) {
+        Optional<UserEntity> user = userRepo.findByUsername(username);
+        user.orElseThrow(() -> new UsernameNotFoundException("Not found: " + username));
+
+        return user.get();
+    }
 }

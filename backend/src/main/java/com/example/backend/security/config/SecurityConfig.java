@@ -55,6 +55,8 @@ public class SecurityConfig {
     // from https://www.youtube.com/watch?v=X80nJ5T7YpE&list=PLqq-6Pq4lTTYTEooakHchTGglSvkZAjnE&index=12
     // up-to-date documentation: https://spring.io/guides/gs/securing-web/
 
+    /*
+    // works but some things are deprecated
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
@@ -76,31 +78,33 @@ public class SecurityConfig {
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }
-
-    // try to remove deprecations
-    /*@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http
-                .cors(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // do not create a session! -> use jwt
-                .exceptionHandling((exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)) // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
-                .authorizeHttpRequests(auth -> auth
-                                .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/api/users/confirm-sign-up**").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/users/reset-password**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/api/users/update-password").permitAll()
-                                .anyRequest().authenticated() // any other request needs to be authenticated!
-                        //.anyRequest().permitAll()
-                )
-                //.and().formLogin().disable(); // type of login, that Spring should do
-                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class) // adding the authenticationTokenFilterBean() before the UsernamePasswordAuthFilter
-
-                .build();
     }*/
 
+    // try to remove deprecations
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors(withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(sess
+                        -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ) // do not create a session! -> use jwt
+                //.exeptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and() // handle 403 forbidden errors for login -> see https://stackoverflow.com/questions/59555526/requets-return-only-403-forbidden-even-if-csrf-is-disabled-spring-security-jw
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.POST, "/api/users/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/register**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/users/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/scores/**").authenticated()
+                        .requestMatchers(HttpMethod.POST, "/scores/**").authenticated()
+                        .anyRequest().authenticated() // any other request needs to be authenticated!
+                )
+                //.anyRequest().permitAll()
+                .formLogin(AbstractHttpConfigurer::disable)
+                .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

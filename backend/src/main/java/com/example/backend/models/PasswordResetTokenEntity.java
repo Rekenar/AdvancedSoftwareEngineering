@@ -2,6 +2,8 @@ package com.example.backend.models;
 
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,7 +21,7 @@ public class PasswordResetTokenEntity {
     @JoinColumn(nullable = false, name = "user_id")
     private UserEntity user;
 
-    private Date expiryDate;
+    private LocalDateTime expiryDate;
 
     public Long getId() {
         return id;
@@ -45,11 +47,11 @@ public class PasswordResetTokenEntity {
         this.user = user;
     }
 
-    public Date getExpiryDate() {
+    public LocalDateTime getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(LocalDateTime expiryDate) {
         this.expiryDate = expiryDate;
     }
 }
