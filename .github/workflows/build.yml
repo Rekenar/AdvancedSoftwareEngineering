@@ -27,6 +27,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    # Set up JDK 21
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
@@ -34,13 +35,38 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    # Install Chrome
     - name: Install Chrome
       run: |
         sudo apt-get update
         sudo apt-get install -y google-chrome-stable
 
+    # Set up Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21.1.0'
+
+    # Install frontend dependencies
+    - name: Install frontend dependencies
+      working-directory: ./frontend-new
+      run: npm install
+
+    # Build frontend
+    - name: Build frontend
+      working-directory: ./frontend-new
+      run: npm run build
+
+    # Start frontend server
+    - name: Start frontend server
+      working-directory: ./frontend-new
+      run: npm start &
+      # The ampersand (&) at the end runs the server in the background
+
+    # Create MySQL container
     - name: Create MySQL container
       run: docker-compose -f backend/docker-compose.yml up -d mysql
 
+    # Build with Maven
     - name: Build with Maven
       run: mvn -B package --file backend/pom.xml
