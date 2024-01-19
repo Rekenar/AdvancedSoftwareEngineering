@@ -32,7 +32,10 @@
             Password must be at least 8 characters long
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Login</button>
+        <button mat-raised-button color="primary" type="submit" class="btn-login">Login</button>
+        <div *ngIf="loginError" class="error-message">
+          {{ loginError }}
+        </div>
       </form>
       <br>
       <p>Dont't have an account? <a routerLink="/register">Create one now!</a></p>
