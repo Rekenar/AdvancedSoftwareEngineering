@@ -22,7 +22,7 @@ public class WebDriverLibrary {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
 
-        return new ChromeDriver();
+        return new ChromeDriver(options);
     }
 
 
