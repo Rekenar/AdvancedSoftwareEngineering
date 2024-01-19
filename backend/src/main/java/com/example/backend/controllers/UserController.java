@@ -101,7 +101,7 @@ public class UserController {
                     jwtUtil.getEXPIRATION_TIME() - 10));
         } catch (BadCredentialsException e) {
             logger.error("Authentication failed: Incorrect username or password", e);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Incorrect username or password");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect username or password");
         } catch (Exception e) {
             logger.error("Authentication failed: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed");

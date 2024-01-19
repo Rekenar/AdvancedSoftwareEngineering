@@ -11,22 +11,22 @@ name: Java CI with Maven
 on:
   push:
     branches:
-        - main
-        - development
-        - automation-tests
+      - main
+      - development
+      - automation-tests
   pull_request:
     branches:
-        - main
-        - development
-        - automation-tests
+      - main
+      - development
+      - automation-tests
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up JDK 21
       uses: actions/setup-java@v3
       with:
@@ -34,8 +34,36 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '21.1.0'
+
+    - name: Install frontend dependencies
+      working-directory: ./frontend-new
+      run: npm install
+
+    - name: Build frontend
+      working-directory: ./frontend-new
+      run: npm run build
+
+    - name: Start frontend server
+      working-directory: ./frontend-new
+      run: npm start &
+      # The ampersand (&) at the end runs the server in the background
+
     - name: Create MySQL container
       run: docker-compose -f backend/docker-compose.yml up -d mysql
 
-    - name: Build with Maven
-      run: mvn -B package --file backend/pom.xml
+    - name: Start backend server
+      run: mvn spring-boot:run -f backend/pom.xml &
+      # The ampersand (&) at the end runs the server in the background
+
+    - name: Run backend tests (Selenium)
+      run: mvn test -f backend/pom.xml
+      # Adjust the command if your tests are not part of the default test phase
