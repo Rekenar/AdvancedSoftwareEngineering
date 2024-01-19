@@ -13,11 +13,12 @@ on:
     branches:
         - main
         - development
-        - selenium-tests
+        - automation-tests
   pull_request:
     branches:
         - main
         - development
+        - automation-tests
 
 jobs:
   build:
