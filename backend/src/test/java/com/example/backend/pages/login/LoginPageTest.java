@@ -1,9 +1,7 @@
 package com.example.backend.pages.login;
 
-import com.example.backend.models.UserEntity;
 import com.example.backend.repositories.UserRepo;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,20 +35,6 @@ public class LoginPageTest {
 
     @Autowired
     PasswordEncoder passwordEncoder;
-
-    @BeforeEach
-    void setupDefaultUser() {
-        String username = "user@user.at";
-        if (userRepo.findByUsername(username).isEmpty()) {
-            UserEntity entity = new UserEntity();
-            entity.setId(1L);
-            entity.setUsername(username);
-            entity.setEnabled(true);
-            entity.setPassword(passwordEncoder.encode("user1234"));
-            entity.setDeleted(false);
-            userRepo.save(entity);
-        }
-    }
 
     @Test
     public void testLoginAndRedirectToHomeExpectSuccess() {
