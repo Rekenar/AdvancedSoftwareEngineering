@@ -37,6 +37,7 @@ import {AsteroidComponent} from "./asteroid/asteroid.component";
 
 import {PreviewComponent} from "./preview/preview.component";
 import {SnakegameModule} from "./snakegame/snakegame.module";
+import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
     LeafletModule,
     ScoreboardComponent,
     AsteroidComponent,
-    PreviewComponent
+    PreviewComponent,
+    MovieGuessrComponent
   ],
 
   providers: [],
