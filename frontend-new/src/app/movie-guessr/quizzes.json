@@ -1,0 +1,206 @@
+[
+  {
+    "title": "Jurassic Park",
+    "hints": [
+      {
+        "category": "Plot Summary",
+        "hint": "An ambitious theme park project goes terribly wrong when its main attractions - prehistoric creatures - defy human control.",
+        "cost": 2
+      },
+      {
+        "category": "Emojis Summary",
+        "hint": "🦖🏝️🚗🌧️⚠️",
+        "cost": 1
+      },
+      {
+        "category": "Famous Quote",
+        "hint": "\"Life finds a way.\"",
+        "cost": 3
+      },
+      {
+        "category": "Setting",
+        "hint": "The story unfolds on a remote, lush island off the coast of Costa Rica.",
+        "cost": 2
+      },
+      {
+        "category": "Trivia",
+        "hint": "This movie marked a revolution in CGI technology and was one of the first to combine CGI with live-action.",
+        "cost": 3
+      },
+      {
+        "category": "Director's Signature",
+        "hint": "Directed by a filmmaker known for his adventurous and imaginative storytelling, often involving fantastical elements.",
+        "cost": 2
+      },
+      {
+        "category": "Character Hint",
+        "hint": "A paleontologist, a paleobotanist, and a mathematician are among the key characters.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A tense moment with a cup of water vibrating due to the footsteps of an unseen giant.",
+        "cost": 4
+      },
+      {
+        "category": "Fun Fact",
+        "hint": "The sound designers used a combination of animal sounds to create the unique voices of the dinosaurs.",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "Shutter Island",
+    "hints": [
+      {
+        "category": "Plot Summary",
+        "hint": "A U.S. Marshal investigates a psychiatric facility on a remote island following the disappearance of a patient.",
+        "cost": 2
+      },
+      {
+        "category": "Emojis Summary",
+        "hint": "👮‍♂️🏝️🧠💊🌧️",
+        "cost": 1
+      },
+      {
+        "category": "Famous Quote",
+        "hint": "\"Which would be worse: To live as a monster, or to die as a good man?\"",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "The story is set on a desolate, stormy island housing a facility for the criminally insane.",
+        "cost": 3
+      },
+      {
+        "category": "Trivia",
+        "hint": "This movie is based on a novel of the same name.",
+        "cost": 2
+      },
+      {
+        "category": "Director's Signature",
+        "hint": "Directed by a filmmaker famous for his intricate storytelling and frequent collaborations with a well-known actor.",
+        "cost": 2
+      },
+      {
+        "category": "Character Hint",
+        "hint": "The protagonist is haunted by his traumatic past, including memories of his time as a soldier and personal tragedies.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A scene involving a surreal, dream-like sequence with the protagonist's deceased wife.",
+        "cost": 4
+      },
+      {
+        "category": "Alternative Name",
+        "hint": "\"Ashecliffe\"",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "Dark",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "A small German town with a nuclear power plant plays a central role.",
+        "cost": 2
+      },
+      {
+        "category": "Character",
+        "hint": "The disappearance of a young boy sets off a chain of events.",
+        "cost": 3
+      },
+      {
+        "category": "Plot Element",
+        "hint": "Time travel is a key element in the storyline.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "This series is a mix of science fiction and thriller.",
+        "cost": 1
+      },
+      {
+        "category": "Creators",
+        "hint": "Created by Baran bo Odar and Jantje Friese.",
+        "cost": 2
+      },
+      {
+        "category": "Theme",
+        "hint": "Explores the implications of time and its effect on human nature.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Known for its complex and intricate narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Production",
+        "hint": "The first German-language Netflix original series.",
+        "cost": 4
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "Features haunting and atmospheric music.",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "The Grinch",
+    "hints": [
+      {
+        "category": "Character",
+        "hint": "A green, furry recluse who despises Christmas and the Whos.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "The story takes place in a snowflake, in a town called Whoville.",
+        "cost": 3
+      },
+      {
+        "category": "Plot Element",
+        "hint": "The main character plots to steal Christmas from the town's inhabitants.",
+        "cost": 2
+      },
+      {
+        "category": "Theme",
+        "hint": "Explores themes of loneliness, redemption, and the true spirit of Christmas.",
+        "cost": 2
+      },
+      {
+        "category": "Adaptation",
+        "hint": "Based on a book by Dr. Seuss.",
+        "cost": 4
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "A scene where the Grinch's heart grows three sizes.",
+        "cost": 1
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Known for its unique animation style and heartwarming story.",
+        "cost": 3
+      },
+      {
+        "category": "Voice Actor",
+        "hint": "The Grinch is voiced by a famous actor known for his comedic roles.",
+        "cost": 2
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "The character has become synonymous with anyone who is perceived as anti-Christmas.",
+        "cost": 1
+      }
+    ]
+  }
+
+
+
+
+]
