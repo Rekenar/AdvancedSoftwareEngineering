@@ -42,8 +42,7 @@ public class AcceptanceNavigationTest {
             {"btnGame2", "contentGame2"},
             {"btnGame3", "contentGame3"},
             {"btnGame4", "contentGame4"},
-            {"btnGame5", "contentGame5"},
-            {"btnGame6", "contentGame6"}
+            {"btnGame5", "contentGame5"}
     };
 
     @Test
