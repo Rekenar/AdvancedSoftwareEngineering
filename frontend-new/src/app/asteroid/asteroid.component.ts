@@ -9,6 +9,9 @@ import {BigAsteroid} from './asteroids/BigAsteroid';
 import {ISpaceship} from "./spaceships/ISpaceship";
 import {NormalSpaceship} from "./spaceships/NormalSpaceship";
 import {interval, Subscription} from "rxjs";
+import {IPowerUp} from "./powerups/IPowerUp";
+import {SpeedPowerUp} from "./powerups/SpeedPowerUp";
+import {TripleMagazinePowerUp} from "./powerups/TripleMagazinePowerUp";
 
 
 @Component({
@@ -23,6 +26,8 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   private spaceShip: ISpaceship;
 
   private asteroids: IAsteroid[] = [];
+
+  private powerUps: IPowerUp[] = [];
 
   private context: CanvasRenderingContext2D;
 
@@ -49,6 +54,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     this.setupEventListeners();
     this.fetchAsteroids();
     this.spaceShip = new NormalSpaceship(this.context, innerWidth / 2, innerHeight / 2, 0, 0);
+    this.createPowerUps();
   }
 
   ngOnDestroy(): void {
@@ -164,10 +170,14 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
     this.asteroids.forEach(asteroid => asteroid.drawAsteroid(this.context));
 
+
+    this.powerUps.forEach(powerUp => powerUp.draw(this.context));
+
     this.spaceShip.draw();
 
     this.drawScore();
   }
+  
 
   private update() {
     this.updateSpaceship();
@@ -179,28 +189,33 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   }
 
   private updateAsteroids() {
+    for (const powerUp of this.powerUps) {
+      if (powerUp.getHitbox().intersects(this.spaceShip.getHitbox())) {
+        powerUp.apply(this.spaceShip);
+        this.powerUps.splice(this.powerUps.indexOf(powerUp), 1);
+      }
+    }
     for (const asteroid of this.asteroids) {
       asteroid.updateAsteroids(this.context.canvas.width, this.context.canvas.height);
 
 
-      if (asteroid.collidesWith(this.spaceShip, this.context)) {
+      if (this.spaceShip.getHitbox().intersects(asteroid.getHitbox())) {
         this.spaceShip.loseLife(this.context.canvas.width, this.context.canvas.height);
       }
 
 
       for (const bullet of this.spaceShip.getMagazine.getBullets) {
-        if (asteroid.collidesWith(bullet, this.context)) {
-
+        if (bullet.getHitbox().intersects(asteroid.getHitbox())) {
           if (asteroid instanceof SmallAsteroid) {
             this.score += 10;
           } else if (asteroid instanceof MediumAsteroid) {
             this.score += 5;
-            this.asteroids.push(new SmallAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
-            this.asteroids.push(new SmallAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new SmallAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new SmallAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
           } else if (asteroid instanceof BigAsteroid) {
             this.score += 2;
-            this.asteroids.push(new MediumAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
-            this.asteroids.push(new MediumAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new MediumAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new MediumAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
           }
 
           this.asteroids.splice(this.asteroids.indexOf(asteroid), 1);
@@ -208,6 +223,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
           break;
         }
       }
+
     }
   }
 
@@ -255,15 +271,20 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     data.asteroids.forEach(asteroid => {
       switch (asteroid.size) {
         case 1:
-          this.asteroids.push(new SmallAsteroid(asteroid.x, asteroid.y, asteroid.speed, asteroid.angle, 0));
+          this.asteroids.push(new SmallAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
           break;
         case 2:
-          this.asteroids.push(new MediumAsteroid(asteroid.x, asteroid.y, asteroid.speed, asteroid.angle, 0));
+          this.asteroids.push(new MediumAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
           break;
         case 3:
-          this.asteroids.push(new BigAsteroid(asteroid.x, asteroid.y, asteroid.speed, asteroid.angle, 0));
+          this.asteroids.push(new BigAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
           break;
       }
     });
+  }
+
+  private createPowerUps() {
+    this.powerUps.push(new SpeedPowerUp(100, 100));
+    this.powerUps.push(new TripleMagazinePowerUp(200, 200));
   }
 }

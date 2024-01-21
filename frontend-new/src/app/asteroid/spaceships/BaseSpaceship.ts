@@ -3,7 +3,7 @@ import {SpaceshipRenderer} from "./utility/SpaceshipRenderer";
 import {IMagazine} from "../magazine/IMagazine";
 import {SpaceshipMovementController} from "./utility/SpaceshipMovementController";
 import {SpaceshipStatusManager} from "./utility/SpaceshipStatusManager";
-import {NormalMagazine} from "../magazine/NormalMagazine";
+import {IHitbox} from "../hitboxes/IHitbox";
 
 export abstract class BaseSpaceship implements ISpaceship {
   protected spaceshipRenderer: SpaceshipRenderer;
@@ -11,11 +11,11 @@ export abstract class BaseSpaceship implements ISpaceship {
   protected magazine: IMagazine;
   private statusManager: SpaceshipStatusManager;
 
-  protected constructor(context: CanvasRenderingContext2D, x: number, y: number, speed: number, rotation: number) {
+  protected constructor(context: CanvasRenderingContext2D, x: number, y: number, speed: number, rotation: number, magazine: IMagazine) {
     this.spaceshipMovementController = new SpaceshipMovementController(x, y, speed, rotation);
     this.spaceshipRenderer = new SpaceshipRenderer(context);
     this.statusManager = new SpaceshipStatusManager();
-    this.magazine = new NormalMagazine(context);
+    this.magazine = magazine;
   }
 
 
@@ -71,12 +71,20 @@ export abstract class BaseSpaceship implements ISpaceship {
     this.statusManager.setMoving(moving);
   }
 
-
-  getHitbox(): Path2D {
-    const path = new Path2D();
-    path.arc(this.getX, this.getY, 19, 0, 2 * Math.PI);
-    return path;
+  get getContext(): CanvasRenderingContext2D {
+    return this.spaceshipRenderer.getContext;
   }
+
+  setMagazine(magazine: IMagazine) {
+    this.magazine = magazine;
+  }
+
+  setSpeed(speed: number): void {
+    this.spaceshipMovementController.setSpeed(speed);
+  }
+
+
+  abstract getHitbox(): IHitbox;
 
 
   updateSpaceship(pressedKeys: Set<string>, width: number, height: number): void {
@@ -104,6 +112,7 @@ export abstract class BaseSpaceship implements ISpaceship {
   draw(): void {
     this.spaceshipRenderer.draw(this.getKilled, this.getX, this.getY, this.getRotation, this.getMoving, this.getLives, this.getShots);
     this.magazine.drawBullets();
+
   }
 
   loseLife(width: number, height: number): void {

@@ -5,6 +5,10 @@ export class SpaceshipRenderer {
     this.context = context;
   }
 
+  get getContext(): CanvasRenderingContext2D {
+    return this.context;
+  }
+
   draw(killed: boolean, x: number, y: number, rotation: number, moving: boolean, lives: number, shots: number) {
     if (!killed) {
       this.drawSpaceship(x, y, rotation);

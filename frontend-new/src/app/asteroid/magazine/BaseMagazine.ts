@@ -16,8 +16,7 @@ export abstract class BaseMagazine implements IMagazine {
   }
 
   shoot(x: number, y: number, angle: number): void {
-    const speed = 10; // Adjust the bullet speed as needed
-    const bullet = new NormalBullet(x, y, speed, angle);
+    const bullet = new NormalBullet(x, y, angle);
     this.bullets.push(bullet);
   }
 

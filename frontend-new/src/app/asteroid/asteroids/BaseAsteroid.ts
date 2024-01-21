@@ -1,4 +1,6 @@
 import {IAsteroid} from "./IAsteroid";
+import {IHitbox} from "../hitboxes/IHitbox";
+import {CircleHitbox} from "../hitboxes/CircleHitbox";
 
 export abstract class BaseAsteroid implements IAsteroid {
   protected x: number;
@@ -42,27 +44,10 @@ export abstract class BaseAsteroid implements IAsteroid {
     return this.sizeFactor;
   }
 
-  getHitbox(): Path2D {
-    let radius = 40;
-    const path = new Path2D();
-
-    path.arc(this.x, this.y, radius * this.sizeFactor, 0, 2 * Math.PI);
-
-    return path;
+  getHitbox(): IHitbox {
+    return new CircleHitbox(this.x, this.y, 40 * this.sizeFactor)
   }
 
-  collidesWith(otherObject: {
-    getHitbox(): Path2D,
-    getX: number,
-    getY: number
-  }, context: CanvasRenderingContext2D): boolean {
-    const asteroidHitbox = this.getHitbox();
-    const otherObjectHitbox = otherObject.getHitbox();
-    const otherObjectX = otherObject.getX;
-    const otherObjectY = otherObject.getY;
-
-    return context.isPointInPath(otherObjectHitbox, this.x, this.y) || context.isPointInPath(asteroidHitbox, otherObjectX, otherObjectY);
-  }
 
   updateAsteroids(width: number, height: number) {
     let movementX = Math.sin(this.angle) * this.speed;

@@ -1,8 +1,10 @@
+import {IHitbox} from "../hitboxes/IHitbox";
+
 export interface IBullet {
   getX: number;
   getY: number;
 
-  getHitbox(): Path2D;
+  getHitbox(): IHitbox;
 
   drawBullet(context: CanvasRenderingContext2D): void;
 

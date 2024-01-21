@@ -1,4 +1,5 @@
 import {IMagazine} from "../magazine/IMagazine";
+import {IHitbox} from "../hitboxes/IHitbox";
 
 export interface ISpaceship {
   getX: number;
@@ -25,7 +26,13 @@ export interface ISpaceship {
 
   setMoving: boolean;
 
-  getHitbox(): Path2D;
+  getContext: CanvasRenderingContext2D;
+
+  setSpeed(speed: number): void;
+
+  setMagazine(magazine: IMagazine): void;
+
+  getHitbox(): IHitbox;
 
   draw(): void;
 

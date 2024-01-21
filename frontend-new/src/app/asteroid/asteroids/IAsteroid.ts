@@ -1,3 +1,5 @@
+import {IHitbox} from "../hitboxes/IHitbox";
+
 export interface IAsteroid {
   getX: number;
   getY: number;
@@ -5,13 +7,8 @@ export interface IAsteroid {
   getAngle: number;
   getRotation: number;
 
-  getHitbox(): Path2D;
+  getHitbox(): IHitbox;
 
-  collidesWith(otherObject: {
-    getHitbox(): Path2D,
-    getX: number,
-    getY: number
-  }, context: CanvasRenderingContext2D): boolean;
 
   updateAsteroids(width: number, height: number): void;
 
