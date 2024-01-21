@@ -61,20 +61,18 @@ export class MovieGuessrGamestateService {
     }
   }
 
-  checkCorrectFilmName(userInput: string): boolean {
-    // Compare userInput with the correct film name
-    const correctFilmName = this.selectedMovie.title;
-    return userInput.toLowerCase() === correctFilmName.toLowerCase();
-  }
-
   checkGuess(userInput: string) {
-    if (userInput.toLowerCase() === this.selectedMovie.title.toLowerCase()) {
-      this.nextRound()
+    // Normalize the user input and the selected movie title for comparison
+    const normalizedUserInput = userInput.trim().toLowerCase();
+    const normalizedMovieTitle = this.selectedMovie.title.trim().toLowerCase();
+
+    if (normalizedUserInput === normalizedMovieTitle) {
+      this.nextRound();
       this.coinCount += 5;
-      this.initializeGame()
+      this.initializeGame();
     } else {
       if (this.coinCount > 0) {
-        this.coinCount--
+        this.coinCount--;
       }
     }
   }

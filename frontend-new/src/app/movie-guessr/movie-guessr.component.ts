@@ -7,9 +7,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {map, Observable, startWith} from "rxjs";
-import quizzesData from './quizzes.json'; // Import the JSON file
 import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-services/movie-guessr-gamestate.service';
 import {MatButtonModule} from "@angular/material/button";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-movie-guessr',
@@ -32,7 +32,7 @@ import {MatButtonModule} from "@angular/material/button";
   styleUrl: './movie-guessr.component.css'
 })
 export class MovieGuessrComponent implements OnInit{
-  constructor(public gameService: MovieGuessrGamestateService) {}
+  constructor(public gameService: MovieGuessrGamestateService, private http: HttpClient) {}
 
   tiles = Array.from({ length: 9 }, (_, i) => i + 1);
 
@@ -41,14 +41,30 @@ export class MovieGuessrComponent implements OnInit{
   filteredOptions: Observable<string[]>;
 
   ngOnInit(): void {
-    this.gameService.initializeGame();
-    this.gameService.coinCount = 10;
-    this.options = quizzesData.map((quiz) => quiz.title);
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value || '')),
+
+    this.http.get('assets/data/movies.txt', { responseType: 'text' }).subscribe(
+      (data) => {
+        // Split the contents into an array of movie titles
+        this.options = data.split('\n');
+        // Set up filtering for the autocomplete
+        this.filteredOptions = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map((value) => {
+            if (value && value.length >= 3) {
+              return this._filter(value);
+            } else {
+              return [];
+            }
+          })
+        );
+      },
+      (error) => {
+        console.error('Error reading movie titles:', error);
+      }
     );
 
+    this.gameService.initializeGame();
+    this.gameService.coinCount = 10;
   }
 
   private _filter(value: string): string[] {
@@ -59,18 +75,6 @@ export class MovieGuessrComponent implements OnInit{
 
   onInputSubmitted(userInput: string | null): void {
     if (userInput !== null) {
-      //const isCorrect = this.gameService.checkCorrectFilmName(userInput);
-/*
-      if (isCorrect) {
-        // User's input is correct, load a new quiz and award 5 coins
-        this.gameService.roundCount++;
-        this.gameService.initializeGame(); // Load a new quiz
-        this.gameService.coinCount += 5; // Award 5 coins
-      } else {
-        // Handle incorrect input (optional)
-      }*/
-
-      // Clear the input field
       this.gameService.checkGuess(userInput);
       this.myControl.setValue('');
     }
