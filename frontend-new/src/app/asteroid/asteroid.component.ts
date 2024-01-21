@@ -177,7 +177,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
     this.drawScore();
   }
-  
+
 
   private update() {
     this.updateSpaceship();
@@ -253,12 +253,8 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   private sendScore() {
     const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("auth-token"));
 
-    const body = {
-      score: this.score,
-      gameName: 5
-    }
 
-    return this.http.post('http://localhost:8080/scores/add', body, {headers});
+    return this.http.post(`http://localhost:8080/scores/add/5/${this.score}`, null, {headers});
   }
 
   private processAsteroidData(data: IncomingAsteroidDTO): void {

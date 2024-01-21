@@ -1,7 +1,6 @@
 package com.example.backend.controllers;
 
 import com.example.backend.dtos.ScoreDTO;
-import com.example.backend.dtos.ScoreInputDTO;
 import com.example.backend.enums.Game;
 import com.example.backend.services.ScoreService;
 import org.slf4j.Logger;
@@ -37,16 +36,15 @@ public class ScoreController {
 
 
 
-    @PostMapping("/add")
-    public ResponseEntity<String> addScore(@RequestBody ScoreInputDTO scoreInputDTO) {
+    @PostMapping("/add/{game}/{scoreValue}")
+    public ResponseEntity<String> addScore(@PathVariable Integer game, @PathVariable Integer scoreValue) {
         try {
-            logger.info("Adding score");
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            Game gameEnum = Game.valueOf(Integer.valueOf( scoreInputDTO.getGameName()));
-            scoreService.createScore(username, gameEnum, scoreInputDTO.getScore());
+            Game gameEnum = Game.valueOf(game);
+            scoreService.createScore(username, gameEnum, scoreValue);
             return ResponseEntity.ok("Score added");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getLocalizedMessage());
+            return ResponseEntity.badRequest().build();
         }
     }
 }
