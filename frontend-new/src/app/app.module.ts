@@ -36,6 +36,7 @@ import {MatListModule} from "@angular/material/list";
 import {AsteroidComponent} from "./asteroid/asteroid.component";
 
 import {SnakegameModule} from "./snakegame/snakegame.module";
+import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
 
 @NgModule({
@@ -74,7 +75,8 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
     SnakegameModule,
     LeafletModule,
     ScoreboardComponent,
-    AsteroidComponent
+    AsteroidComponent,
+    MovieGuessrComponent
   ],
 
   providers: [],

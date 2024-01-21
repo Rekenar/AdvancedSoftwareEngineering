@@ -1,0 +1,1104 @@
+[
+  {
+    "title": "Jurassic Park",
+    "hints": [
+      {
+        "category": "Plot Summary",
+        "hint": "An ambitious theme park project goes terribly wrong when its main attractions.",
+        "cost": 3
+      },
+      {
+        "category": "Emojis Summary",
+        "hint": "🦖🏝️🚗🌧️⚠️",
+        "cost": 1
+      },
+      {
+        "category": "Famous Quote",
+        "hint": "\"Life finds a way.\"",
+        "cost": 3
+      },
+      {
+        "category": "Setting",
+        "hint": "The story unfolds on a remote, lush island off the coast of Costa Rica.",
+        "cost": 2
+      },
+      {
+        "category": "Trivia",
+        "hint": "This movie marked a revolution in CGI technology and was one of the first to combine CGI with live-action.",
+        "cost": 3
+      },
+      {
+        "category": "Director's Signature",
+        "hint": "Directed by a filmmaker known for his adventurous and imaginative storytelling, often involving fantastical elements.",
+        "cost": 2
+      },
+      {
+        "category": "Character Hint",
+        "hint": "A paleontologist, a paleobotanist, and a mathematician are among the key characters.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A tense moment with a cup of water vibrating due to the footsteps of an unseen giant.",
+        "cost": 4
+      },
+      {
+        "category": "Fun Fact",
+        "hint": "The sound designers used a combination of animal sounds to create the unique voices of the dinosaurs.",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "Shutter Island",
+    "hints": [
+      {
+        "category": "Plot Summary",
+        "hint": "A U.S. Marshal investigates a psychiatric facility on a remote island following the disappearance of a patient.",
+        "cost": 3
+      },
+      {
+        "category": "Emojis Summary",
+        "hint": "👮‍♂️🏝️🧠💊🌧️",
+        "cost": 1
+      },
+      {
+        "category": "Famous Quote",
+        "hint": "\"Which would be worse: To live as a monster, or to die as a good man?\"",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "The story is set on a desolate, stormy island housing a facility for the criminally insane.",
+        "cost": 3
+      },
+      {
+        "category": "Trivia",
+        "hint": "This movie is based on a novel of the same name.",
+        "cost": 2
+      },
+      {
+        "category": "Director's Signature",
+        "hint": "Directed by a filmmaker famous for his intricate storytelling and frequent collaborations with a well-known actor.",
+        "cost": 2
+      },
+      {
+        "category": "Character Hint",
+        "hint": "The protagonist is haunted by his traumatic past, including memories of his time as a soldier and personal tragedies.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A scene involving a surreal, dream-like sequence with the protagonist's deceased wife.",
+        "cost": 4
+      },
+      {
+        "category": "Alternative Name",
+        "hint": "\"Ashecliffe\"",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "Dark",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "A small German town with a nuclear power plant plays a central role.",
+        "cost": 2
+      },
+      {
+        "category": "Character",
+        "hint": "The disappearance of a young boy sets off a chain of events.",
+        "cost": 3
+      },
+      {
+        "category": "Plot Element",
+        "hint": "Time travel is a key element in the storyline.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "This series is a mix of science fiction and thriller.",
+        "cost": 1
+      },
+      {
+        "category": "Creators",
+        "hint": "Created by Baran bo Odar and Jantje Friese.",
+        "cost": 2
+      },
+      {
+        "category": "Theme",
+        "hint": "Explores the implications of time and its effect on human nature.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Known for its complex and intricate narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Production",
+        "hint": "The first German-language Netflix original series.",
+        "cost": 4
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "Features haunting and atmospheric music.",
+        "cost": 1
+      }
+    ]
+  },
+  {
+    "title": "Pulp Fiction",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "The story unfolds in a non-linear narrative, jumping between different timelines and locations in a city known for its glamour and underworld.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A mysterious briefcase, often glowing when opened, plays a pivotal role but its contents remain a secret.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "A character recites a misquoted biblical passage, 'Ezekiel 25:17', in a chilling and memorable scene.",
+        "cost": 5
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "The film features a retro soundtrack with a mix of surf music, soul, and pop hits from the 1960s and 1970s.",
+        "cost": 2
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "The film is known for its eclectic dialogue, sharp humor, and graphic violence, blending together to form a distinctive style.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker renowned for his innovative storytelling and cultural references, the film stands as a testament to his unique vision.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "This movie is a blend of crime, drama, and dark comedy, with elements of a neo-noir aesthetic.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "Critically acclaimed, the film was praised for its original screenplay and became a landmark in independent filmmaking.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "This movie has influenced popular culture significantly, inspiring a variety of media and becoming a staple reference in discussions about 90s cinema.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Schindler's List",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set during World War II, the story takes place in and around the Kraków Ghetto and a concentration camp in Poland.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "The film is predominantly in black and white, creating a stark, historical atmosphere, with the notable exception of a girl in a red coat.",
+        "cost": 5
+      },
+      {
+        "category": "Theme",
+        "hint": "Central themes include the moral complexities of humanity, the horror of genocide, and the redemptive power of self-sacrifice.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker known for his diverse genres and blockbuster hits, this film stands out for its historical and emotional depth.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "The film received immense critical acclaim, noted for its emotional impact, historical accuracy, and remarkable performances.",
+        "cost": 2
+      },
+      {
+        "category": "Awards",
+        "hint": "It won numerous prestigious awards, including several Oscars, particularly for Best Picture and Best Director.",
+        "cost": 3
+      },
+      {
+        "category": "Music",
+        "hint": "The haunting score, composed by a renowned film composer, adds profound depth to the film's somber and poignant narrative.",
+        "cost": 3
+      },
+      {
+        "category": "Impact",
+        "hint": "The film had a significant impact on public awareness of the Holocaust and led to the establishment of historical archives and memorials.",
+        "cost": 4
+      },
+      {
+        "category": "Historical Context",
+        "hint": "Based on a true story, it portrays the real-life account of a businessman who saved over a thousand lives during the Holocaust.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Forrest Gump",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Spanning several decades, the story takes the audience through notable historical events in the United States from the 1950s to the 1980s.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A box of chocolates becomes a symbol for the unpredictability of life, as quoted by the main character.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "One of the film's most memorable lines is, 'Life is like a box of chocolates, you never know what you're gonna get.'",
+        "cost": 5
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "The soundtrack features a wide array of popular American songs from the eras depicted in the movie, reflecting its various time periods.",
+        "cost": 2
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "The film is known for its blend of comedy and drama, and the unique way it integrates the protagonist into real historical footage.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker known for his ability to blend humor with heartwarming storytelling, this movie is a testament to his versatile style.",
+        "cost": 2
+      },
+      {
+        "category": "Genre",
+        "hint": "This movie is a unique blend of drama, romance, and comedy, telling the story of an unwittingly influential man's life journey.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "The film was both a critical and commercial success, praised for its innovative narrative structure and heartwarming story.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "It has left a lasting cultural impact, with several lines and scenes from the movie becoming iconic in American pop culture.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "The Matrix",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in a dystopian future where reality is a simulated construct, and the true world is a post-apocalyptic wasteland.",
+        "cost": 4
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "Red and blue pills symbolize the choice between embracing the harsh truth of reality or remaining in blissful ignorance.",
+        "cost": 5
+      },
+      {
+        "category": "Famous Line",
+        "hint": "A line that became synonymous with the film's concept is 'Welcome to the real world.'",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "The film is known for its groundbreaking visual effects, including the use of 'bullet time,' which allows for slowed-down action sequences.",
+        "cost": 3
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Combines elements of cyberpunk, philosophical allegories, and innovative action choreography.",
+        "cost": 2
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by siblings known for their visionary storytelling and visual innovation, creating a film that redefined a genre.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "A blend of science fiction, action, and philosophical drama, the film questions the nature of reality and human perception.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "The film was a critical and commercial success, lauded for its innovative storytelling, special effects, and action sequences.",
+        "cost": 2
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "It significantly influenced popular culture, introducing terms and concepts that became part of the mainstream lexicon.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Se7en",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "The story unfolds in a dark, rain-soaked city plagued by crime and decay, setting the tone for a grim narrative.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A series of elaborately staged crime scenes, each representing one of the seven deadly sins.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "'What's in the box?' becomes a chilling moment of suspense and horror near the film's climax.",
+        "cost": 5
+      },
+      {
+        "category": "Visual Style",
+        "hint": "The film is characterized by its bleak cinematography and a constant sense of dread and foreboding.",
+        "cost": 3
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Known for its shocking and unconventional ending, leaving a lasting impact on the audience.",
+        "cost": 5
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker known for his dark and stylish thrillers, this film stands out for its narrative intensity and visual storytelling.",
+        "cost": 2
+      },
+      {
+        "category": "Genre",
+        "hint": "A psychological thriller that delves into the depths of human depravity and the psyche of a serial killer.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "Critically acclaimed for its writing, acting, and directing, the film is considered a classic in the thriller genre.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "Its influence is seen in numerous subsequent crime thrillers and its ending has been widely discussed and referenced in popular culture.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "Interstellar",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in a future where Earth is becoming uninhabitable, leading to a daring space exploration mission to find a new home for humanity.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A complex wristwatch plays a significant role in the movie, symbolizing the theme of time.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "A memorable line from the film is, 'Love is the one thing that transcends time and space.'",
+        "cost": 5
+      },
+      {
+        "category": "Scientific Concept",
+        "hint": "The film explores advanced scientific theories such as black holes, wormholes, and the relativity of time.",
+        "cost": 4
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Notable for its scientifically accurate depiction of space phenomena, consulted by a renowned theoretical physicist.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker known for his complex narratives and grand visual style, this film is a testament to his ambitious storytelling.",
+        "cost": 2
+      },
+      {
+        "category": "Genre",
+        "hint": "A science fiction epic that blends adventure, drama, and a deep exploration of human emotions and survival.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "Received acclaim for its visual effects, musical score, and ambitious storytelling, though it sparked debate over its scientific and narrative complexity.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "The film sparked discussions about space exploration and scientific concepts, influencing public interest in astrophysics.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "The Silence of the Lambs",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "The narrative unfolds in various locations including an FBI training academy, a maximum-security asylum, and crime scenes.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A moth with a skull-like pattern on its back becomes a symbol associated with the film's chilling theme.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "A disturbing and memorable line by a character is, 'I ate his liver with some fava beans and a nice Chianti.'",
+        "cost": 5
+      },
+      {
+        "category": "Character",
+        "hint": "The film features a brilliant but manipulative psychiatrist turned serial killer, who assists in profiling another serial killer.",
+        "cost": 2
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Notable for its psychological intensity and the complex relationship between the main characters, an FBI trainee and a serial killer.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker known for his ability to create tension and drama, this film is celebrated for its suspenseful and gripping narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Genre",
+        "hint": "A psychological thriller that delves deep into the minds of its characters, blending crime, horror, and drama.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "Critically acclaimed, it won multiple Academy Awards and is praised for its screenplay, direction, and performances.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "The film has had a lasting impact on the thriller genre and popular culture, often cited for its iconic characters and scenes.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "Saving Private Ryan",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set during World War II, the story begins with the Normandy Invasion and follows a squad through war-torn France.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "The film opens with a harrowingly realistic and intense depiction of the D-Day landing at Omaha Beach.",
+        "cost": 5
+      },
+      {
+        "category": "Theme",
+        "hint": "Explores themes of bravery, sacrifice, the horrors of war, and the moral complexities faced by soldiers.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker renowned for his skill in creating immersive and emotionally powerful films, often with historical significance.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "Critically acclaimed for its realistic portrayal of war, the film is noted for its direction, cinematography, and sound design.",
+        "cost": 2
+      },
+      {
+        "category": "Awards",
+        "hint": "Received multiple Academy Awards, particularly praised for its directing, cinematography, and sound editing.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Notable for its use of handheld cameras and desaturated colors to create a gritty, realistic depiction of combat.",
+        "cost": 4
+      },
+      {
+        "category": "Impact",
+        "hint": "The film is considered one of the greatest war films ever made, profoundly impacting the portrayal of war in cinema.",
+        "cost": 4
+      },
+      {
+        "category": "Historical Accuracy",
+        "hint": "While the main narrative is fictional, the film is praised for its accurate depiction of the World War II era and military tactics.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Back to the Future",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "The story oscillates between the 1980s and the 1950s, featuring a small American town as the backdrop for time-travel adventures.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A modified DeLorean car serves as a time machine, becoming one of the most recognizable symbols of the film.",
+        "cost": 5
+      },
+      {
+        "category": "Famous Line",
+        "hint": "A memorable quote from the movie is, 'Where we're going, we don't need roads.'",
+        "cost": 4
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "The film's soundtrack is memorable, especially the power ballad 'The Power of Love' which became synonymous with the film.",
+        "cost": 2
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Known for its clever and humorous take on time travel, the film creatively explores the consequences of altering the past.",
+        "cost": 3
+      },
+      {
+        "category": "Directorial Style",
+        "hint": "Directed by a filmmaker renowned for his ability to blend comedy, science fiction, and adventure into family-friendly blockbusters.",
+        "cost": 2
+      },
+      {
+        "category": "Genre",
+        "hint": "A science fiction adventure comedy that masterfully blends 80s culture with a nostalgic look at the 1950s.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Reception",
+        "hint": "The film was a massive commercial success and critically acclaimed for its original script, engaging performances, and visual effects.",
+        "cost": 3
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "It left a significant mark on pop culture, inspiring various media and becoming a staple reference in discussions about time travel in cinema.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "Spider-Man: Into the Spider-Verse",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "This animated adventure unfolds in a vibrant, urban landscape, where multiple dimensions converge.",
+        "cost": 2
+      },
+      {
+        "category": "Awards",
+        "hint": "The film received significant acclaim, notably winning an Academy Award for Best Animated Feature.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "The movie is renowned for its unique animation style, which mimics the look of comic book panels.",
+        "cost": 3
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "The soundtrack is a mix of hip hop, pop, and alternative music, featuring artists like Post Malone.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Central themes include self-discovery, responsibility, and the concept of parallel universes.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Critics praised the film for its innovative animation, engaging story, and fresh take on the superhero genre.",
+        "cost": 3
+      },
+      {
+        "category": "Genre",
+        "hint": "This film is a mix of comedy, action, and science fiction, set in a superhero universe.",
+        "cost": 2
+      },
+      {
+        "category": "Production",
+        "hint": "Produced by a major animation studio known for pushing the boundaries of traditional animation.",
+        "cost": 2
+      },
+      {
+        "category": "Influence",
+        "hint": "It inspired a surge in interest for alternative takes on classic comic book characters.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "The Shining",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in an isolated, grandiose hotel enveloped by a harsh winter landscape.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker renowned for his meticulous and symbolic approach to cinema.",
+        "cost": 4
+      },
+      {
+        "category": "Adaptation",
+        "hint": "Based on a novel by a famous author known for his contributions to the horror genre.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Notable for its symmetrical shots and steady camerawork that create an unsettling atmosphere.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Features a memorable scene with a character breaking through a door, leading to a famous line.",
+        "cost": 5
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of madness, isolation, and the supernatural.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "While initial reviews were mixed, it has since been regarded as one of the greatest horror films ever made.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Pioneering use of Steadicam for smooth tracking shots added to the film's eerie ambiance.",
+        "cost": 4
+      },
+      {
+        "category": "Legacy",
+        "hint": "Its influence is evident in numerous horror films and TV shows, and it has inspired countless theories and analyses.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "1917",
+    "hints": [
+      {
+        "category": "Cinematography",
+        "hint": "The film is notable for its continuous shot technique, creating an immersive and unbroken visual experience.",
+        "cost": 5
+      },
+      {
+        "category": "Setting",
+        "hint": "Set against the backdrop of World War I, depicting the harsh realities of trench warfare.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his work on epic and visually stunning films.",
+        "cost": 4
+      },
+      {
+        "category": "Production",
+        "hint": "Remarkable for its detailed and expansive set design, recreating the battlefields of the early 20th century.",
+        "cost": 3
+      },
+      {
+        "category": "Awards",
+        "hint": "Received multiple Academy Awards, including for its cinematography and visual effects.",
+        "cost": 4
+      },
+      {
+        "category": "Plot",
+        "hint": "Centers on a perilous mission across enemy lines, with the fate of thousands hanging in the balance.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes of bravery, brotherhood, and the human cost of war are central to the narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Music",
+        "hint": "The score, both haunting and evocative, amplifies the tension and emotional depth of the film.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Praised for its technical mastery and emotional depth, it was a significant contender during awards season.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Inglourious Basterds",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his distinctive style and often revisionist approach to historical events.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in Nazi-occupied France during World War II, presenting an alternate history narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes include revenge, the power of cinema, and the moral complexities of war.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received widespread acclaim for its screenplay, direction, and performances.",
+        "cost": 3
+      },
+      {
+        "category": "Casting",
+        "hint": "Features a memorable performance by an actor who won an Oscar for his role as a charming yet ruthless Nazi officer.",
+        "cost": 4
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Known for its sharp dialogue, graphic violence, and a blend of humor and drama.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Includes a tense and brilliantly scripted scene in a basement tavern that escalates into unexpected violence.",
+        "cost": 4
+      },
+      {
+        "category": "Dialogue",
+        "hint": "Notable for its multilingual script, with characters speaking English, German, French, and Italian.",
+        "cost": 3
+      },
+      {
+        "category": "Influence",
+        "hint": "Influenced by various film genres, including war films, spaghetti westerns, and thrillers.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Star Wars: Episode VI - Return of the Jedi",
+    "hints": [
+      {
+        "category": "Franchise",
+        "hint": "Part of a globally popular sci-fi saga known for its iconic characters and spaceships.",
+        "cost": 2
+      },
+      {
+        "category": "Setting",
+        "hint": "Features diverse settings including a dense forest moon, a desert planet, and the vastness of space.",
+        "cost": 2
+      },
+      {
+        "category": "Characters",
+        "hint": "Introduces small, furry creatures living in the forest who play a significant role in the story.",
+        "cost": 3
+      },
+      {
+        "category": "Villains",
+        "hint": "The central antagonist, clad in black armor, faces a crucial turning point in his story arc.",
+        "cost": 4
+      },
+      {
+        "category": "Climactic Battle",
+        "hint": "Concludes with a thrilling space battle involving the destruction of a massive superweapon.",
+        "cost": 3
+      },
+      {
+        "category": "Music",
+        "hint": "Features a memorable and sweeping musical score that has become synonymous with epic adventure.",
+        "cost": 2
+      },
+      {
+        "category": "Special Effects",
+        "hint": "Utilizes groundbreaking special effects for its time, including complex puppetry and space battle sequences.",
+        "cost": 3
+      },
+      {
+        "category": "Legacy",
+        "hint": "Marked as the original conclusion to a beloved trilogy, it has a significant place in cinematic history.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of redemption, the struggle between good and evil, and the power of hope.",
+        "cost": 2
+      }
+    ]
+  },
+  {
+    "title": "The Wolf of Wall Street",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker renowned for his work in crime and psychological thrillers.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in the 1980s and 1990s.",
+        "cost": 2
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes include greed, corruption, and the moral decay of a high-flying stockbroker.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a popular actor known for his dynamic performances, portraying the film's protagonist.",
+        "cost": 3
+      },
+      {
+        "category": "Adaptation",
+        "hint": "Based on a memoir, detailing the real-life experiences of a notorious stockbroker.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received critical acclaim for its direction, screenplay, and lead actor's performance.",
+        "cost": 3
+      },
+      {
+        "category": "Controversy",
+        "hint": "Notable for its controversial depiction of debauchery, drug use, and financial crime.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Features dynamic and energetic cinematography, mirroring the chaotic world of its characters.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Includes a famous scene where the protagonist gives an impassioned and wild speech to his employees.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "Catch Me If You Can",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his diverse and critically acclaimed body of work.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in the 1960s, following a young con artist as he executes a series of daring and sophisticated frauds.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a renowned actor known for his versatile roles, playing the charismatic and elusive protagonist.",
+        "cost": 3
+      },
+      {
+        "category": "Plot",
+        "hint": "The story revolves around the cat-and-mouse chase between the protagonist and an FBI agent.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of deception, identity, and the pursuit of the American dream.",
+        "cost": 2
+      },
+      {
+        "category": "Based on True Events",
+        "hint": "Inspired by the real-life story of a notorious and ingenious impostor.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Praised for its engaging narrative, dynamic performances, and stylish direction.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "The film is noted for its sleek and polished visual style, reflecting the glamour and allure of the protagonist's cons.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Features memorable scenes of the protagonist impersonating a pilot, a doctor, and a lawyer.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "The Truman Show",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in an idyllic, meticulously crafted small town that's not quite what it seems.",
+        "cost": 3
+      },
+      {
+        "category": "Concept",
+        "hint": "Centers on the life of a man who is unaware that his entire life is a televised reality show.",
+        "cost": 4
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a comedic actor known for his transition into more serious and thought-provoking roles.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of surveillance, reality versus illusion, and personal freedom.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by an Australian filmmaker known for his unique storytelling and visual style.",
+        "cost": 4
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received acclaim for its originality, insightful commentary, and the lead actor's performance.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Features a picturesque and almost utopian visual aesthetic that contrasts with the underlying narrative tension.",
+        "cost": 3
+      },
+      {
+        "category": "Legacy",
+        "hint": "The film's title has become a cultural reference for situations where people feel they are being watched or manipulated.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Utilizes unique camera angles and shots to give the audience a sense of voyeurism and surveillance.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Bohemian Rhapsody",
+    "hints": [
+      {
+        "category": "Biopic",
+        "hint": "A cinematic portrayal of the life and career of a singer.",
+        "cost": 4
+      },
+      {
+        "category": "Music",
+        "hint": "Features iconic songs and performances that defined a generation and remain popular worldwide.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "The lead actor received critical acclaim and awards for his transformative portrayal of the band's charismatic frontman.",
+        "cost": 4
+      },
+      {
+        "category": "Band",
+        "hint": "Focuses on the rise, challenges, and successes of a groundbreaking British rock band.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by filmmakers known for their work in action and drama genres.",
+        "cost": 4
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received mixed reviews from critics but was a major hit with audiences, earning numerous accolades.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Captures the era's essence through its visual style, concert scenes, and period-specific set design.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of identity, artistry, and the impact of fame on personal relationships.",
+        "cost": 2
+      },
+      {
+        "category": "Iconic Performance",
+        "hint": "Recreates one of the most memorable live performances in rock history.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in a world of swashbuckling pirates.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Character",
+        "hint": "Features a charismatic and eccentric pirate captain known for his wit, charm, and iconic attire.",
+        "cost": 3
+      },
+      {
+        "category": "Plot",
+        "hint": "Centers on the quest to break an ancient curse that has doomed a crew of pirates to live as the undead.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "A mix of action, adventure, fantasy, and comedy, creating a unique and entertaining film experience.",
+        "cost": 2
+      },
+      {
+        "category": "Origin",
+        "hint": "Inspired by a classic theme park ride, transforming it into a cinematic story.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Effects",
+        "hint": "Notable for its groundbreaking special effects, especially the portrayal of the cursed pirate crew.",
+        "cost": 3
+      },
+      {
+        "category": "Music",
+        "hint": "Features an iconic and memorable orchestral score that enhances the adventurous tone of the film.",
+        "cost": 2
+      },
+      {
+        "category": "Franchise",
+        "hint": "The success of this film led to the creation of several sequels, expanding the story's universe.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received positive reviews for its entertaining plot, special effects, and the lead actor's performance.",
+        "cost": 3
+      }
+    ]
+  }
+
+
+]
