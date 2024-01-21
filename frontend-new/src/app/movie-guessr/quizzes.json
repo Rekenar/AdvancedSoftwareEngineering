@@ -4,8 +4,8 @@
     "hints": [
       {
         "category": "Plot Summary",
-        "hint": "An ambitious theme park project goes terribly wrong when its main attractions - prehistoric creatures - defy human control.",
-        "cost": 2
+        "hint": "An ambitious theme park project goes terribly wrong when its main attractions.",
+        "cost": 3
       },
       {
         "category": "Emojis Summary",
@@ -55,7 +55,7 @@
       {
         "category": "Plot Summary",
         "hint": "A U.S. Marshal investigates a psychiatric facility on a remote island following the disappearance of a patient.",
-        "cost": 2
+        "cost": 3
       },
       {
         "category": "Emojis Summary",
@@ -598,5 +598,507 @@
         "cost": 4
       }
     ]
+  },
+  {
+    "title": "Spider-Man: Into the Spider-Verse",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "This animated adventure unfolds in a vibrant, urban landscape, where multiple dimensions converge.",
+        "cost": 2
+      },
+      {
+        "category": "Awards",
+        "hint": "The film received significant acclaim, notably winning an Academy Award for Best Animated Feature.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "The movie is renowned for its unique animation style, which mimics the look of comic book panels.",
+        "cost": 3
+      },
+      {
+        "category": "Soundtrack",
+        "hint": "The soundtrack is a mix of hip hop, pop, and alternative music, featuring artists like Post Malone.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Central themes include self-discovery, responsibility, and the concept of parallel universes.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Critics praised the film for its innovative animation, engaging story, and fresh take on the superhero genre.",
+        "cost": 3
+      },
+      {
+        "category": "Genre",
+        "hint": "This film is a mix of comedy, action, and science fiction, set in a superhero universe.",
+        "cost": 2
+      },
+      {
+        "category": "Production",
+        "hint": "Produced by a major animation studio known for pushing the boundaries of traditional animation.",
+        "cost": 2
+      },
+      {
+        "category": "Influence",
+        "hint": "It inspired a surge in interest for alternative takes on classic comic book characters.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "The Shining",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in an isolated, grandiose hotel enveloped by a harsh winter landscape.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker renowned for his meticulous and symbolic approach to cinema.",
+        "cost": 4
+      },
+      {
+        "category": "Adaptation",
+        "hint": "Based on a novel by a famous author known for his contributions to the horror genre.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Notable for its symmetrical shots and steady camerawork that create an unsettling atmosphere.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Features a memorable scene with a character breaking through a door, leading to a famous line.",
+        "cost": 5
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of madness, isolation, and the supernatural.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "While initial reviews were mixed, it has since been regarded as one of the greatest horror films ever made.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Pioneering use of Steadicam for smooth tracking shots added to the film's eerie ambiance.",
+        "cost": 4
+      },
+      {
+        "category": "Legacy",
+        "hint": "Its influence is evident in numerous horror films and TV shows, and it has inspired countless theories and analyses.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "1917",
+    "hints": [
+      {
+        "category": "Cinematography",
+        "hint": "The film is notable for its continuous shot technique, creating an immersive and unbroken visual experience.",
+        "cost": 5
+      },
+      {
+        "category": "Setting",
+        "hint": "Set against the backdrop of World War I, depicting the harsh realities of trench warfare.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his work on epic and visually stunning films.",
+        "cost": 4
+      },
+      {
+        "category": "Production",
+        "hint": "Remarkable for its detailed and expansive set design, recreating the battlefields of the early 20th century.",
+        "cost": 3
+      },
+      {
+        "category": "Awards",
+        "hint": "Received multiple Academy Awards, including for its cinematography and visual effects.",
+        "cost": 4
+      },
+      {
+        "category": "Plot",
+        "hint": "Centers on a perilous mission across enemy lines, with the fate of thousands hanging in the balance.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes of bravery, brotherhood, and the human cost of war are central to the narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Music",
+        "hint": "The score, both haunting and evocative, amplifies the tension and emotional depth of the film.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Praised for its technical mastery and emotional depth, it was a significant contender during awards season.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Inglourious Basterds",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his distinctive style and often revisionist approach to historical events.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in Nazi-occupied France during World War II, presenting an alternate history narrative.",
+        "cost": 2
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes include revenge, the power of cinema, and the moral complexities of war.",
+        "cost": 2
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received widespread acclaim for its screenplay, direction, and performances.",
+        "cost": 3
+      },
+      {
+        "category": "Casting",
+        "hint": "Features a memorable performance by an actor who won an Oscar for his role as a charming yet ruthless Nazi officer.",
+        "cost": 4
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Known for its sharp dialogue, graphic violence, and a blend of humor and drama.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Includes a tense and brilliantly scripted scene in a basement tavern that escalates into unexpected violence.",
+        "cost": 4
+      },
+      {
+        "category": "Dialogue",
+        "hint": "Notable for its multilingual script, with characters speaking English, German, French, and Italian.",
+        "cost": 3
+      },
+      {
+        "category": "Influence",
+        "hint": "Influenced by various film genres, including war films, spaghetti westerns, and thrillers.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Star Wars: Episode VI - Return of the Jedi",
+    "hints": [
+      {
+        "category": "Franchise",
+        "hint": "Part of a globally popular sci-fi saga known for its iconic characters and spaceships.",
+        "cost": 2
+      },
+      {
+        "category": "Setting",
+        "hint": "Features diverse settings including a dense forest moon, a desert planet, and the vastness of space.",
+        "cost": 2
+      },
+      {
+        "category": "Characters",
+        "hint": "Introduces small, furry creatures living in the forest who play a significant role in the story.",
+        "cost": 3
+      },
+      {
+        "category": "Villains",
+        "hint": "The central antagonist, clad in black armor, faces a crucial turning point in his story arc.",
+        "cost": 4
+      },
+      {
+        "category": "Climactic Battle",
+        "hint": "Concludes with a thrilling space battle involving the destruction of a massive superweapon.",
+        "cost": 3
+      },
+      {
+        "category": "Music",
+        "hint": "Features a memorable and sweeping musical score that has become synonymous with epic adventure.",
+        "cost": 2
+      },
+      {
+        "category": "Special Effects",
+        "hint": "Utilizes groundbreaking special effects for its time, including complex puppetry and space battle sequences.",
+        "cost": 3
+      },
+      {
+        "category": "Legacy",
+        "hint": "Marked as the original conclusion to a beloved trilogy, it has a significant place in cinematic history.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of redemption, the struggle between good and evil, and the power of hope.",
+        "cost": 2
+      }
+    ]
+  },
+  {
+    "title": "The Wolf of Wall Street",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker renowned for his work in crime and psychological thrillers.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in the 1980s and 1990s.",
+        "cost": 2
+      },
+      {
+        "category": "Themes",
+        "hint": "Themes include greed, corruption, and the moral decay of a high-flying stockbroker.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a popular actor known for his dynamic performances, portraying the film's protagonist.",
+        "cost": 3
+      },
+      {
+        "category": "Adaptation",
+        "hint": "Based on a memoir, detailing the real-life experiences of a notorious stockbroker.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received critical acclaim for its direction, screenplay, and lead actor's performance.",
+        "cost": 3
+      },
+      {
+        "category": "Controversy",
+        "hint": "Notable for its controversial depiction of debauchery, drug use, and financial crime.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Features dynamic and energetic cinematography, mirroring the chaotic world of its characters.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Includes a famous scene where the protagonist gives an impassioned and wild speech to his employees.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "Catch Me If You Can",
+    "hints": [
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker known for his diverse and critically acclaimed body of work.",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "Set in the 1960s, following a young con artist as he executes a series of daring and sophisticated frauds.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a renowned actor known for his versatile roles, playing the charismatic and elusive protagonist.",
+        "cost": 3
+      },
+      {
+        "category": "Plot",
+        "hint": "The story revolves around the cat-and-mouse chase between the protagonist and an FBI agent.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of deception, identity, and the pursuit of the American dream.",
+        "cost": 2
+      },
+      {
+        "category": "Based on True Events",
+        "hint": "Inspired by the real-life story of a notorious and ingenious impostor.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Praised for its engaging narrative, dynamic performances, and stylish direction.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "The film is noted for its sleek and polished visual style, reflecting the glamour and allure of the protagonist's cons.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Scene",
+        "hint": "Features memorable scenes of the protagonist impersonating a pilot, a doctor, and a lawyer.",
+        "cost": 4
+      }
+    ]
+  },
+  {
+    "title": "The Truman Show",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in an idyllic, meticulously crafted small town that's not quite what it seems.",
+        "cost": 3
+      },
+      {
+        "category": "Concept",
+        "hint": "Centers on the life of a man who is unaware that his entire life is a televised reality show.",
+        "cost": 4
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "Stars a comedic actor known for his transition into more serious and thought-provoking roles.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of surveillance, reality versus illusion, and personal freedom.",
+        "cost": 2
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by an Australian filmmaker known for his unique storytelling and visual style.",
+        "cost": 4
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received acclaim for its originality, insightful commentary, and the lead actor's performance.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Style",
+        "hint": "Features a picturesque and almost utopian visual aesthetic that contrasts with the underlying narrative tension.",
+        "cost": 3
+      },
+      {
+        "category": "Legacy",
+        "hint": "The film's title has become a cultural reference for situations where people feel they are being watched or manipulated.",
+        "cost": 4
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Utilizes unique camera angles and shots to give the audience a sense of voyeurism and surveillance.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Bohemian Rhapsody",
+    "hints": [
+      {
+        "category": "Biopic",
+        "hint": "A cinematic portrayal of the life and career of a singer.",
+        "cost": 4
+      },
+      {
+        "category": "Music",
+        "hint": "Features iconic songs and performances that defined a generation and remain popular worldwide.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Actor",
+        "hint": "The lead actor received critical acclaim and awards for his transformative portrayal of the band's charismatic frontman.",
+        "cost": 4
+      },
+      {
+        "category": "Band",
+        "hint": "Focuses on the rise, challenges, and successes of a groundbreaking British rock band.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by filmmakers known for their work in action and drama genres.",
+        "cost": 4
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received mixed reviews from critics but was a major hit with audiences, earning numerous accolades.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Captures the era's essence through its visual style, concert scenes, and period-specific set design.",
+        "cost": 3
+      },
+      {
+        "category": "Themes",
+        "hint": "Explores themes of identity, artistry, and the impact of fame on personal relationships.",
+        "cost": 2
+      },
+      {
+        "category": "Iconic Performance",
+        "hint": "Recreates one of the most memorable live performances in rock history.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Pirates of the Caribbean: The Curse of the Black Pearl",
+    "hints": [
+      {
+        "category": "Setting",
+        "hint": "Set in a world of swashbuckling pirates.",
+        "cost": 2
+      },
+      {
+        "category": "Lead Character",
+        "hint": "Features a charismatic and eccentric pirate captain known for his wit, charm, and iconic attire.",
+        "cost": 3
+      },
+      {
+        "category": "Plot",
+        "hint": "Centers on the quest to break an ancient curse that has doomed a crew of pirates to live as the undead.",
+        "cost": 4
+      },
+      {
+        "category": "Genre",
+        "hint": "A mix of action, adventure, fantasy, and comedy, creating a unique and entertaining film experience.",
+        "cost": 2
+      },
+      {
+        "category": "Origin",
+        "hint": "Inspired by a classic theme park ride, transforming it into a cinematic story.",
+        "cost": 3
+      },
+      {
+        "category": "Visual Effects",
+        "hint": "Notable for its groundbreaking special effects, especially the portrayal of the cursed pirate crew.",
+        "cost": 3
+      },
+      {
+        "category": "Music",
+        "hint": "Features an iconic and memorable orchestral score that enhances the adventurous tone of the film.",
+        "cost": 2
+      },
+      {
+        "category": "Franchise",
+        "hint": "The success of this film led to the creation of several sequels, expanding the story's universe.",
+        "cost": 3
+      },
+      {
+        "category": "Critical Acclaim",
+        "hint": "Received positive reviews for its entertaining plot, special effects, and the lead actor's performance.",
+        "cost": 3
+      }
+    ]
   }
+
+
 ]
