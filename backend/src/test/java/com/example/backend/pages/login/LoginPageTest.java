@@ -2,6 +2,7 @@ package com.example.backend.pages.login;
 
 import com.example.backend.repositories.UserRepo;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -25,7 +27,6 @@ public class LoginPageTest {
     @Qualifier("getChromeDriver")
     @Autowired
     private WebDriver driver;
-
 
     @Value("${FRONTEND_URL}")
     private String frontendUrl;
@@ -36,50 +37,35 @@ public class LoginPageTest {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    private LoginPage loginPage;
+
+    @BeforeEach
+    public void setUp() {
+        driver.get(frontendUrl + "login");
+        loginPage = PageFactory.initElements(driver, LoginPage.class);
+    }
+
     @Test
     public void testLoginAndRedirectToHomeExpectSuccess() {
-        try {
-            // Navigate to the login page
-            driver.get(frontendUrl + "login");
-
-            LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-            boolean isRedirected = loginPage.performLoginAndCheckRedirect("user@user.at", "user1234", frontendUrl + "home");
-
-            assertTrue(isRedirected, "The user was not redirected to the home page after login.");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AssertionError("Login test failed.");
-        }
+        boolean isRedirected = performLoginAndCheckRedirect("user@user.at", "user1234", frontendUrl + "home");
+        assertTrue(isRedirected, "The user was not redirected to the home page after login.");
     }
 
     @Test
     public void testLoginWithIncorrectCredentialsExpectFailure() {
-        try {
-            // Navigate to the login page
-            driver.get(frontendUrl + "login");
+        boolean staysAtLoginPage = performLoginAndCheckRedirect("wrongUser", "wrongPassword", frontendUrl + "login");
+        assertTrue(staysAtLoginPage, "The user was incorrectly redirected after entering wrong credentials.");
+        assertErrorMessage("Incorrect username or password");
+    }
 
-            LoginPage loginPage = PageFactory.initElements(driver, LoginPage.class);
-            loginPage.login("wrongUser", "wrongPassword");
-            loginPage.clickLogin();
+    private boolean performLoginAndCheckRedirect(String username, String password, String expectedUrl) {
+        return loginPage.performLoginAndCheckRedirect(username, password, expectedUrl);
+    }
 
-            // Wait for the error message to appear
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            WebElement errorMessageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".error-message")));
-
-            // Check if the error message is displayed and appropriate
-            String expectedErrorMessage = "Incorrect username or password";
-            String actualErrorMessage = errorMessageElement.getText();
-            assertTrue(actualErrorMessage.contains(expectedErrorMessage), "The expected error message was not displayed.");
-
-            // Check if the user is still on the login page
-            String currentUrl = driver.getCurrentUrl();
-            assertTrue(currentUrl.endsWith("/login"), "The user was incorrectly redirected after entering wrong credentials.");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new AssertionError("Login with incorrect credentials test failed.");
-        }
+    private void assertErrorMessage(String expectedErrorMessage) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement errorMessageElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".error-message")));
+        assertTrue(errorMessageElement.getText().contains(expectedErrorMessage), "The expected error message was not displayed.");
     }
 
     @AfterEach
