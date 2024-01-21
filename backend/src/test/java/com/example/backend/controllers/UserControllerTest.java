@@ -72,14 +72,14 @@ class UserControllerTest {
     }
 
     @Test
-    public void whenLoginFailsThenReturnBadRequest() throws Exception {
+    public void whenLoginFailsThenReturnUnauthorized() throws Exception {
         AuthenticationRequest request = new AuthenticationRequest("user@user.at", "user1234");
         when(authenticationManager.authenticate(any())).thenThrow(BadCredentialsException.class);
 
         mockMvc.perform(post("/api/users/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().isUnauthorized());
     }
 
 }
