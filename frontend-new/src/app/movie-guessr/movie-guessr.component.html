@@ -1,15 +1,12 @@
 <div class="movie-guessr-background">
-
   <div class="coin-count">
     <span class="mat-title">Coins: {{ gameService.coinCount }}</span>
   </div>
 
-
-
   <div class="center-container">
     <!-- Display the selected movie's hints and categories -->
     <div class="game-container">
-      <mat-grid-list cols="3" rowHeight="1:1">
+      <mat-grid-list cols="3" rowHeight="1:1" class="grid-layout-custom">
         <mat-grid-tile *ngFor="let hint of gameService.selectedMovie.hints; let i = index">
           <div class="custom-tile-wrapper">
             <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint" [index]="i"></app-tile>
@@ -18,8 +15,7 @@
       </mat-grid-list>
     </div>
 
-
-    <form class="example-form" (submit)="onInputSubmitted(myControl.value)">
+    <form class="submit-form" (submit)="onInputSubmitted(myControl.value)">
       <mat-form-field class="example-full-width">
         <mat-label>Movie Name</mat-label>
         <input type="text"
@@ -36,4 +32,3 @@
     </form>
   </div>
 </div>
-

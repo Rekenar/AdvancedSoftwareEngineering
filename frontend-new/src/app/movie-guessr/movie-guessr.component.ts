@@ -9,6 +9,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {map, Observable, startWith} from "rxjs";
 import quizzesData from './quizzes.json'; // Import the JSON file
 import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-services/movie-guessr-gamestate.service';
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
   selector: 'app-movie-guessr',
@@ -25,6 +26,7 @@ import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-servi
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
+    MatButtonModule,
   ],
   templateUrl: './movie-guessr.component.html',
   styleUrl: './movie-guessr.component.css'
