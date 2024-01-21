@@ -35,7 +35,6 @@ import {MatListModule} from "@angular/material/list";
 
 import {AsteroidComponent} from "./asteroid/asteroid.component";
 
-import {PreviewComponent} from "./preview/preview.component";
 import {SnakegameModule} from "./snakegame/snakegame.module";
 import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
@@ -77,7 +76,6 @@ import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
     LeafletModule,
     ScoreboardComponent,
     AsteroidComponent,
-    PreviewComponent,
     MovieGuessrComponent
   ],
 

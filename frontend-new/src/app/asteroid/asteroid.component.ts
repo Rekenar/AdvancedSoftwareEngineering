@@ -1,15 +1,17 @@
-import {Component, ElementRef, HostListener, OnInit, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {Asteroid} from "./Asteroid";
-import {Spaceship} from "./Spaceship";
-import {AsteroidEnum} from "./asteroid.enum";
-
-//todo: Add Menu with start button and settings for sound and color of spaceship and asteroids and bullets
-//todo: Add Highscore
-//todo: Add Sound
-//todo: Maybe add different spaceships
-//todo: Maybe add enemies
-
+import {IncomingAsteroidDTO} from "./asteroids/IncomingAsteroidDTO";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {IAsteroid} from "./asteroids/IAsteroid";
+import {SmallAsteroid} from './asteroids/SmallAsteroid';
+import {MediumAsteroid} from "./asteroids/MediumAsteroid";
+import {BigAsteroid} from './asteroids/BigAsteroid';
+import {ISpaceship} from "./spaceships/ISpaceship";
+import {NormalSpaceship} from "./spaceships/NormalSpaceship";
+import {interval, Subscription} from "rxjs";
+import {IPowerUp} from "./powerups/IPowerUp";
+import {SpeedPowerUp} from "./powerups/SpeedPowerUp";
+import {TripleMagazinePowerUp} from "./powerups/TripleMagazinePowerUp";
 
 
 @Component({
@@ -20,40 +22,85 @@ import {AsteroidEnum} from "./asteroid.enum";
   styleUrl: './asteroid.component.css'
 })
 
-export class AsteroidComponent implements OnInit{
-  private readonly spaceShip:Spaceship;
+export class AsteroidComponent implements OnInit, OnDestroy {
+  private spaceShip: ISpaceship;
 
-  private context:CanvasRenderingContext2D;
+  private asteroids: IAsteroid[] = [];
+
+  private powerUps: IPowerUp[] = [];
+
+  private context: CanvasRenderingContext2D;
 
   private pressedKeys = new Set<string>();
 
-  private asteroids: Asteroid[] = [];
-
   private gameRunning = false;
 
-  private isShot:boolean = false;
+  private isShot: boolean = false;
 
-  private isHit: boolean = false;
+  private asteroidSubscription: Subscription;
+
+  private asteroidInterval = 10000;
 
   private score = 0;
 
 
-
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(private el: ElementRef, private renderer: Renderer2, private http: HttpClient) {
     this.context = {} as CanvasRenderingContext2D;
-    this.spaceShip = new Spaceship(750, 300, 0, 0, 0);
   }
 
-  ngOnInit() {
-    const canvas =  this.el.nativeElement.querySelector('#gameCanvas');
-    this.context = canvas.getContext('2d');
-    this.initCanvas(canvas);
-    this.renderer.listen('window', 'keydown', (event) => this.handleKeyDown(event));
 
-    this.createAsteroid();
+  ngOnInit(): void {
+    this.initializeCanvas();
+    this.setupEventListeners();
+    this.fetchAsteroids();
+    this.spaceShip = new NormalSpaceship(this.context, innerWidth / 2, innerHeight / 2, 0, 0);
+    this.createPowerUps();
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe to prevent memory leak
+    if (this.asteroidSubscription) {
+      this.asteroidSubscription.unsubscribe();
+    }
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyDown(event: KeyboardEvent) {
+    this.pressedKeys.add(event.key);
+    if (event.key === 'ArrowUp') {
+      this.spaceShip.setMoving = true;
+    }
+    if (event.key === ' ' && !this.isShot) {
+      this.isShot = true;
+      this.spaceShip.shoot();
+    }
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  handleKeyUp(event: KeyboardEvent) {
+    this.pressedKeys.delete(event.key);
+    if (event.key === 'ArrowUp') {
+      this.spaceShip.setMoving = false;
+    }
+    if (event.key === ' ' && this.isShot) {
+      this.isShot = false;
+    }
+  }
+
+  private initializeCanvas(): void {
+    const canvas = this.el.nativeElement.querySelector('#gameCanvas');
+    this.context = canvas.getContext('2d');
+    this.resizeCanvas(canvas);
+    window.addEventListener('resize', () => this.resizeCanvas(canvas));
+  }
+
+  private setupEventListeners(): void {
+    this.renderer.listen('window', 'keydown', (event) => this.handleKeyDown(event));
+    this.renderer.listen('window', 'keyup', (event) => this.handleKeyUp(event));
     this.renderer.listen('window', 'click', (event) => this.handleClickEvent(event));
     const keydownListener = () => {
       this.gameRunning = true;
+      this.asteroidSubscription = interval(this.asteroidInterval).subscribe(() => this.fetchAsteroids());
       this.gameLoop();
       // Remove the keydown listener after it's been triggered once
       window.removeEventListener('keydown', keydownListener);
@@ -61,33 +108,33 @@ export class AsteroidComponent implements OnInit{
     window.addEventListener('keydown', keydownListener);
   }
 
-
-  private initCanvas(canvas: HTMLCanvasElement) {
-    const resizeCanvas = () => {
-      if(this.gameRunning) return;
-      canvas.width = window.innerWidth * 0.99;
-      canvas.height = window.innerHeight * 0.90;
-      this.drawBackground();
-      this.context.fillStyle = '#666666';
-      this.context.font = '30px Arial';
-      this.context.textAlign = 'center';
-      this.context.fillText('Press any key to start', this.context.canvas.width / 2, this.context.canvas.height / 2);
-      this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height);
-    };
-
-    // Initial canvas setup
-    resizeCanvas();
-
-    // Redraw canvas on resize
-    window.addEventListener('resize', resizeCanvas);
+  private fetchAsteroids(): void {
+    this.createAsteroid().subscribe(data => {
+      this.processAsteroidData(data);
+    });
   }
+
+  private resizeCanvas(canvas: HTMLCanvasElement): void {
+    if (this.gameRunning) return;
+    canvas.width = window.innerWidth * 0.99;
+    canvas.height = window.innerHeight * 0.90;
+    this.drawStartScreen();
+  }
+
+  private drawStartScreen(): void {
+    this.drawBackground();
+    this.context.fillStyle = '#666666';
+    this.context.font = '30px Arial';
+    this.context.textAlign = 'center';
+    this.context.fillText('Press any key to start', this.context.canvas.width / 2, this.context.canvas.height / 2);
+  }
+
 
   private createStartScreen() {
     //Create Start Screen with buttons for start and settings
 
 
   }
-
 
   private handleClickEvent(event: MouseEvent) {
     //Check if mouse is over start button or settings button
@@ -104,7 +151,8 @@ export class AsteroidComponent implements OnInit{
 
 
   private gameLoop() {
-    if(!this.gameRunning || this.spaceShip.getLives <= 0) {
+    if (!this.gameRunning || this.spaceShip.getLives <= 0) {
+      this.sendScore().subscribe();
       this.gameOverScreen();
       return;
     }
@@ -117,20 +165,17 @@ export class AsteroidComponent implements OnInit{
     setTimeout(() => this.gameLoop(), 1000 / 60); // 60 frames per second
   }
 
-
-
   private draw() {
     this.drawBackground();
-
 
     this.asteroids.forEach(asteroid => asteroid.drawAsteroid(this.context));
 
 
-    this.spaceShip.draw(this.context);
+    this.powerUps.forEach(powerUp => powerUp.draw(this.context));
 
+    this.spaceShip.draw();
 
     this.drawScore();
-
   }
 
 
@@ -139,126 +184,103 @@ export class AsteroidComponent implements OnInit{
     this.updateAsteroids();
   }
 
-
   private updateSpaceship() {
     this.spaceShip.updateSpaceship(this.pressedKeys, this.context.canvas.width, this.context.canvas.height);
   }
 
-
   private updateAsteroids() {
-    for(const asteroid of this.asteroids){
+    for (const powerUp of this.powerUps) {
+      if (powerUp.getHitbox().intersects(this.spaceShip.getHitbox())) {
+        powerUp.apply(this.spaceShip);
+        this.powerUps.splice(this.powerUps.indexOf(powerUp), 1);
+      }
+    }
+    for (const asteroid of this.asteroids) {
       asteroid.updateAsteroids(this.context.canvas.width, this.context.canvas.height);
 
 
-      if(!this.isHit){
-        if(asteroid.collidesWith(this.spaceShip, this.context)){
-          this.spaceShip.loseLife();
-          this.isHit = true;
-          setTimeout(() => {
-            this.spaceShip.resetSpaceship(this.context.canvas.width, this.context.canvas.height)
-            this.isHit = false
-          }, 2000);
-
-        }
+      if (this.spaceShip.getHitbox().intersects(asteroid.getHitbox())) {
+        this.spaceShip.loseLife(this.context.canvas.width, this.context.canvas.height);
       }
 
-      for(const bullet of this.spaceShip.getBullets) {
-        if(asteroid.collidesWith(bullet, this.context)) {
 
-
-          switch(asteroid.getSize){
-            case AsteroidEnum.small: {
-              this.score += 10;
-              break;
-            }
-            case AsteroidEnum.medium: {
-              this.score += 5;
-              this.asteroids.push(new Asteroid(asteroid.getX+50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle * -Math.PI/2, asteroid.getRotation, AsteroidEnum.small));
-              this.asteroids.push(new Asteroid(asteroid.getX-50, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* Math.PI/2, asteroid.getRotation, AsteroidEnum.small));
-              break;
-            }
-            case AsteroidEnum.big: {
-              this.score += 2;
-              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* -Math.PI/2, asteroid.getRotation, AsteroidEnum.medium));
-              this.asteroids.push(new Asteroid(asteroid.getX, asteroid.getY, asteroid.getSpeed, asteroid.getAngle* Math.PI/2, asteroid.getRotation, AsteroidEnum.medium));
-              break;
-            }
+      for (const bullet of this.spaceShip.getMagazine.getBullets) {
+        if (bullet.getHitbox().intersects(asteroid.getHitbox())) {
+          if (asteroid instanceof SmallAsteroid) {
+            this.score += 10;
+          } else if (asteroid instanceof MediumAsteroid) {
+            this.score += 5;
+            this.asteroids.push(new SmallAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new SmallAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
+          } else if (asteroid instanceof BigAsteroid) {
+            this.score += 2;
+            this.asteroids.push(new MediumAsteroid(asteroid.getX + 50, asteroid.getY, asteroid.getAngle * -Math.PI / 2, asteroid.getRotation));
+            this.asteroids.push(new MediumAsteroid(asteroid.getX - 50, asteroid.getY, asteroid.getAngle * Math.PI / 2, asteroid.getRotation));
           }
+
           this.asteroids.splice(this.asteroids.indexOf(asteroid), 1);
-          this.spaceShip.getBullets.splice(this.spaceShip.getBullets.indexOf(bullet), 1);
+          this.spaceShip.getMagazine.getBullets.splice(this.spaceShip.getMagazine.getBullets.indexOf(bullet), 1);
           break;
         }
       }
+
     }
   }
 
-
-
-
-  @HostListener('window:keydown', ['$event'])
-  handleKeyDown(event: KeyboardEvent) {
-    this.pressedKeys.add(event.key);
-    if(event.key === ' ' &&  !this.isShot) {
-      this.isShot = true;
-      this.spaceShip.shoot();
-    }
-  }
-
-  @HostListener('window:keyup', ['$event'])
-  handleKeyUp(event: KeyboardEvent) {
-    this.pressedKeys.delete(event.key);
-    if(event.key === 'ArrowUp') {
-      this.spaceShip.setMoving(false);
-    }
-
-    if(event.key === ' ' &&  this.isShot) {
-      this.isShot = false;
-    }
-  }
-
-  private createAsteroid() {
-    for(let i = 0; i < 10; i++){
-      let random = Math.random() * -Math.PI*2;
-      let randomX = Math.random() * this.context.canvas.width;
-      let randomY = Math.random() * this.context.canvas.height;
-      let randomSize = Math.floor(Math.random() * 3);
-
-      this.asteroids.push(new Asteroid(randomX, randomY,1,random,0,randomSize));
-    }
-
-    //this.asteroids.push(new Asteroid(100, 100, 1, -Math.PI/2, 0, AsteroidEnum.big));
-  }
 
   private drawScore() {
     this.context.fillStyle = '#FFFFFF';
     this.context.font = '30px Arial';
     this.context.textAlign = 'center';
-    this.context.fillText('Score: ' + this.score, this.context.canvas.width/2, 50);
+    this.context.fillText('Score: ' + this.score, this.context.canvas.width / 2, 50);
   }
+
   private gameOverScreen() {
     this.drawBackground()
     this.context.fillStyle = '#FFFFFF';
     this.context.font = '30px Arial';
     this.context.textAlign = 'center';
-    this.context.fillText('Game Over', this.context.canvas.width/2, this.context.canvas.height/2);
-    this.context.fillText('Score: ' + this.score, this.context.canvas.width/2, this.context.canvas.height/2 + 50)
+    this.context.fillText('Game Over', this.context.canvas.width / 2, this.context.canvas.height / 2);
+    this.context.fillText('Score: ' + this.score, this.context.canvas.width / 2, this.context.canvas.height / 2 + 50)
+  }
+
+  private createAsteroid() {
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("auth-token"));
+
+    return this.http.get<IncomingAsteroidDTO>('http://localhost:8080/api/asteroid/' + window.innerWidth + '/' + window.innerHeight, {headers});
+  }
+
+  private sendScore() {
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("auth-token"));
+
+
+    return this.http.post(`http://localhost:8080/scores/add/5/${this.score}`, null, {headers});
+  }
+
+  private processAsteroidData(data: IncomingAsteroidDTO): void {
+    if (data.error === null) {
+      this.createAsteroidsFromDTO(data);
+    }
+  }
+
+  private createAsteroidsFromDTO(data: IncomingAsteroidDTO): void {
+    data.asteroids.forEach(asteroid => {
+      switch (asteroid.size) {
+        case 1:
+          this.asteroids.push(new SmallAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
+          break;
+        case 2:
+          this.asteroids.push(new MediumAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
+          break;
+        case 3:
+          this.asteroids.push(new BigAsteroid(asteroid.x, asteroid.y, asteroid.angle, 0));
+          break;
+      }
+    });
+  }
+
+  private createPowerUps() {
+    this.powerUps.push(new SpeedPowerUp(100, 100));
+    this.powerUps.push(new TripleMagazinePowerUp(200, 200));
   }
 }
-
-
-
-
-
-
-
-
-
-//Asteroid(id, x-coordinate, y-coordinate, speed, angle, rotation, size) for DB
-//Where angle is pointed at random point on the canvas
-//Where rotation starts with 0
-//Where size is 0 = small, 1 = medium, 2 = big
-//Where speed is between 0.5 and 1.5 for all asteroids
-//X and Y coordinates are random and not on the canvas
-//Get new Asteroids every 15 seconds
-
-

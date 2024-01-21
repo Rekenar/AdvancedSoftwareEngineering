@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {MatCardModule} from "@angular/material/card";
-import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
 import {catchError, tap} from "rxjs/operators";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
 import * as moment from "moment";
+import {EMPTY, throwError} from "rxjs";
 
 const AUTH_TOKEN_KEY = 'auth-token';
 const EXPIRATION_KEY = 'expiration';
@@ -26,6 +22,8 @@ export class LoginComponent implements OnInit{
 
   // Hide the password input
   hide = true;
+
+  loginError: string = '';
 
   constructor(private loginService: AuthService, public formBuilder: FormBuilder, private router: Router) { }
 
@@ -50,8 +48,14 @@ export class LoginComponent implements OnInit{
         this.router.navigate(['/home']);
       }),
       catchError(error => {
-        console.error('Error sending data:', error);
-        throw error;
+        if (error.status === 401) {
+          // Handle incorrect credentials
+          this.loginError = 'Incorrect username or password';
+        } else {
+          // Handle other types of errors
+          this.loginError = 'An error occurred. Please try again later.';
+        }
+        return EMPTY; // dont propagate the error
       })
     ).subscribe();
   }

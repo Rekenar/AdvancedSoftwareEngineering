@@ -5,6 +5,5 @@ export enum Game {
   Game3 = "Game 3",
   Game4 = "Game 4",
   Game5 = "Game 5",
-  Game6 = "Game 6",
   Scoreboard = "Scoreboard"
 }
