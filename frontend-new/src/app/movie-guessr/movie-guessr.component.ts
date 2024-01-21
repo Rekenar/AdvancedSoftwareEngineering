@@ -8,6 +8,7 @@ import {FormControl, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {map, Observable, startWith} from "rxjs";
 import quizzesData from './quizzes.json'; // Import the JSON file
+import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-services/movie-guessr-gamestate.service';
 
 @Component({
   selector: 'app-movie-guessr',
@@ -29,25 +30,22 @@ import quizzesData from './quizzes.json'; // Import the JSON file
   styleUrl: './movie-guessr.component.css'
 })
 export class MovieGuessrComponent implements OnInit{
+  constructor(public gameService: MovieGuessrGamestateService) {}
+
   tiles = Array.from({ length: 9 }, (_, i) => i + 1);
 
   myControl = new FormControl('');
   options: string[] = ['Star Wars', 'LOTR', 'Shrek'];
   filteredOptions: Observable<string[]>;
-  selectedMovie: any; // Store the selected movie object
-  selectedQuizIndex: number = 0; // Initialize with the first movie (you can change this for randomness)
 
   ngOnInit(): void {
+    this.gameService.initializeGame();
+
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
-    const movies: any[] = quizzesData;
-    // Generate a random index to select a quiz
-    this.selectedQuizIndex = Math.floor(Math.random() * movies.length);
 
-    // Assign the selected quiz to the property
-    this.selectedMovie = movies[this.selectedQuizIndex];
   }
 
   private _filter(value: string): string[] {
@@ -55,4 +53,5 @@ export class MovieGuessrComponent implements OnInit{
 
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
+
 }

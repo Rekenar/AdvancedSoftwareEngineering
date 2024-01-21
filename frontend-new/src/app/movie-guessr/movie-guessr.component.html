@@ -1,10 +1,15 @@
+<div class="coin-count">
+  <span>Coins: {{ gameService.coinCount }}</span>
+</div>
+
+
 <div class="center-container">
   <!-- Display the selected movie's hints and categories -->
   <div class="game-container">
     <mat-grid-list cols="3" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let hint of selectedMovie.hints; let i = index">
+      <mat-grid-tile *ngFor="let hint of gameService.selectedMovie.hints; let i = index">
         <div class="custom-tile-wrapper">
-          <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint"></app-tile>
+          <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint" [index]="i"></app-tile>
         </div>
       </mat-grid-tile>
     </mat-grid-list>

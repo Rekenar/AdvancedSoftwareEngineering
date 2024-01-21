@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-services/movie-guessr-gamestate.service';
+
 
 @Component({
   selector: 'app-tile',
@@ -8,8 +10,15 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrl: './tile.component.css'
 })
 export class TileComponent implements OnInit {
+  constructor(public gameService: MovieGuessrGamestateService) {}
+
   @Input() hintName: String;
-  @Input() hint: string; // Define the hint property with @Input
+  @Input() hint: string;
+  @Input() cost: number;
+  @Input() coinCount: number;
+  @Input() index!: number;
+
+
   backgroundColor: string;
   flipped = false;
 
@@ -18,7 +27,10 @@ export class TileComponent implements OnInit {
   }
 
   flipTile() {
-    this.flipped = !this.flipped;
+    console.log(this.index)
+    if (this.gameService.flipTile(this.index)) {
+      this.flipped = true;
+    }
   }
 
   getRandomPastelColor() {
