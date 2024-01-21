@@ -18,7 +18,6 @@ export class TileComponent implements OnInit {
   @Input() coinCount: number;
   @Input() index!: number;
 
-
   backgroundColor: string;
   flipped = false;
 

@@ -6,14 +6,14 @@ import quizzesData from "../../movie-guessr/quizzes.json";
 })
 export class MovieGuessrGamestateService {
   coinCount: number = 10; // Initialize coin count
-  selectedMovie: any; // Store the selected movie object
-  selectedQuizIndex: number = 0; // Initialize with the first movie (you can change this for randomness)
+  selectedMovie: any;
+  selectedQuizIndex: number = 0;
   tileData: { category: string, hint: string, cost: number, flipped: boolean }[] = [];
   roundCount: number = 0; // Initialize round count to 0
   constructor() { }
 
   initializeGame() {
-    // Initialize the game state, e.g., select a random movie
+    // Initialize the game state
     const movies: any[] = quizzesData;
     // Generate a random index to select a quiz
     this.selectedQuizIndex = Math.floor(Math.random() * movies.length);
@@ -31,25 +31,9 @@ export class MovieGuessrGamestateService {
 
   }
 
-
-  // Add a method to flip a tile and deduct coins
   flipTile(tileIndex: number): boolean {
     console.log("Tile " + tileIndex + " clicked!");
-
     const tile = this.tileData[tileIndex];
-    if(!tile.flipped) {
-      if(this.coinCount >= tile.cost) {
-        this.coinCount -= tile.cost;
-        // Mark the tile as flipped
-        tile.flipped = true;
-        return true; // Tile flipped successfully
-      } else {
-        console.log("not enough coins!")
-        return false; // Not enough coins to flip the tile
-      }
-    }
-
-    console.log(tile)
     // Check if the tile is already flipped or if the player has enough coins to flip the tile
     if (!tile.flipped && this.coinCount >= tile.cost) {
       this.coinCount -= tile.cost;
@@ -78,7 +62,7 @@ export class MovieGuessrGamestateService {
   }
 
   nextRound() {
-
+    // for later use
   }
 
   resetGame() {

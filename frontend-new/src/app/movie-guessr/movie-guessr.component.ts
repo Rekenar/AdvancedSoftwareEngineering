@@ -34,8 +34,6 @@ import { HttpClient } from '@angular/common/http';
 export class MovieGuessrComponent implements OnInit{
   constructor(public gameService: MovieGuessrGamestateService, private http: HttpClient) {}
 
-  tiles = Array.from({ length: 9 }, (_, i) => i + 1);
-
   myControl = new FormControl('');
   options: string[] = [];
   filteredOptions: Observable<string[]>;
