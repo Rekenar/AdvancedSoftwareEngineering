@@ -1,20 +1,24 @@
-export class Bullet {
-  private x: number;
-  private y: number;
-  private readonly speed: number;
-  private readonly angle: number;
+import {IBullet} from "./IBullet";
 
-  constructor(x: number, y: number, speed: number,angle:number) {
+export abstract class BaseBullet implements IBullet {
+  protected x: number;
+  protected y: number;
+  protected readonly speed: number;
+  protected readonly angle: number;
+
+  protected constructor(x: number, y: number, speed: number, angle: number) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.angle = angle;
   }
 
-  getHitbox(): Path2D {
-    const path = new Path2D();
-    path.arc(this.x, this.y, 3, 0, 2 * Math.PI);
-    return path;
+  get getX(): number {
+    return this.x;
+  }
+
+  get getY(): number {
+    return this.y;
   }
 
   drawBullet(context: CanvasRenderingContext2D) {
@@ -24,6 +28,11 @@ export class Bullet {
     context.fill(path);
   }
 
+  getHitbox(): Path2D {
+    const path = new Path2D();
+    path.arc(this.x, this.y, 3, 0, 2 * Math.PI);
+    return path;
+  }
 
   updateBullet(width: number, height: number) {
     this.x -= Math.sin(this.angle) * this.speed;
@@ -31,13 +40,5 @@ export class Bullet {
     return (this.x < 0 || this.x > width || this.y < 0 || this.y > height);
   }
 
-
-  get getX(): number {
-    return this.x;
-  }
-
-  get getY(): number {
-    return this.y;
-  }
 
 }

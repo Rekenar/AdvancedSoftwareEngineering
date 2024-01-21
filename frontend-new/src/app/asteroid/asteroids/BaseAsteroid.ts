@@ -1,39 +1,61 @@
-import {AsteroidEnum} from "./asteroid.enum";
+import {IAsteroid} from "./IAsteroid";
 
-export class Asteroid {
-  private x: number;
-  private y: number;
-  private readonly speed: number;
-  private readonly angle: number;
-  private rotation: number;
-  private readonly asteroidSize: AsteroidEnum;
+export abstract class BaseAsteroid implements IAsteroid {
+  protected x: number;
+  protected y: number;
+  protected readonly speed: number;
+  protected readonly angle: number;
+  protected rotation: number;
+  protected readonly sizeFactor: number;
 
-  constructor(x: number, y: number, speed: number, angle:number, rotation:number, asteroidSize: AsteroidEnum) {
+
+  protected constructor(x: number, y: number, speed: number, angle: number, rotation: number, sizeFactor: number) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.angle = angle;
     this.rotation = rotation;
-    this.asteroidSize = asteroidSize;
+    this.sizeFactor = sizeFactor;
+  }
+
+  get getX(): number {
+    return this.x;
+  }
+
+  get getY(): number {
+    return this.y;
+  }
+
+  get getSpeed(): number {
+    return this.speed;
+  }
+
+  get getAngle(): number {
+    return this.angle;
+  }
+
+  get getRotation(): number {
+    return this.rotation;
+  }
+
+  get getSizeFactor(): number {
+    return this.sizeFactor;
   }
 
   getHitbox(): Path2D {
     let radius = 40;
     const path = new Path2D();
 
-    if(this.asteroidSize == AsteroidEnum.small){
-      path.arc(this.x, this.y, radius, 0, 2 * Math.PI);
-    }
-    else if(this.asteroidSize == AsteroidEnum.medium){
-      path.arc(this.x, this.y, radius * 2, 0, 2 * Math.PI);
-    }
-    else if(this.asteroidSize == AsteroidEnum.big){
-      path.arc(this.x, this.y, radius * 3, 0, 2 * Math.PI);
-    }
+    path.arc(this.x, this.y, radius * this.sizeFactor, 0, 2 * Math.PI);
+
     return path;
   }
 
-  collidesWith(otherObject: { getHitbox(): Path2D, getX:number, getY:number }, context: CanvasRenderingContext2D): boolean {
+  collidesWith(otherObject: {
+    getHitbox(): Path2D,
+    getX: number,
+    getY: number
+  }, context: CanvasRenderingContext2D): boolean {
     const asteroidHitbox = this.getHitbox();
     const otherObjectHitbox = otherObject.getHitbox();
     const otherObjectX = otherObject.getX;
@@ -42,30 +64,30 @@ export class Asteroid {
     return context.isPointInPath(otherObjectHitbox, this.x, this.y) || context.isPointInPath(asteroidHitbox, otherObjectX, otherObjectY);
   }
 
-
   updateAsteroids(width: number, height: number) {
     let movementX = Math.sin(this.angle) * this.speed;
     let movementY = Math.cos(this.angle) * this.speed;
 
-    if( this.x > width) {
+
+    if (this.x > width) {
       this.x = 0;
     }
-    if( this.x < 0) {
+    if (this.x < 0) {
       this.x = width;
     }
-    if( this.y > height) {
+    if (this.y > height) {
       this.y = 0;
     }
-    if( this.y < 0) {
+    if (this.y < 0) {
       this.y = height;
     }
 
 
-    if( this.x >= 0 && this.x <= width ) {
+    if (this.x >= 0 && this.x <= width) {
       this.x += movementX;
     }
 
-    if( this.y  >= 0 && this.y  <= height) {
+    if (this.y >= 0 && this.y <= height) {
       this.y += movementY;
     }
 
@@ -73,18 +95,13 @@ export class Asteroid {
     this.rotation += 0.02;
   }
 
-  drawAsteroid(context:CanvasRenderingContext2D) {
+
+  drawAsteroid(context: CanvasRenderingContext2D) {
     let path = new Path2D();
 
-    if(this.asteroidSize == AsteroidEnum.small){
-      path = this.drawAsteroidPath(1);
-    }
-    else if(this.asteroidSize == AsteroidEnum.medium){
-      path = this.drawAsteroidPath(2);
-    }
-    else if(this.asteroidSize == AsteroidEnum.big){
-      path = this.drawAsteroidPath(3);
-    }
+
+    path = this.drawAsteroidPath(this.sizeFactor);
+
 
     context.save();
     context.translate(this.x, this.y);
@@ -97,7 +114,7 @@ export class Asteroid {
   }
 
 
-  private drawAsteroidPath(scalingFactor:number):Path2D{
+  private drawAsteroidPath(scalingFactor: number): Path2D {
 
     const path = new Path2D();
 
@@ -150,30 +167,4 @@ export class Asteroid {
 
     return path;
   }
-
-  get getX(): number {
-    return this.x;
-  }
-
-  get getY(): number {
-    return this.y;
-  }
-
-  get getSpeed(): number {
-    return this.speed;
-  }
-
-  get getAngle(): number {
-    return this.angle;
-  }
-
-  get getRotation(): number {
-    return this.rotation;
-  }
-
-  get getSize(): AsteroidEnum {
-    return this.asteroidSize;
-  }
-
 }
-

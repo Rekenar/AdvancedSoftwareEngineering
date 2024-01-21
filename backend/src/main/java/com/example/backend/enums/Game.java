@@ -5,8 +5,7 @@ public enum Game {
     Game2("Game 2"),
     Game3("Snake"),
     Game4("Game 4"),
-    Game5("Asteroid"),
-    Game6("");
+    Game5("Asteroid");
 
     private final String displayName;
 
@@ -26,7 +25,6 @@ public enum Game {
             case 3 -> Game3;
             case 4 -> Game4;
             case 5 -> Game5;
-            case 6 -> Game6;
             default -> throw new IllegalArgumentException("Invalid game number");
         };
     }

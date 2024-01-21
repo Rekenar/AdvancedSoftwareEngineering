@@ -1,8 +1,11 @@
 package com.example.backend.controllers;
 
 import com.example.backend.dtos.ScoreDTO;
+import com.example.backend.dtos.ScoreInputDTO;
 import com.example.backend.enums.Game;
 import com.example.backend.services.ScoreService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,8 @@ import java.util.List;
 @RequestMapping("/scores")
 @CrossOrigin
 public class ScoreController {
+
+    private final Logger logger = LoggerFactory.getLogger(ScoreController.class);
 
     ScoreService scoreService;
 
@@ -32,15 +37,16 @@ public class ScoreController {
 
 
 
-    @PostMapping("/add/{game}/{scoreValue}")
-    public ResponseEntity<String> addScore(@PathVariable Integer game, @PathVariable Integer scoreValue) {
+    @PostMapping("/add")
+    public ResponseEntity<String> addScore(@RequestBody ScoreInputDTO scoreInputDTO) {
         try {
+            logger.info("Adding score");
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            Game gameEnum = Game.valueOf(game);
-            scoreService.createScore(username, gameEnum, scoreValue);
+            Game gameEnum = Game.valueOf(Integer.valueOf( scoreInputDTO.getGameName()));
+            scoreService.createScore(username, gameEnum, scoreInputDTO.getScore());
             return ResponseEntity.ok("Score added");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getLocalizedMessage());
         }
     }
 }
