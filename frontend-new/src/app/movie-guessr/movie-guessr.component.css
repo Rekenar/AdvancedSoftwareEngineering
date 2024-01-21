@@ -24,3 +24,21 @@
 .center-container {
   text-align: center;
 }
+
+.movie-guessr-background {
+  /* Set the background image URL */
+  background-image: url('../../assets/images/movie-background.png');
+  /* Set background size and other properties as needed */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* Set a background color as a fallback */
+  background-color: #000000; /* Replace with your desired background color */
+}
+
+.coin-count {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+}

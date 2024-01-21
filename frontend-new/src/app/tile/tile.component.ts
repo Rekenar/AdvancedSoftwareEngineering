@@ -36,6 +36,6 @@ export class TileComponent implements OnInit {
   getRandomPastelColor() {
     const base = 200; // Base color for pastel
     const color = () => Math.floor(base + Math.random() * 55); // Range: 200-255
-    return `rgb(${color()}, ${color()}, ${color()})`;
+    return `rgba(${color()}, ${color()}, ${color()}, ${0.9})`;
   }
 }

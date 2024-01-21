@@ -1,37 +1,40 @@
-<div class="coin-count">
-  <span>Coins: {{ gameService.coinCount }}</span>
-</div>
+<div class="movie-guessr-background">
 
-
-<div class="center-container">
-  <!-- Display the selected movie's hints and categories -->
-  <div class="game-container">
-    <mat-grid-list cols="3" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let hint of gameService.selectedMovie.hints; let i = index">
-        <div class="custom-tile-wrapper">
-          <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint" [index]="i"></app-tile>
-        </div>
-      </mat-grid-tile>
-    </mat-grid-list>
+  <div class="coin-count">
+    <span class="mat-title">Coins: {{ gameService.coinCount }}</span>
   </div>
 
 
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
-      <mat-label>Movie Name</mat-label>
-      <input type="text"
-             placeholder="Star Wars..."
-             aria-label="movie-name"
-             matInput
-             [formControl]="myControl"
-             [matAutocomplete]="auto">
-      <mat-autocomplete #auto="matAutocomplete">
-        @for (option of filteredOptions | async; track option) {
-          <mat-option [value]="option">{{option}}</mat-option>
-        }
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
-</div>
 
+  <div class="center-container">
+    <!-- Display the selected movie's hints and categories -->
+    <div class="game-container">
+      <mat-grid-list cols="3" rowHeight="1:1">
+        <mat-grid-tile *ngFor="let hint of gameService.selectedMovie.hints; let i = index">
+          <div class="custom-tile-wrapper">
+            <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint" [index]="i"></app-tile>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <mat-label>Movie Name</mat-label>
+        <input type="text"
+               placeholder="Star Wars..."
+               aria-label="movie-name"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          @for (option of filteredOptions | async; track option) {
+            <mat-option [value]="option">{{option}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+    </form>
+  </div>
+</div>
 
