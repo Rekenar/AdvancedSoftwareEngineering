@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {SnakegameService} from "../services/snakegame.service";
 
 @Component({
   selector: 'app-snakegame',
@@ -16,12 +18,16 @@ export class SnakegameComponent {
   isGameOver = false;
   gameInterval: any;
 
+  constructor(private snakeGameService: SnakegameService) {
+
+  }
+
   startGame() {
     this.isGameStarted = true;
 
     this.initializeGame();
 
-    this.gameInterval = setInterval(() => this.updateGame(), 200);
+    this.gameInterval = setInterval(() => this.updateGame(), 180);
   }
 
 
@@ -64,6 +70,10 @@ export class SnakegameComponent {
   updateGame(): void {
     if (this.isGameOver) {
       clearInterval(this.gameInterval); // Stop the game loop
+
+      //save score
+      this.snakeGameService.postScore(this.score);
+
       return;
     }
 
