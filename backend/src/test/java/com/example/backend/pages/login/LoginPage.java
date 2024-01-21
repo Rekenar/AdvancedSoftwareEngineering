@@ -43,7 +43,7 @@ public class LoginPage {
 
     public HomePage clickLogin() {
         btnLogin.click();
-        return new HomePage();
+        return new HomePage(driver);
     }
 
     public boolean performLoginAndCheckRedirect(String username, String password, String expectedUrl) {
