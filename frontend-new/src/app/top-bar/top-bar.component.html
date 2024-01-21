@@ -1,11 +1,10 @@
 <mat-toolbar>
-  <button mat-button (click)="updateData(Game.Game1)">Game 1</button>
-  <button mat-button (click)="updateData(Game.Game2)">Game 2</button>
-  <button mat-button (click)="updateData(Game.Game3)">Game 3</button>
-  <button mat-button (click)="updateData(Game.Game4)">Game 4</button>
-  <button mat-button (click)="updateData(Game.Game5)">Game 5</button>
-  <button mat-button (click)="updateData(Game.Game6)">Game 6</button>
+  <button (click)="updateData(Game.Game1)" mat-button>Game 1</button>
+  <button (click)="updateData(Game.Game2)" mat-button>Game 2</button>
+  <button (click)="updateData(Game.Game3)" mat-button>Game 3</button>
+  <button (click)="updateData(Game.Game4)" mat-button>Game 4</button>
+  <button (click)="updateData(Game.Game5)" mat-button>Game 5</button>
   <span class="spacer"></span>
-  <button mat-button (click)="updateData(Game.Scoreboard)">Scoreboard</button>
-  <button mat-button (click)="logout()">logout</button>
+  <button (click)="updateData(Game.Scoreboard)" mat-button>Scoreboard</button>
+  <button (click)="logout()" mat-button>logout</button>
 </mat-toolbar>
