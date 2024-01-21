@@ -19,7 +19,7 @@
     </div>
 
 
-    <form class="example-form">
+    <form class="example-form" (submit)="onInputSubmitted(myControl.value)">
       <mat-form-field class="example-full-width">
         <mat-label>Movie Name</mat-label>
         <input type="text"
@@ -29,11 +29,10 @@
                [formControl]="myControl"
                [matAutocomplete]="auto">
         <mat-autocomplete #auto="matAutocomplete">
-          @for (option of filteredOptions | async; track option) {
-            <mat-option [value]="option">{{option}}</mat-option>
-          }
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
     </form>
   </div>
 </div>

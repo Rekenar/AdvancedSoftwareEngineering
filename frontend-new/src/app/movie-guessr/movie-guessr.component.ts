@@ -35,12 +35,13 @@ export class MovieGuessrComponent implements OnInit{
   tiles = Array.from({ length: 9 }, (_, i) => i + 1);
 
   myControl = new FormControl('');
-  options: string[] = ['Star Wars', 'LOTR', 'Shrek'];
+  options: string[] = [];
   filteredOptions: Observable<string[]>;
 
   ngOnInit(): void {
     this.gameService.initializeGame();
-
+    this.gameService.coinCount = 10;
+    this.options = quizzesData.map((quiz) => quiz.title);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
@@ -54,4 +55,22 @@ export class MovieGuessrComponent implements OnInit{
     return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 
+  onInputSubmitted(userInput: string | null): void {
+    if (userInput !== null) {
+      //const isCorrect = this.gameService.checkCorrectFilmName(userInput);
+/*
+      if (isCorrect) {
+        // User's input is correct, load a new quiz and award 5 coins
+        this.gameService.roundCount++;
+        this.gameService.initializeGame(); // Load a new quiz
+        this.gameService.coinCount += 5; // Award 5 coins
+      } else {
+        // Handle incorrect input (optional)
+      }*/
+
+      // Clear the input field
+      this.gameService.checkGuess(userInput);
+      this.myControl.setValue('');
+    }
+  }
 }

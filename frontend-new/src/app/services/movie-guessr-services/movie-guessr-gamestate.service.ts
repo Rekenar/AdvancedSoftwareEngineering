@@ -5,17 +5,15 @@ import quizzesData from "../../movie-guessr/quizzes.json";
   providedIn: 'root'
 })
 export class MovieGuessrGamestateService {
-  coinCount: number = 0; // Initialize coin count
+  coinCount: number = 10; // Initialize coin count
   selectedMovie: any; // Store the selected movie object
   selectedQuizIndex: number = 0; // Initialize with the first movie (you can change this for randomness)
   tileData: { category: string, hint: string, cost: number, flipped: boolean }[] = [];
-
+  roundCount: number = 0; // Initialize round count to 0
   constructor() { }
 
   initializeGame() {
     // Initialize the game state, e.g., select a random movie
-    // You can also set initial values for coin count and other properties
-    this.coinCount = 10; // Initialize coin count to 10 (or any other value)
     const movies: any[] = quizzesData;
     // Generate a random index to select a quiz
     this.selectedQuizIndex = Math.floor(Math.random() * movies.length);
@@ -61,5 +59,32 @@ export class MovieGuessrGamestateService {
       console.log("not enough coins!")
       return false; // Not enough coins to flip the tile or tile already flipped
     }
+  }
+
+  checkCorrectFilmName(userInput: string): boolean {
+    // Compare userInput with the correct film name
+    const correctFilmName = this.selectedMovie.title;
+    return userInput.toLowerCase() === correctFilmName.toLowerCase();
+  }
+
+  checkGuess(userInput: string) {
+    if (userInput.toLowerCase() === this.selectedMovie.title.toLowerCase()) {
+      this.nextRound()
+      this.coinCount += 5;
+      this.initializeGame()
+    } else {
+      if (this.coinCount > 0) {
+        this.coinCount--
+      }
+    }
+  }
+
+  nextRound() {
+
+  }
+
+  resetGame() {
+    this.roundCount = 0;
+    this.coinCount = 10;
   }
 }
