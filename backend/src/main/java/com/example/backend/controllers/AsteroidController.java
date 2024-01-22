@@ -1,6 +1,7 @@
 package com.example.backend.controllers;
 
 import com.example.backend.dtos.AsteroidOutgoingDTO;
+import com.example.backend.dtos.PowerUpDTO;
 import com.example.backend.services.AsteroidService;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/asteroid")
+@RequestMapping("/api")
 @CrossOrigin
 public class AsteroidController {
 
@@ -21,12 +22,23 @@ public class AsteroidController {
         this.asteroidService = asteroidService;
     }
 
-    @GetMapping("/{width}/{height}")
+    @GetMapping("/asteroid/{width}/{height}")
     public ResponseEntity<AsteroidOutgoingDTO> getAsteroidData(@PathVariable int width, @PathVariable int height) {
         AsteroidOutgoingDTO asteroidOutgoingDTO = asteroidService.getAsteroidData(width, height);
         if(asteroidOutgoingDTO.getError() == null) {
             return ResponseEntity.ok(asteroidOutgoingDTO);
         }
         return ResponseEntity.badRequest().body(asteroidOutgoingDTO);
+    }
+
+    @GetMapping("/power-up/{width}/{height}")
+    public ResponseEntity<PowerUpDTO> getPowerUpData(@PathVariable int width, @PathVariable int height) {
+        logger.info("getPowerUpData");
+        PowerUpDTO  powerUpDTO = asteroidService.getPowerUpData(width, height);
+        if(powerUpDTO.getError() == null) {
+            logger.info( "powerUpDTO: " + powerUpDTO );
+            return ResponseEntity.ok(powerUpDTO);
+        }
+        return ResponseEntity.badRequest().body(powerUpDTO);
     }
 }

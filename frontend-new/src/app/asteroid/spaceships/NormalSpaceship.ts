@@ -16,6 +16,8 @@ export class NormalSpaceship extends BaseSpaceship {
   }
 
   override updateSpaceship(pressedKeys: Set<string>, width: number, height: number) {
+    console.log(this.getMaxSpeed)
+    console.log(this.getMagazineCapacity())
     this.hitbox.setX = this.getX;
     this.hitbox.setY = this.getY;
     super.updateSpaceship(pressedKeys, width, height);

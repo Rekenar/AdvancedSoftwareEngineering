@@ -11,6 +11,7 @@ export abstract class BaseMagazine implements IMagazine {
     this.bullets = [];
   }
 
+
   get getBullets(): IBullet[] {
     return this.bullets;
   }
@@ -33,5 +34,6 @@ export abstract class BaseMagazine implements IMagazine {
       }
     });
   }
+
 
 }

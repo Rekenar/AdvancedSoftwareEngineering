@@ -1,6 +1,7 @@
 package com.example.backend.services;
 
 import com.example.backend.dtos.AsteroidOutgoingDTO;
+import com.example.backend.dtos.PowerUpDTO;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.data.util.Pair;
@@ -32,11 +33,7 @@ public class AsteroidService {
 
             for(int i = 0; i < 10; i++) {
 
-
-                Integer x = (int) (Math.random() * width);
-                Integer y = (int) (Math.random() * height);
-
-                Pair<Integer, Integer> point = calculatePoint(x, y, middle, boundary);
+                Pair<Integer, Integer> point = calculatePoint(width, height, middle, boundary);
 
                 double angle = (Math.random() * -Math.PI * 2);
 
@@ -50,10 +47,35 @@ public class AsteroidService {
         } catch (Exception e) {
             return new AsteroidOutgoingDTO(e.getLocalizedMessage());
         }
-
     }
 
-    private Pair<Integer, Integer> calculatePoint(Integer x, Integer y, Pair<Integer, Integer> middle, Pair<Integer, Integer> boundary) {
+    public PowerUpDTO getPowerUpData(int width, int height) {
+        try {
+            if(width <= 0 || height <= 0) {
+                throw new IllegalArgumentException("Width and height must be positive");
+            }
+            List<PowerUp> powerUp = new ArrayList<>(20);
+            Pair<Integer, Integer> middle = Pair.of(width / 2, height / 2);
+
+            Pair<Integer, Integer> boundary = Pair.of(width / 6, height / 6);
+
+
+            for(int i = 0; i < 2; i++) {
+                Pair<Integer, Integer> point = calculatePoint(width, height, middle, boundary);
+
+                int type = (int) (Math.random() * 5);
+
+                powerUp.add(new PowerUp(point.getFirst(), point.getSecond(), type));
+            }
+            return new PowerUpDTO(null, powerUp);
+        } catch (Exception e) {
+            return new PowerUpDTO(e.getMessage());
+        }
+    }
+
+    private Pair<Integer, Integer> calculatePoint(int width, int height, Pair<Integer, Integer> middle, Pair<Integer, Integer> boundary) {
+        int x = (int) (Math.random() * width - 100);
+        int y = (int) (Math.random() * height - 100);
         int boundaryLeftRight = boundary.getFirst();
         int boundaryTopBottom = boundary.getSecond();
 
