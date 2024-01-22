@@ -10,13 +10,21 @@ export class MovieGuessrGamestateService {
   selectedQuizIndex: number = 0;
   tileData: { category: string, hint: string, cost: number, flipped: boolean }[] = [];
   roundCount: number = 0; // Initialize round count to 0
+  playedGameIds: number[] = [];
+
   constructor() { }
 
   initializeGame() {
     // Initialize the game state
     const movies: any[] = quizzesData;
     // Generate a random index to select a quiz
-    this.selectedQuizIndex = Math.floor(Math.random() * movies.length);
+
+    if(this.playedGameIds.length >= movies.length) {
+      this.playedGameIds = [];
+    }
+    do (this.selectedQuizIndex = Math.floor(Math.random() * movies.length)); while (this.playedGameIds.includes(this.selectedQuizIndex));
+    this.playedGameIds.push(this.selectedQuizIndex);
+
 
     // Assign the selected quiz to the property
     this.selectedMovie = movies[this.selectedQuizIndex];
