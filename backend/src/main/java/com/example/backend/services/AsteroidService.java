@@ -2,6 +2,8 @@ package com.example.backend.services;
 
 import com.example.backend.dtos.AsteroidOutgoingDTO;
 import com.example.backend.dtos.PowerUpDTO;
+import com.example.backend.models.Asteroid;
+import com.example.backend.models.PowerUp;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.data.util.Pair;
@@ -45,7 +47,7 @@ public class AsteroidService {
             }
             return new AsteroidOutgoingDTO(null, asteroids);
         } catch (Exception e) {
-            return new AsteroidOutgoingDTO(e.getLocalizedMessage());
+            return new AsteroidOutgoingDTO(e.getMessage());
         }
     }
 

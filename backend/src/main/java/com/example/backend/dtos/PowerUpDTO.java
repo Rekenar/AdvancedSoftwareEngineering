@@ -1,6 +1,6 @@
 package com.example.backend.dtos;
 
-import com.example.backend.services.PowerUp;
+import com.example.backend.models.PowerUp;
 
 import java.util.List;
 

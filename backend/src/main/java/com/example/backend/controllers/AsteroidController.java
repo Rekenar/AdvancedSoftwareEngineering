@@ -33,10 +33,8 @@ public class AsteroidController {
 
     @GetMapping("/power-up/{width}/{height}")
     public ResponseEntity<PowerUpDTO> getPowerUpData(@PathVariable int width, @PathVariable int height) {
-        logger.info("getPowerUpData");
         PowerUpDTO  powerUpDTO = asteroidService.getPowerUpData(width, height);
         if(powerUpDTO.getError() == null) {
-            logger.info( "powerUpDTO: " + powerUpDTO );
             return ResponseEntity.ok(powerUpDTO);
         }
         return ResponseEntity.badRequest().body(powerUpDTO);
