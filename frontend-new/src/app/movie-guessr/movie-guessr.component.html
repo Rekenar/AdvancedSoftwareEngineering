@@ -3,6 +3,9 @@
     <span class="mat-title">Coins: {{ gameService.coinCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
     <br>
     <span class="mat-title">Round: {{ gameService.roundCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+    <br>
+    <span class="mat-title">Lives: {{ gameService.lives.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+
   </div>
 
 
@@ -23,7 +26,7 @@
       <mat-form-field class="example-full-width">
         <mat-label>Movie Name</mat-label>
         <input type="text"
-               placeholder="Star Wars..."
+               placeholder="at least 3 characters"
                aria-label="movie-name"
                matInput
                [formControl]="myControl"

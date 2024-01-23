@@ -87,7 +87,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     AsteroidComponent,
     MovieGuessrComponent,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
 
   providers: [],
