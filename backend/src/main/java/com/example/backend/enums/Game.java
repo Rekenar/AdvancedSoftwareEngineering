@@ -1,10 +1,10 @@
 package com.example.backend.enums;
 
 public enum Game {
-    Game1("Almost Game"),
-    Game2("Game 2"),
+    Game1("Almost-Game"),
+    Game2("Movie-Guessr"),
     Game3("Snake"),
-    Game4("Game 4"),
+    Game4("Typing-Game"),
     Game5("Asteroid");
 
     private final String displayName;
