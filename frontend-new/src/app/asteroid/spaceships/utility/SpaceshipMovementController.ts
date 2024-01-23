@@ -3,12 +3,14 @@ export class SpaceshipMovementController {
   private speed: number;
   private x: number;
   private y: number;
+  private maxSpeed: number;
 
   constructor(x: number, y: number, speed: number, rotation: number) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.rotation = rotation;
+    this.maxSpeed = 4;
   }
 
   rotate(pressedKeys: Set<string>) {
@@ -39,6 +41,10 @@ export class SpaceshipMovementController {
     return this.speed;
   }
 
+  getMaxSpeed(): number {
+    return this.maxSpeed;
+  }
+
   setRotation(rotation: number): void {
     this.rotation = rotation;
   }
@@ -53,6 +59,10 @@ export class SpaceshipMovementController {
 
   setY(y: number): void {
     this.y = y;
+  }
+
+  setMaxSpeed(maxSpeed: number): void {
+    this.maxSpeed = maxSpeed;
   }
 
   setCoordinates(x: number, y: number): void {
@@ -76,7 +86,7 @@ export class SpaceshipMovementController {
     let movementY = this.speed * directionY;
 
     if (pressedKeys.has('ArrowUp')) {
-      if (this.speed < 7) this.speed += 0.5;
+      if (this.speed < this.maxSpeed) this.speed += 0.5;
     }
     if (pressedKeys.has('ArrowDown') && this.speed > 0) {
       this.speed -= 0.1;

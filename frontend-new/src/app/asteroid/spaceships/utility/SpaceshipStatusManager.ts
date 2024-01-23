@@ -1,5 +1,6 @@
 export class SpaceshipStatusManager {
   private lives: number;
+  private maxShots: number;
   private shots: number;
   private killed: boolean;
   private isReloading: boolean;
@@ -9,8 +10,17 @@ export class SpaceshipStatusManager {
   constructor() {
     this.lives = 3;
     this.shots = 10;
+    this.maxShots = 10;
     this.killed = false;
     this.isReloading = false;
+  }
+
+  get getMaxShots(): number {
+    return this.maxShots;
+  }
+
+  setMaxShots() {
+    this.maxShots++;
   }
 
   loseLife(): void {
@@ -25,7 +35,7 @@ export class SpaceshipStatusManager {
     this.isReloading = true;
     setTimeout(() => {
       this.isReloading = false
-      this.shots = 10;
+      this.shots = this.maxShots;
     }, 2000);
   }
 

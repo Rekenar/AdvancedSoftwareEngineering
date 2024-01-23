@@ -1,6 +1,6 @@
 package com.example.backend.dtos;
 
-import com.example.backend.services.Asteroid;
+import com.example.backend.models.Asteroid;
 
 import java.util.List;
 

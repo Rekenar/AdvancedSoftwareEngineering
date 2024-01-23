@@ -15,8 +15,7 @@ export class TripleMagazine extends BaseMagazine {
     let bullet1: IBullet;
     let bullet2: IBullet;
     let bullet3: IBullet;
-    let num = Math.floor(Math.random() * 3);
-    switch (num) {
+    switch (Math.floor(Math.random() * 3)) {
       case 0:
         bullet1 = new SlowBullet(x, y, angle);
         bullet2 = new SlowBullet(x, y, angle + Math.PI / 6);
