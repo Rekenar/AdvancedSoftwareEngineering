@@ -11,7 +11,7 @@ import java.util.List;
 public class HomePage {
     private WebDriver driver;
 
-    @FindBy(how = How.XPATH, using = "//button[contains(., 'Game 1')]")
+    @FindBy(how = How.CLASS_NAME, using = "btnGame1")
     public WebElement game1Button;
 
     public HomePage(WebDriver driver) {
