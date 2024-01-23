@@ -9,34 +9,17 @@ export class MovieGuessrGamestateService {
   selectedMovie: any;
   selectedQuizIndex: number = 0;
   tileData: { category: string, hint: string, cost: number, flipped: boolean }[] = [];
-  roundCount: number = 0; // Initialize round count to 0
+  roundCount: number = -1;
   playedGameIds: number[] = [];
+  movies: any[] = []
 
   constructor() { }
 
   initializeGame() {
     // Initialize the game state
-    const movies: any[] = quizzesData;
+    this.movies = quizzesData;
     // Generate a random index to select a quiz
-
-    if(this.playedGameIds.length >= movies.length) {
-      this.playedGameIds = [];
-    }
-    do (this.selectedQuizIndex = Math.floor(Math.random() * movies.length)); while (this.playedGameIds.includes(this.selectedQuizIndex));
-    this.playedGameIds.push(this.selectedQuizIndex);
-
-
-    // Assign the selected quiz to the property
-    this.selectedMovie = movies[this.selectedQuizIndex];
-
-    // Initialize tileData array with tile information
-    this.tileData = this.selectedMovie.hints.map((hint: any) => ({
-      category: hint.category,
-      hint: hint.hint,
-      cost: hint.cost, // Set the initial cost based on the hint
-      flipped: false, // Initialize as not flipped
-    }));
-
+    this.nextRound()
   }
 
   flipTile(tileIndex: number): boolean {
@@ -61,7 +44,7 @@ export class MovieGuessrGamestateService {
     if (normalizedUserInput === normalizedMovieTitle) {
       this.nextRound();
       this.coinCount += 5;
-      this.initializeGame();
+      //this.initializeGame();
     } else {
       if (this.coinCount > 0) {
         this.coinCount--;
@@ -70,7 +53,23 @@ export class MovieGuessrGamestateService {
   }
 
   nextRound() {
-    // for later use
+    if(this.playedGameIds.length >= this.movies.length) {
+      this.playedGameIds = [];
+    }
+    do (this.selectedQuizIndex = Math.floor(Math.random() * this.movies.length)); while (this.playedGameIds.includes(this.selectedQuizIndex));
+    this.playedGameIds.push(this.selectedQuizIndex);
+
+    // Assign the selected quiz to the property
+    this.selectedMovie = this.movies[this.selectedQuizIndex];
+
+    // Initialize tileData array with tile information
+    this.tileData = this.selectedMovie.hints.map((hint: any) => ({
+      category: hint.category,
+      hint: hint.hint,
+      cost: hint.cost, // Set the initial cost based on the hint
+      flipped: false, // Initialize as not flipped
+    }));
+    this.roundCount++;
   }
 
   resetGame() {
