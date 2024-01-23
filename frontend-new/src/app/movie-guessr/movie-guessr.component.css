@@ -7,7 +7,7 @@
   background-color: #000000;
 }
 
-.coin-count {
+.score-container {
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -34,3 +34,4 @@
 .submit-form {
   padding: 20px;
 }
+
