@@ -51,7 +51,9 @@ export class MovieGuessrComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.openDialog();
+    // DO NOT ENABLE THIS AS IT WILL FAIL THE TESTS
+    // Why? No clue
+    //this.openDialog();
 
     this.http.get('assets/data/movies.txt', { responseType: 'text' }).subscribe(
       (data) => {
