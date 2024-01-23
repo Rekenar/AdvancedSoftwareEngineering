@@ -1,7 +1,11 @@
 <div class="movie-guessr-background">
-  <div class="coin-count">
-    <span class="mat-title">Coins: {{ gameService.coinCount }}</span>
+  <div class="score-container">
+    <span class="mat-title">Coins: {{ gameService.coinCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+    <br>
+    <span class="mat-title">Round: {{ gameService.roundCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
   </div>
+
+
 
   <div class="center-container">
     <!-- Display the selected movie's hints and categories -->

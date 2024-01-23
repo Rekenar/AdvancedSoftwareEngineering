@@ -62,7 +62,6 @@ export class MovieGuessrComponent implements OnInit{
     );
 
     this.gameService.initializeGame();
-    this.gameService.coinCount = 10;
   }
 
   private _filter(value: string): string[] {
