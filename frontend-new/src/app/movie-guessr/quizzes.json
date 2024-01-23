@@ -404,7 +404,7 @@
     "hints": [
       {
         "category": "Setting",
-        "hint": "The narrative unfolds in various locations including an FBI training academy, a maximum-security asylum, and crime scenes.",
+        "hint": "The narrative unfolds in various locations including an FBI training academy.",
         "cost": 4
       },
       {
@@ -419,7 +419,7 @@
       },
       {
         "category": "Character",
-        "hint": "The film features a brilliant but manipulative psychiatrist turned serial killer, who assists in profiling another serial killer.",
+        "hint": "The film features a brilliant but manipulative psychiatrist.",
         "cost": 4
       },
       {
