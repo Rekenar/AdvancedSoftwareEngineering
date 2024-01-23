@@ -1,9 +1,9 @@
 export enum Game {
   NoGame = "No Game",
-  Game1 = "Game 1",
-  Game2 = "Game 2",
-  Game3 = "Game 3",
-  Game4 = "Game 4",
-  Game5 = "Game 5",
+  Game1 = "Almost-Game",
+  Game2 = "Movie-Guessr",
+  Game3 = "Snake",
+  Game4 = "Typing-Game",
+  Game5 = "Asteroid",
   Scoreboard = "Scoreboard"
 }

@@ -25,6 +25,12 @@ table {
   padding: 0 0 0 0;
 }
 
+.mat-elevation-z8 {
+  background-color: white;
+  opacity: 0.95;
+}
+
+
 td, th {
   width: 20%;
 }

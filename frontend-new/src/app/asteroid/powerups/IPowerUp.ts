@@ -10,5 +10,4 @@ export interface IPowerUp {
 
   getHitbox(): IHitbox;
 
-  createIcon(size: number): Path2D;
 }

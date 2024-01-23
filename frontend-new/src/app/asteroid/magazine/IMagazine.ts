@@ -7,9 +7,10 @@ export interface IMagazine {
 
 
   shoot(x: number, y: number, angle: number): void;
-  
+
   drawBullets(): void;
 
   updateBullets(): void;
+
 
 }
