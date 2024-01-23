@@ -32,6 +32,7 @@ import { AlmostModeComponent } from './almost-game/almost-mode/almost-mode.compo
 import {ScoreboardComponent} from "./scoreboard/scoreboard.component";
 import { GameComponent } from './typing-game/game/game.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ResultComponent } from './typing-game/result/result.component';
 
 
 
@@ -48,7 +49,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     AlmostStartComponent,
     AlmostMapComponent,
     AlmostModeComponent,
-    GameComponent
+    GameComponent,
+    ResultComponent
   ],
 
   imports: [

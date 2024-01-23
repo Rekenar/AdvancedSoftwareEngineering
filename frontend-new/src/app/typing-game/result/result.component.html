@@ -1,56 +1,37 @@
-<header>
-    <h2>GAME OVER!</h2>
-   </header>
 
-  <article>
-      
+    <div class="popUpContainer">
+       <header>
+        <h2>GAME OVER!</h2>
+       </header>
 
-        <!-- <p id="score">Score: 0</p>
-        <p id="mistakes">Mistakes: 0</p>
-        <p id="word-per-minute">Words per Minute: 0</p>
-        <p id="accuracy">Accuracy: 100%</p>   -->
-        <div id="container" class="text-center">
-                <div class="row">
-                    <div class="col mx-auto">
-                        <p id="totalScore">Score: 0</p>
-                    </div>
-                    <div class="col mx-auto">
-                        <p id="mistakes">Mistakes: 60s</p>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 50px;">
-                    <div class="col mx-auto">
-                        <p id="word-per-minute">WPM: 0</p>
-                    </div>
-                    <div class="col mx-auto">
-                        <p id="accuracy">Accuracy: 100%</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col" style="margin-left:20%">
-                        <div class = "buttons">
-                            <button id="restart" class="neumorphic" style="width: 30%;">
-                                <i class="fas fa-redo"></i>
-                            <span>Restart</span>
-                            </button>
+      <article>
+            <div id="container" class="text-center">
+                    <div class="row">
+                        <div class="col mx-auto">
+                            <p id="totalScore">Score: {{score}}</p>
+                        </div>
+                        <div class="col mx-auto">
+                            <p id="mistakes">Mistakes: {{mistakes}}s</p>
                         </div>
                     </div>
-                </div>
-        </div>
-        
-            <!-- <button class="neumorphic">
-                <i class="fas fa-redo"></i>
-              <span id="score">Score: 0</span>
-            </button>
-            
-            <br>
-            <button class="neumorphic">
-              <i class="fas fa-redo"></i>
-              <span id="word-per-minute">WPM: 0</span>
-            </button>
-            <button class="neumorphic">
-                <i class="fas fa-redo"></i>
-              <span id="accuracy">Accuracy: 100%</span>
-            </button> -->
-          
-  </article>
+                    <div class="row">
+                        <div class="col mx-auto">
+                            <p id="word-per-minute">WPM: {{wordPerMinute}}</p>
+                        </div>
+                        <div class="col mx-auto">
+                            <p id="accuracy">Accuracy: {{accuracy}}%</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class = "buttons">
+                                <button id="restart" class="neumorphic" (click)="restartGameClick()">
+                                    <i class="fas fa-redo"></i>
+                                    <span class="button-text">Restart</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+      </article>
+   </div>        

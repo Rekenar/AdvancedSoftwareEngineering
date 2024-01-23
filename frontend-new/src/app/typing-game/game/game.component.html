@@ -1,25 +1,34 @@
-<div class="container" style="max-width: 600px; ">
-    <div class="row">
-        <div class="col">
-            <p id="score">Score: {{score}}</p>
-        </div>
-        <div class="col">
-            
-            <p id="multiplier">{{multiplier}}x</p>
-        </div>
-        <div class="col">
-            <p id="time">Time: {{time}}s</p>
-        </div>
-    </div>
-    <main>
-        <section id="game-area">
-            <div id="word-container">
-                
-            </div>
-        </section>
+<app-result *ngIf="showResult" [gameData]="yourGameData" (restartGameClicked)="restartGame()"></app-result>
 
-    </main>
+<div id="content">
+    <div class="blur-container"></div>
+    <div class="container" style="max-width: 600px; ">
+        <div class="row">
+            <div class="col">
+                <p id="score">Score: {{score}}</p>
+            </div>
+            <div class="col">
+                
+                <p id="multiplier">{{multiplier}}x</p>
+            </div>
+            <div class="col">
+                <p id="time">Time: {{time}}s</p>
+            </div>
+        </div>
+        <main>
+            <section id="game-area">
+                <div id="word-container">
+                    
+                </div>
+            </section>
+
+        </main>
+        <input type="text" id="input" [(ngModel)]="inputText" (input)="checkInput($event)" placeholder="Type the falling word..." autocomplete="off">
+    </div>
+    
+  
 </div>
 
-    <input type="text" id="input" [(ngModel)]="inputText" (input)="checkInput($event)" placeholder="Type the falling word..." autocomplete="off">
+
+
 

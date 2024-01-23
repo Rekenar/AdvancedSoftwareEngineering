@@ -1,31 +1,37 @@
-import { Component, OnInit , OnDestroy } from '@angular/core';
+import { Component, OnInit , OnDestroy, Optional, SkipSelf, NgModule, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TypingService } from 'src/app/services/typing.service';
+import { CommunicationService } from 'src/app/services/typing.service';
+import { ResultComponent } from 'src/app/typing-game/result/result.component';
+import { NgZone } from '@angular/core';
+
 
 type AudioFile = string;
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrl: './game.component.css'
+  styleUrls: ['./game.component.css']
 })
 
 
 export class GameComponent implements OnInit, OnDestroy {
+  resultVisible: boolean = true;
+  constructor(private zone: NgZone, private cd: ChangeDetectorRef, @Optional() @SkipSelf() private typingService: TypingService) {
+
+    if (!this.typingService) {
+  
+    }
+  }
+
+  
 
   audioFiles: AudioFile[] =  ['../../../assets/typing-game/Sounds/2.mp3', '../../../assets/typing-game/Sounds/3.mp3', '../../../assets/typing-game/Sounds/4.mp3', '../../../assets/typing-game/Sounds/6.mp3', '../../../assets/typing-game/Sounds/8.mp3', '../../../assets/typing-game/Sounds/9.mp3', '../../../assets/typing-game/Sounds/10.mp3'];
 
-  words: string[] = ["and", "but", "cat", "dog", "run", "fun", "hop", "top", "hat", "eat",
-  "pat", "rat", "bit", "sit", "map", "lip", "cap", "lap", "pen", "hen",
-  "gem", "sun", "one", "two", "red", "led", "fog", "jog", "bug", "mug",
-  "dig", "pig", "jog", "log", "zap", "yap", "nap", "sap", "dad", "add",
-  "ice", "ace", "den", "men", "wet", "jet", "hit", "pit", "lot", "dot",
-  "rot", "cut", "hut", "nut", "bun", "fun", "mud", "bud", "hot", "dot",
-  "pot", "got", "jog", "jog", "box", "fox", "mix", "fix", "bag", "rag",
-  "tag", "jam", "ram", "dam", "ham", "jar", "car", "bar", "tar", "par",
-  "bat", "rat", "fat", "cat", "hat", "mat", "pat", "sat", "vat", "bet",
-  "pet", "get", "set", "jet", "let", "met", "net", "wet", "yet", "hum",
-  "gum", "sum", "rum", "bum", "run", "sun", "fun", "bun", "nun", "gun"
-  ];
+  words: string[] = [];
+  showResult: boolean = false;
+  showGame: boolean = true;
+  yourGameData: any[] = [];
 
   time = 60;
   inputText:string = '';
@@ -41,21 +47,47 @@ export class GameComponent implements OnInit, OnDestroy {
   setTimeoutSeconds = 5000;
   intervalForAnimation: any;
   pause = false;
-
+  something:any;
+  wordContainer:any;
+  
   ngOnInit() {
-    this.newGame();
-    this.timerInterval = setInterval(() => this.updateTimer(), 1000);
+  this.startGame();
+  this.wordContainer = document.getElementById('word-container');
+
+  }
+
+  async getData(): Promise<void> {
+    try {
+      const response = await this.typingService.getAllWords().toPromise();
+      this.something = response;   
+      this.words = this.something.map((item: { word: any }) => item.word);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   }
   
+  async startGame() {
+    try {
+      await this.getData();
+      this.newGame();
+  
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
+
+
+
   ngOnDestroy(): void {
-    // clearInterval(this.timerInterval);
-    // clearInterval(this.intervalForAnimation);
+
   }
 
   newGame(): void {
     if (!this.pause) {
       this.keepInputFocused();
       clearInterval(this.timerInterval);
+      
+      this.timerInterval = setInterval(() => this.updateTimer(), 1000);
       this.time = 60;
       this.index = 0;
       this.score = 0;
@@ -66,48 +98,46 @@ export class GameComponent implements OnInit, OnDestroy {
       this.multiplier = 1;
       this.accuracy = 100;
       this.setTimeoutSeconds = 5000;
-      // this.updateValues();
-      this.createFallingWord();
+      this.inputText ='';
+      this.createFallingWord(); 
     }
   }
 
   createFallingWord() {
-   clearInterval(this.intervalForAnimation);
+    this.resetAnimation(this.setTimeoutSeconds/1000);
+
     const word = document.createElement('div');
     word.className = 'falling-word';
-    word.textContent = this.words[Math.floor(Math.random() * this.words.length)];
-  
-    const wordContainer = document.getElementById('word-container');
-    if (wordContainer) {
-      while (wordContainer.firstChild) {
-        wordContainer.removeChild(wordContainer.firstChild);
-      }
-      
-      wordContainer.appendChild(word);
-      this.intervalForAnimation = setInterval(this.createFallingWord,this.setTimeoutSeconds);
-      // this.resetAnimation(this.setTimeoutSeconds / 1000);
+    const randomWord = Math.floor(Math.random() * this.words.length);
+
+    word.textContent = this.words[randomWord];
+
+    while (this.wordContainer.firstChild) {
+    this.wordContainer.removeChild(this.wordContainer.firstChild);
+    this.resetAnimation(this.setTimeoutSeconds/1000);
     }
+    this.wordContainer.appendChild(word);
+
   }
-  
-  // resetAnimation(duration: number) {
-  //   const wordContainer = document.getElementById('word-container');
-  //   if(wordContainer)
-  //   {
-  //     wordContainer.style.animation = 'none';
-  //     setTimeout(() => {
-  //       wordContainer.style.animation = `fallAnimation ${duration}s linear infinite`;
-  //     }, 50);
-  //   }
-  // }
+
+  resetAnimation(duration:number): void  {
+
+    this.wordContainer.style.animation = 'none';
+    void this.wordContainer.offsetWidth;
+    this.wordContainer.style.animation = '';
+    this.wordContainer.style.animationDuration = `${duration}s`;
+    clearInterval(this.intervalForAnimation);
+    this.intervalForAnimation = setInterval(() => this.createFallingWord(),this.setTimeoutSeconds);
+  }
+
 
   keepInputFocused() {
     const inputElement = document.getElementById('input') as HTMLInputElement;
   
     if (inputElement) {
-      // Immediately focus the input element
+
       inputElement.focus();
-  
-      // Add an event listener to re-focus the input element whenever it loses focus
+
       inputElement.addEventListener('blur', function () {
         inputElement.focus();
       });
@@ -120,64 +150,93 @@ export class GameComponent implements OnInit, OnDestroy {
     audio.play();
   }
 
-   checkInput(event: Event): void {
-    if (!this.pause) {
-      const wordContainer = document.getElementById('word-container');
-      
-      if (wordContainer) {
-        const typedText: string = this.inputText.trim().toLowerCase();
-        const charTyped: string = typedText.charAt(this.index);
-        this.totalTyped++;
-        
-        const wordElements: Element[] = Array.from(wordContainer.getElementsByClassName('falling-word'));
-        for (const wordElement of wordElements) {
-          const wordText: string = (wordElement.textContent || '').toLowerCase();
-          if (charTyped === wordText.charAt(this.index)) {
-            this.typeSound();
-            if (typedText === wordText) {
-              this.score += 10 * this.multiplier;
-              this.index = 0;
-              this.multiplier += 0.2 * wordText.length;
-              this.multiplier = Number(this.multiplier.toFixed(2));
-              wordElement.remove();
-              this.inputText='';
-              this.createFallingWord();
-              if (this.setTimeoutSeconds > 1000) {
-                this.setTimeoutSeconds -= 500;
-              }
-            } else {
-              this.index++; // Move to the next character
-            }
-          } 
-          else {
-            this.inputText = ''; // Clear input on mistake
-            this.index = 0; // Reset index on mistake
-            
-            this.mistakes++;
-            this.multiplier = 1;
-
-            if (this.setTimeoutSeconds < 5000) {
-              this.setTimeoutSeconds += 500;
-            }
+  checkInput(event: Event): void {
+    if (this.pause) {
+      return;
+    }
   
-        //    updateMistakes(mistakesElement);
-            
-          }
+    const typedText: string = this.inputText.trim().toLowerCase();
+    const charTyped: string = typedText.charAt(this.index);
+    this.totalTyped++;
   
-          this.totalScore = this.score - this.mistakes * 10;
+    const wordElements: Element[] = Array.from(this.wordContainer.getElementsByClassName('falling-word'));
+  
+    for (const wordElement of wordElements) {
+      const wordText: string = (wordElement.textContent ?? '').toLowerCase();
+  
+      if (charTyped === wordText.charAt(this.index)) {
+        this.typeSound();
+  
+        if (typedText === wordText) {
+          this.handleCorrectInput(wordElement);
+        } else {
+          this.index++;
         }
+      } else {
+        this.handleIncorrectInput();
       }
     }
   }
+  
+  private handleCorrectInput(wordElement: Element): void {
+    this.score += 10 * this.multiplier;
+    this.index = 0;
+    this.multiplier += 0.2 * (wordElement.textContent?.length ?? 0);
+    this.multiplier = Number(this.multiplier.toFixed(2));
+    wordElement.remove();
+    this.inputText = '';
+    this.createFallingWord();
+    this.setTimeoutSeconds = this.setTimeoutSeconds > 1000 ? this.setTimeoutSeconds - 500 : this.setTimeoutSeconds;
+  }
+  
+  private handleIncorrectInput(): void {
+    this.zone.run(() => {
+      setTimeout(() => {
+        this.inputText = '';
+        this.cd.detectChanges();
+      }, 0);
+    });
+    this.index = 0; 
+    this.mistakes++;
+    this.multiplier = 1;
+    this.setTimeoutSeconds = this.setTimeoutSeconds < 5000 ? this.setTimeoutSeconds + 500 : this.setTimeoutSeconds;
+    
+
+  }
 
   updateTimer() {
-    if(!this.pause)
-    {
-      this.time--;
-      if (this.time === 0) {
-        this.pause = true;
-        this.newGame(); // Reset the game after the timer reaches 0
-      }
+    if (this.pause) {
+      return;
     }
+    this.time--;
+    if (this.time === 0) {
+      clearInterval(this.intervalForAnimation);
+      this.pause = true;
+  
+      this.totalScore = Math.max(this.score - this.mistakes * 10, 0);
+      const minutesElapsed = Math.max((60 - this.time) / 60, 0);
+
+      this.totalScore = this.totalScore > 0 ? this.totalScore: 0;  
+      this.wordPerMinute = minutesElapsed > 0 ? Math.round((this.totalTyped / 5) / minutesElapsed) : 0;
+      this.accuracy = this.totalTyped !== 0 ? Math.round(((this.totalTyped - this.mistakes) / this.totalTyped) * 100) : 0;
+  
+      this.yourGameData = [
+        { totalScore: this.totalScore },
+        { mistakes: this.mistakes },
+        { wordPerminute: this.wordPerMinute },
+        { accuracy: this.accuracy }
+      ];
+
+      this.typingService.postScore(this.totalScore);
+      this.showResult = true;
+      this.showGame = false;
+    }
+  }
+
+  restartGame(){
+
+    this.pause = false;
+    this.showResult = false;
+    this.newGame();
   }
 }

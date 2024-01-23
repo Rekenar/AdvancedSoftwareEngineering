@@ -1,24 +1,3 @@
-body {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    /* background-color: #f0f0f0; */
-
-	/* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
-
-    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 50%);
-
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
-
-    font-family: 'Arial', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 /* #word-container {
     height: 65vh; 
     overflow: hidden;
@@ -49,7 +28,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    text-shadow: 5px 5px 0px #07bccc;
+    text-shadow: 5px 5px 0px #888888;
     font-size: 3em;
     color: #fff; /* Green color for multiplier */
     animation: pulseAnimation 0.5s ease infinite; /* Add a pulse animation */
@@ -77,14 +56,31 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f0f0f0; 
-    font-family: 'Arial', sans-serif;
     display: flex;
     flex-direction: column; /* Align content in a column */
     align-items: center;
     min-height: 100vh;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
+    overflow:hidden;
+     /* Include padding and border in the element's total width and height */
 }
-
+.container{
+    z-index: 1; /* Place it above the blurred background */
+    padding: 20px;
+    background-image: url("../../../assets/typing-game/img/BG.jpg"); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover; /* Ensure the background image covers the entire element */
+    background-repeat: no-repeat; /* Do not repeat the background image */ 
+    overflow: hidden;
+}
+.blur-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); /* Adjust the blur amount as needed */
+  z-index: -1; /* Place it above the content */
+}
 header {
     text-align: center; /* Center align the heading */
     margin: 20px 0; /* Add space above and below the heading */
@@ -105,20 +101,35 @@ header {
     animation: fallAnimation 5s linear infinite;
 } */
 
-#word-container {
+:host {
+  position: relative;
+}
 
-    font-family: 'Roboto', sans-serif; /* Use the custom 'Roboto' font with a fallback to a generic sans-serif font */
-    font-size: 36px; /* Set the font size to 36 pixels */
-    color: #333; /* Set the text color to a dark grey */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a subtle text shadow for a good style */
-    animation: fallAnimation 5s linear infinite; /* Apply the fallAnimation animation to the container */
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-    width: 100%;
-    top: -50px;
-    height: 65vh; 
-    /* Add other styling for the word container as needed */
+/* Adjust this style based on your layout and design */
+app-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Ensure the result component is above the game component */
+}
+
+#word-container {
+  font-family: 'roboto';
+  text-transform: uppercase;
+  font-size: 4rem;
+  font-weight: 500;
+  cursor: default;
+  animation-name: fallAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-timing-function: linear; /* Apply the fallAnimation animation to the container */
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  top: -50px;
+  height: 65vh; 
   }
 
 #input-area {
@@ -153,6 +164,7 @@ footer {
     text-align: center;
     font-family: 'Roboto', sans-serif;
     font-size: 30px;
+    font-weight: bold;
     margin: 5px;
     color: #333;
 }
@@ -183,6 +195,7 @@ footer {
     
     .falling-word {
         font-size: 24px;
+        overflow: hidden;
     }
 
     .info-text {
@@ -197,20 +210,6 @@ a:nth-child(1) {
 
 
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
-
 
   /*Make stuff responsive*/
   
@@ -221,42 +220,6 @@ a:nth-child(1) {
   }
 
 
-
-
-
-
-  
-
-  .falling-word {
-    /*position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
-     font-size: 36px;
-     color: #333;
-     white-space: nowrap;   */
- 
-
-     text-transform: uppercase;
-     transition: all 0.5s;
-     -webkit-text-stroke: 4px #d6f4f4;
-     font-variation-settings: "wght" 900, "ital" 1;
-     font-size: 4rem;
-     text-align: center;
-     color: transparent;
-     font-family: 'Roboto', sans-serif;
-     text-shadow: 10px 10px 0px #07bccc,
-
-       45px 45px 10px #482896;
-     cursor: default;
- 
- 
- }
-
-
- .falling-word:hover {
-    font-variation-settings: "wght" 100, "ital" 0;
-    text-shadow: none;
-  }
 
 
 
@@ -282,9 +245,6 @@ a:nth-child(1) {
     max-width: 600px; /* Maximum width */
  /*   border: none;
     outline: none; /* Remove outline and custom on focus below */
-
-
-
     font-family: 'Roboto', sans-serif;
     color: #333;
     font-size: 1.2rem;
@@ -293,7 +253,7 @@ a:nth-child(1) {
     border-radius: 0.5rem;
     background-color: rgb(255, 255, 255);
     border: none;
-    width: 20%;
+    width: 60%;
     display: block;
     border-bottom: 0.3rem solid transparent;
     transition: all 0.3s;
@@ -307,145 +267,7 @@ a:nth-child(1) {
   }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  #openPopUp{
-    text-align:center;
-    background-color: #1abc9c;
-    padding: 15px 15px;
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 1.5em;
-    border-radius: 3.5px;
-    text-decoration: none;
-    font-weight: 100;
-    transition:background-color 0.15s linear;
-    -webkit-transition:background-color 0.15s linear;
-    -moz-transition:background-color 0.25s linear;
-    -o-transition:background-color 0.25s linear;
-  }
-  a#openPopUp:hover{
-    cursor: pointer;
-    background-color: #1abc9e;
-  }
-  .popup{
-    position: fixed;
-    top: -100vh;
-    left: 0;
-    z-index: 9999999;
-    background: rgba(0,0,0, 0.75);
-    width: 100vw;
-    height: 100vh;
-    opacity: 0;
   
-      -webkit-transition: opacity  0.35s ease;
-      -moz-transition: opacity 0.35s ease;
-      -o-transition: opacity 0.35s ease;
-      transition: opacity 0.35s ease;
-  }
-  .popup .popUpContainer{
-    height: 80%;
-    width: 100%;
-    max-width: 500px;
-    position: fixed; /* To avoid scroll to target */
-    left: 50%;
-    top: -100vh;
-      -webkit-transition: top  0.35s ease;
-      -moz-transition: top 0.35s ease;
-      -o-transition: top 0.35s ease;
-      transition: top 0.35s ease;
-  
-    /* Trick to properly center the element by using negative 
-    1/2 length of element as margin left and top */
-    margin-left: -250px;
-    background-color: #e5e9f4;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    border-radius: 2px;
-    z-index: 9999999; 
-  }
-  .popup h2{
-    padding: 0.5em;
-    text-align: center;
-    color: #444444;
-    margin: 0;
-  }
-  .popup img{
-    width: 100%;
-    display: block;
-  }
-  .popup article{
-      height: 300px;
-    background-color: #e5e9f4;
-  }
-  /* The cancel button on popup dialog */
-  .popup a.closePopUp{
-    font-family: verdana;
-    color: #e74c3c;
-    position: absolute;
-    top: 0.2em;
-    right: 0.375em;
-    margin: 0;
-    padding: 5px;
-    font-weight: bold;
-    font-size: 1.5em;
-    text-decoration: none;
-  }
-  /* The cancel button on popup dialog */
-  .popup a:hover{
-    color: #c0392b;
-  }
-  /* When popup is targeted, by clicking on link with #popup in HTML */
-  .popup:target{
-    opacity: 1;
-    top: 0;
-  }
-  .popup .closePopUpOutSide{
-    position: absolute;
-    left:0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999991; 
-  }
-  .popup:target .popUpContainer{
-    top: 50px;
-      -webkit-transition: top  0.35s ease;
-      -moz-transition: top 0.35s ease;
-      -o-transition: top 0.35s ease;
-      transition: top 0.35s ease;
-  }
-  
-  @media  (max-width: 796px) {
-    .popup .popUpContainer{
-      width: 90%;
-      max-width: none;
-      left: 5%;
-      margin-left: 0;
-    }
-    .popup ul{
-      padding: 0 1em 0 1em;
-    }
-    .popup:target .popUpContainer{
-      top: 25px;
-      -webkit-transition: top  0.35s ease;
-      -moz-transition: top 0.35s ease;
-      -o-transition: top 0.35s ease;
-      transition: top 0.35s ease;
-    }
-  }
-
 
 
 
