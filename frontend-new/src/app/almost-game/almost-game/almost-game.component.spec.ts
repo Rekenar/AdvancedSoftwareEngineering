@@ -20,4 +20,20 @@ describe('AlmostGameComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('onStartClick', () => {
+    it('should set menu to false and mode to true', () => {
+      // Arrange
+      component.menu = true;
+      component.mode = false;
+
+      // Act
+      component.onStartClick();
+
+      // Assert
+      expect(component.menu).toBe(false);
+      expect(component.mode).toBeTruthy();
+    });
+  });
 });
+
