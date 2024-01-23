@@ -1,0 +1,396 @@
+/* #word-container {
+    height: 65vh; 
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    top: -50px;
+    font-size: 36px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    white-space: nowrap;
+    animation: fallAnimation 10s linear infinite;
+} */
+
+
+
+@keyframes fallAnimation {
+    0% {
+        transform: translateY(0);
+        opacity: 100;
+    }
+    100% {
+        transform: translateY(77%);
+    }
+}
+
+#multiplier {
+    
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    text-shadow: 5px 5px 0px #888888;
+    font-size: 3em;
+    color: #fff; /* Green color for multiplier */
+    animation: pulseAnimation 0.5s ease infinite; /* Add a pulse animation */
+    background-image: url("../../../assets/typing-game/img/spiky.png"); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover; /* Ensure the background image covers the entire element */
+    background-repeat: no-repeat; /* Do not repeat the background image */
+    background-position: center; 
+}
+
+@keyframes pulseAnimation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; 
+    display: flex;
+    flex-direction: column; /* Align content in a column */
+    align-items: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow:hidden;
+     /* Include padding and border in the element's total width and height */
+}
+.container{
+    z-index: 1; /* Place it above the blurred background */
+    padding: 20px;
+    background-image: url("../../../assets/typing-game/img/BG.jpg"); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
+    background-size: cover; /* Ensure the background image covers the entire element */
+    background-repeat: no-repeat; /* Do not repeat the background image */ 
+    overflow: hidden;
+}
+.blur-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); /* Adjust the blur amount as needed */
+  z-index: -1; /* Place it above the content */
+}
+header {
+    text-align: center; /* Center align the heading */
+    margin: 20px 0; /* Add space above and below the heading */
+}
+
+#game-area {
+    width: 100%;
+    text-align: center; /* Center align the word container */
+    margin-bottom: 20px; /* Add space below the game area */
+}
+
+/* #word-container {
+    overflow: hidden;
+    position: relative;
+    font-size: 36px;
+    color: #333;
+    white-space: nowrap;
+    animation: fallAnimation 5s linear infinite;
+} */
+
+:host {
+  position: relative;
+}
+
+/* Adjust this style based on your layout and design */
+app-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1; /* Ensure the result component is above the game component */
+}
+
+#word-container {
+  font-family: 'roboto';
+  text-transform: uppercase;
+  font-size: 4rem;
+  font-weight: 500;
+  cursor: default;
+  animation-name: fallAnimation;
+  animation-iteration-count: infinite;
+  animation-duration: 5s;
+  animation-timing-function: linear; /* Apply the fallAnimation animation to the container */
+  overflow: hidden;
+  position: relative;
+  white-space: nowrap;
+  width: 100%;
+  top: -50px;
+  height: 65vh; 
+  }
+
+#input-area {
+    text-align: center; /* Center align the input area */
+}
+
+
+#stats {
+    text-align: center; /* Center align the statistics section */
+    margin-bottom: 20px; /* Add space below the statistics section */
+}
+
+#stats p {
+    margin: 5px; /* Add space around each statistic */
+}
+
+footer {
+    text-align: center; /* Center align the footer */
+    margin-top: 20px; /* Add space above the footer */
+}
+
+
+
+
+
+#score,
+#totalScore,
+#mistakes,
+#word-per-minute,
+#accuracy,
+#time {
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 5px;
+    color: #333;
+}
+
+
+
+/* 
+@font-face {
+    font-family: 'Roboto';
+    src: url('path_to_font_file.woff2') format('woff2'),  
+         url('path_to_font_file.woff') format('woff');  
+    
+  } */
+
+/* Informative Text */
+.info-text {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Responsive Section */
+@media (max-width: 768px) {
+    #input {
+        width: 80%;
+    }
+    
+    .falling-word {
+        font-size: 24px;
+        overflow: hidden;
+    }
+
+    .info-text {
+        font-size: 14px;
+    }
+}
+
+a:nth-child(1) {
+    font-family: Monoton;
+    animation: neon1 1.5s ease-in-out infinite alternate;
+  }
+
+
+
+
+  /*Make stuff responsive*/
+  
+  @media (max-width: 650px) {
+    p {
+      font-size: 3.5em;
+    }
+  }
+
+
+
+
+
+
+ /* @font-face {
+    src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
+      format("woff2");
+    font-family: "Meta";
+    font-style: normal;
+    font-weight: normal;
+  } */
+
+
+
+
+
+
+
+
+  #input {
+ /*    font-size: 16px;
+    padding: 10px;
+    max-width: 600px; /* Maximum width */
+ /*   border: none;
+    outline: none; /* Remove outline and custom on focus below */
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    border: none;
+    width: 60%;
+    display: block;
+    border-bottom: 0.3rem solid transparent;
+    transition: all 0.3s;
+}
+
+.input:placeholder-shown + .input {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transform: translateY(-4rem);
+    transform: translateY(-4rem);
+  }
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+button.neumorphic {
+  container-type: inline-size;
+  aspect-ratio: 1/1;
+  border: 0.5rem solid transparent;
+  border-radius: 1rem;
+  color: hsl(0 0% 10%);
+  background: none;
+  
+  display: grid;
+  place-content: center;
+  gap: 0rem;
+  
+  --shadow: 
+    -.5rem -.5rem 1rem hsl(0 0% 100% / .75),
+    .5rem .5rem 1rem hsl(0 0% 50% / .5);
+  box-shadow: var(--shadow);
+  outline: none;  
+  transition: all 0.1s;
+  
+  &:hover, &:focus-visible {
+    color: hsl(10 80% 50%);
+    scale: 1.1
+  }
+  &:active, &.active{
+    box-shadow:
+      var(--shadow),
+      inset .5rem .5rem 1rem hsl(0 0% 50% / .5),
+      inset -.5rem -.5rem 1rem hsl(0 0% 100% / .75);
+    color: hsl(10 80% 50%);
+    > i { font-size: 28cqi};
+    > span { font-size: 13cqi};
+  }
+
+  >i {
+    font-size: 31cqi;
+  }
+  > span {
+    font-family: system-ui, sans-serif;
+    font-size: 16cqi;
+  }
+}
+
+
+h1 {
+  text-align: center;
+  color: hsl(0 0% 10%);
+  font-family: system-ui, sans-serif;
+  font-size: 3rem;
+}
+.buttons {
+  display: grid;
+  width: min(75rem, 100%);
+  margin-inline: auto;
+  grid-template-columns: repeat(auto-fit, minmax(min(8rem, 100%), 1fr));
+  gap: 2rem;
+  margin-left: 80px;
+  margin-top: 50px;
+
+}
