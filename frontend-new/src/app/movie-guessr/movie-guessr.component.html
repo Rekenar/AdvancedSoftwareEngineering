@@ -1,13 +1,24 @@
 <div class="movie-guessr-background">
   <div class="score-container">
-    <span class="mat-title">Coins: {{ gameService.coinCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+   <span class="mat-title" *ngFor="let life of [].constructor(gameService.lives) ">
+    <img src="assets/images/heart.png" class="heart-icon" alt="♥" width="50" height="50">
+  </span>
     <br>
-    <span class="mat-title">Round: {{ gameService.roundCount.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+    <span class="mat-title">Coins: {{
+        gameService.coinCount.toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        })
+      }}</span>
     <br>
-    <span class="mat-title">Lives: {{ gameService.lives.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false}) }}</span>
+    <span class="mat-title">Round: {{
+        gameService.roundCount.toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        })
+      }}</span>
 
   </div>
-
 
 
   <div class="center-container">
