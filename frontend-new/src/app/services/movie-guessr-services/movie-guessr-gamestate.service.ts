@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import quizzesData from "../../movie-guessr/quizzes.json";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class MovieGuessrGamestateService {
   playedGameIds: number[] = [];
   movies: any[] = []
 
-  constructor() { }
+  constructor(private _snackBar: MatSnackBar) { }
 
   initializeGame() {
     // Initialize the game state
@@ -42,10 +43,12 @@ export class MovieGuessrGamestateService {
     const normalizedMovieTitle = this.selectedMovie.title.trim().toLowerCase();
 
     if (normalizedUserInput === normalizedMovieTitle) {
+      this.openSnackBar("Correct! +5 coins.", "Nice!")
       this.nextRound();
       this.coinCount += 5;
       //this.initializeGame();
     } else {
+      this.openSnackBar("Incorrect movie!", "try again!");
       if (this.coinCount > 0) {
         this.coinCount--;
       }
@@ -75,5 +78,11 @@ export class MovieGuessrGamestateService {
   resetGame() {
     this.roundCount = 0;
     this.coinCount = 10;
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 }
