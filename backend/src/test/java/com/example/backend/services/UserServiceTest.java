@@ -1,14 +1,17 @@
 package com.example.backend.services;
 
+import com.example.backend.TestHelper;
 import com.example.backend.dtos.UserDetailsDTO;
 import com.example.backend.models.UserEntity;
 import com.example.backend.repositories.UserRepo;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +20,8 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+
 @ExtendWith(MockitoExtension.class)
 class UserServiceTest {
 
@@ -27,36 +31,36 @@ class UserServiceTest {
     @Mock
     private PasswordEncoder passwordEncoder;
 
+    @Mock
+    private ConfirmSignUpTokenService confirmSignUpTokenService;
+
     @InjectMocks
     private UserService userService;
+    private UserEntity mockUser;
+
+    @BeforeEach
+    void setUp() {
+        mockUser = TestHelper.createUserEntity();
+    }
 
     @Test
-    void loadUserByUsernameWhenUserExists() {
-        String username = "testUser";
-        UserEntity mockUser = new UserEntity();
-        mockUser.setUsername(username);
-        when(userRepo.findByUsername(username)).thenReturn(Optional.of(mockUser));
-
-        UserDetails result = userService.loadUserByUsername(username);
-
-        assertEquals(username, result.getUsername());
+    void loadUserByUsernameWhenUserExistsReturnUserDetails() {
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.of(mockUser));
+        UserDetails result = userService.loadUserByUsername(mockUser.getUsername());
+        assertEquals(mockUser.getUsername(), result.getUsername());
     }
 
     @Test
     void loadUserByUsernameWhenUserNotExists() {
-        String username = "testUser";
-        when(userRepo.findByUsername(username)).thenReturn(Optional.empty());
-        assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername(username));
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.of(mockUser));
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.empty());
+        assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername(mockUser.getUsername()));
     }
 
     @Test
     void whenLoadUserIdByUsernameThenReturnUserId() throws Exception {
-        String username = "testUser";
-        UserEntity user = new UserEntity();
-        user.setId(1L);
-
-        when(userRepo.findByUsername(username)).thenReturn(Optional.of(user));
-        Long userId = userService.loadUserIdByUsername(username);
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.of(mockUser));
+        Long userId = userService.loadUserIdByUsername(mockUser.getUsername());
 
         assertNotNull(userId);
         assertEquals(1L, userId);
@@ -65,18 +69,17 @@ class UserServiceTest {
     @Test
     void whenUsernameNotFoundThenThrowException() {
 
-        String username = "notExistingUser";
-        when(userRepo.findByUsername(username)).thenReturn(Optional.empty());
+        String nonExistingUser = "notExistingUser";
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.empty());
 
-        assertThrows(Exception.class, () -> {
-            userService.loadUserIdByUsername(username);
-        });
+        assertThrows(Exception.class, () -> userService.loadUserIdByUsername(nonExistingUser));
     }
 
     @Test
-    void whenCreateUserThenUserIsSaved() throws Exception {
-        UserDetailsDTO newUser = createUser();
-        UserEntity userEntity = createUserEntity(newUser);
+    void whenCreateUserThenUserIsSaved() {
+        UserDetailsDTO newUser = TestHelper.createMockUserDto();
+        newUser.setEnabled(false);
+        UserEntity userEntity = TestHelper.createUserEntity(newUser);
 
         // for check if User already present -> returns empty
         when(userRepo.findByUsername(newUser.getUsername())).thenReturn(Optional.empty());
@@ -91,33 +94,56 @@ class UserServiceTest {
         assertFalse(savedUser.isDeleted());
     }
 
-    private static UserEntity createUserEntity(UserDetailsDTO newUser) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(newUser.getUsername());
-        userEntity.setPassword(newUser.getPassword());
-        userEntity.setEnabled(newUser.isEnabled());
-        userEntity.setDeleted(newUser.isDeleted());
-        return userEntity;
-    }
 
-    private static UserDetailsDTO createUser() {
-        UserDetailsDTO newUser = new UserDetailsDTO();
-        newUser.setUsername("user@user.at");
-        newUser.setPassword("user1234");
-        newUser.setEnabled(false);
-        newUser.setDeleted(false);
-        return newUser;
-    }
 
     @Test
-    void whenCreateExistingUserThenThrowException() throws Exception {
-        UserDetailsDTO existingUser = createUser();
+    void whenCreateExistingUserThenThrowException() {
+        UserDetailsDTO existingUser = TestHelper.createMockUserDto();
 
         when(userRepo.findByUsername(existingUser.getUsername())).thenReturn(Optional.of(new UserEntity()));
 
-        assertThrows(BadCredentialsException.class, () -> {
-            userService.createUser(existingUser);
-        });
+        assertThrows(BadCredentialsException.class, () -> userService.createUser(existingUser));
+    }
+
+    @Test
+    void whenConfirmUserSignUpThenUserIsEnabled() throws Exception {
+        String mockToken = "mockToken";
+        mockUser.setEnabled(false);
+
+        userService.confirmUserSignUp(mockUser, mockToken);
+
+        assertTrue(mockUser.isEnabled(), "User should be enabled after confirmation");
+
+        verify(confirmSignUpTokenService).deleteConfirmSignUpToken(mockToken);
+    }
+
+    @Test
+    void testConvertUserDetailsToUserDetailsDTO() {
+        UserDetails userDetails = User.withUsername("testuser@user.at")
+                .password("user1234")
+                .build();
+        UserDetailsDTO dto = userService.convertUserDetailsToUserDetailsDTO(userDetails);
+
+        assertEquals("testuser@user.at", dto.getUsername());
+        assertEquals("user1234", dto.getPassword());
+    }
+
+    @Test
+    void whenLoadUserEntityByUsernameWithExistingUserThenAssertEqualUsernames() {
+        UserEntity mockUser = TestHelper.createUserEntity();
+
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.of(mockUser));
+
+        UserEntity result = userService.loadUserEntityByUsername(mockUser.getUsername());
+
+        assertEquals(mockUser.getUsername(), result.getUsername());
+    }
+
+    @Test
+    void whenLoadUserEntityByUsernameWithNonExistingUserThenThrowUsernameNotFoundException() {
+        when(userRepo.findByUsername(mockUser.getUsername())).thenReturn(Optional.empty());
+
+        assertThrows(UsernameNotFoundException.class, () -> userService.loadUserEntityByUsername(mockUser.getUsername()));
     }
 
 

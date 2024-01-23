@@ -35,8 +35,12 @@ import {MatListModule} from "@angular/material/list";
 
 import {AsteroidComponent} from "./asteroid/asteroid.component";
 
-import {PreviewComponent} from "./preview/preview.component";
 import {SnakegameModule} from "./snakegame/snakegame.module";
+
+import { GameComponent } from './typing-game/game/game.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ResultComponent } from './typing-game/result/result.component';
+import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
 
 @NgModule({
@@ -52,6 +56,8 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
     AlmostStartComponent,
     AlmostMapComponent,
     AlmostModeComponent,
+    GameComponent,
+    ResultComponent,
     PasswordResetComponent,
     ConfirmSignUpComponent,
     ChangePasswordComponent
@@ -75,8 +81,9 @@ import {SnakegameModule} from "./snakegame/snakegame.module";
     SnakegameModule,
     LeafletModule,
     ScoreboardComponent,
+    TooltipModule.forRoot(),
     AsteroidComponent,
-    PreviewComponent
+    MovieGuessrComponent
   ],
 
   providers: [],

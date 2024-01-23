@@ -1,0 +1,5 @@
+<div class="tile-wrapper tile" [style.background-color]="backgroundColor" [class.flip]="flipped" (click)="flipTile()">
+  <div class="hint">
+    {{ !flipped ? hintName : hint }}
+  </div>
+</div>

@@ -1,0 +1,36 @@
+.movie-guessr-background {
+  background-image: url('../../assets/images/movie-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  /* Set a background color as a fallback */
+  background-color: #000000;
+}
+
+.coin-count {
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.center-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-layout-custom{
+  min-width: 700px;
+}
+
+.custom-tile-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.submit-form {
+  padding: 20px;
+}
