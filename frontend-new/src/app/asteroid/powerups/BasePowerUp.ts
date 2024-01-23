@@ -29,7 +29,7 @@ export abstract class BasePowerUp implements IPowerUp {
 
   draw(context: CanvasRenderingContext2D): void {
     context.fillStyle = "yellow";
-    context.arc(this.x, this.y, 20, 0, 2 * Math.PI);
+    context.fillRect(this.x, this.y, this.width, this.height);
     context.fill();
   }
 
@@ -38,8 +38,5 @@ export abstract class BasePowerUp implements IPowerUp {
   getHitbox(): IHitbox {
     return this.hitbox;
   }
-
-  abstract createIcon(size: number): Path2D
-
 
 }

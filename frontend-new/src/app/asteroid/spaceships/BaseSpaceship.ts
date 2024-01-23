@@ -75,6 +75,22 @@ export abstract class BaseSpaceship implements ISpaceship {
     return this.spaceshipRenderer.getContext;
   }
 
+  get getMaxSpeed(): number {
+    return this.spaceshipMovementController.getMaxSpeed();
+  }
+
+  setMagazineCapacity(): void {
+    this.statusManager.setMaxShots();
+  }
+
+  getMagazineCapacity(): number {
+    return this.statusManager.getMaxShots;
+  }
+
+  setMaxSpeed(maxSpeed: number) {
+    this.spaceshipMovementController.setMaxSpeed(maxSpeed);
+  }
+
   setMagazine(magazine: IMagazine) {
     this.magazine = magazine;
   }

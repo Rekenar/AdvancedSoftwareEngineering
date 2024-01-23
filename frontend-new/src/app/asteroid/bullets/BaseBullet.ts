@@ -7,7 +7,6 @@ export abstract class BaseBullet implements IBullet {
   protected y: number;
   protected readonly speed: number;
   protected angle: number;
-  protected debug: boolean = false;
   private hitbox: IHitbox;
 
   protected constructor(x: number, y: number, speed: number, angle: number) {
@@ -16,7 +15,6 @@ export abstract class BaseBullet implements IBullet {
     this.speed = speed;
     this.angle = angle;
     this.hitbox = new CircleHitbox(this.x, this.y, 3);
-    this.debug = true;
   }
 
   get getX(): number {
@@ -27,13 +25,17 @@ export abstract class BaseBullet implements IBullet {
     return this.y;
   }
 
+
+  setHitbox(hitbox: IHitbox) {
+    this.hitbox = hitbox;
+  }
+
+
   drawBullet(context: CanvasRenderingContext2D) {
     let path = new Path2D()
     path.arc(this.x, this.y, 3, 0, 2 * Math.PI);
     context.fillStyle = '#FFFFFF';
     context.fill(path);
-    if (this.debug)
-      this.hitbox.draw(context);
   }
 
   getHitbox(): IHitbox {

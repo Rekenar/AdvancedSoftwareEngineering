@@ -1,4 +1,4 @@
-package com.example.backend.services;
+package com.example.backend.models;
 
 public class Asteroid{
     private int x;

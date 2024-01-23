@@ -3,6 +3,7 @@ import {SlowBullet} from "../bullets/SlowBullet";
 import {NormalBullet} from "../bullets/NormalBullet";
 import {FastBullet} from "../bullets/FastBullet";
 import {IBullet} from "../bullets/IBullet";
+import {RandomBullet} from "../bullets/RandomBullet";
 
 export class NormalMagazine extends BaseMagazine {
   constructor(context: CanvasRenderingContext2D) {
@@ -12,8 +13,8 @@ export class NormalMagazine extends BaseMagazine {
 
   override shoot(x: number, y: number, angle: number): void {
     let bullet: IBullet;
-    let num = Math.floor(Math.random() * 3);
-    switch (num) {
+
+    switch (Math.floor(Math.random() * 3)) {
       case 0:
         bullet = new SlowBullet(x, y, angle);
         break;
@@ -24,7 +25,7 @@ export class NormalMagazine extends BaseMagazine {
         bullet = new FastBullet(x, y, angle);
         break;
       default:
-        bullet = new NormalBullet(x, y, angle);
+        bullet = new RandomBullet(x, y, angle);
         break;
     }
     this.bullets.push(bullet);

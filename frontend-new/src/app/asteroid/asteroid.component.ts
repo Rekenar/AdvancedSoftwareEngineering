@@ -12,7 +12,8 @@ import {interval, Subscription} from "rxjs";
 import {IPowerUp} from "./powerups/IPowerUp";
 import {SpeedPowerUp} from "./powerups/SpeedPowerUp";
 import {TripleMagazinePowerUp} from "./powerups/TripleMagazinePowerUp";
-
+import {IncomingPowerUpDTO} from "./powerups/PowerUpDTO";
+import {MagazineCapacityPowerUp} from "./powerups/MagazineCapacityPowerUp";
 
 @Component({
   selector: 'app-asteroid',
@@ -39,7 +40,11 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
   private asteroidSubscription: Subscription;
 
-  private asteroidInterval = 10000;
+  private asteroidInterval = 15000;
+
+  private powerUpInterval = 5000;
+
+  private powerUpSubscription: Subscription;
 
   private score = 0;
 
@@ -53,14 +58,18 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     this.initializeCanvas();
     this.setupEventListeners();
     this.fetchAsteroids();
+    this.fetchPowerUps();
     this.spaceShip = new NormalSpaceship(this.context, innerWidth / 2, innerHeight / 2, 0, 0);
-    this.createPowerUps();
+
   }
 
   ngOnDestroy(): void {
     // Unsubscribe to prevent memory leak
     if (this.asteroidSubscription) {
       this.asteroidSubscription.unsubscribe();
+    }
+    if (this.powerUpSubscription) {
+      this.powerUpSubscription.unsubscribe();
     }
   }
 
@@ -101,6 +110,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     const keydownListener = () => {
       this.gameRunning = true;
       this.asteroidSubscription = interval(this.asteroidInterval).subscribe(() => this.fetchAsteroids());
+      this.powerUpSubscription = interval(this.powerUpInterval).subscribe(() => this.fetchPowerUps());
       this.gameLoop();
       // Remove the keydown listener after it's been triggered once
       window.removeEventListener('keydown', keydownListener);
@@ -111,6 +121,12 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   private fetchAsteroids(): void {
     this.createAsteroid().subscribe(data => {
       this.processAsteroidData(data);
+    });
+  }
+
+  private fetchPowerUps(): void {
+    this.createPowerUps().subscribe(data => {
+      this.processPowerUpData(data);
     });
   }
 
@@ -201,6 +217,12 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
       if (this.spaceShip.getHitbox().intersects(asteroid.getHitbox())) {
         this.spaceShip.loseLife(this.context.canvas.width, this.context.canvas.height);
+        this.powerUps = [];
+        this.asteroids = [];
+        setTimeout(() => {
+          this.fetchAsteroids();
+          this.fetchPowerUps();
+        }, 2000);
       }
 
 
@@ -244,6 +266,12 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     this.context.fillText('Score: ' + this.score, this.context.canvas.width / 2, this.context.canvas.height / 2 + 50)
   }
 
+  private createPowerUps() {
+    const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("auth-token"));
+
+    return this.http.get<IncomingPowerUpDTO>('http://localhost:8080/api/power-up/' + window.innerWidth + '/' + window.innerHeight, {headers});
+  }
+
   private createAsteroid() {
     const headers = new HttpHeaders().set("Authorization", "Bearer " + localStorage.getItem("auth-token"));
 
@@ -255,6 +283,13 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
 
     return this.http.post(`http://localhost:8080/scores/add/5/${this.score}`, null, {headers});
+  }
+
+  private processPowerUpData(data: IncomingPowerUpDTO): void {
+    if (data.error === null) {
+      this.createPowerUpsFromDTO(data);
+    }
+
   }
 
   private processAsteroidData(data: IncomingAsteroidDTO): void {
@@ -279,8 +314,28 @@ export class AsteroidComponent implements OnInit, OnDestroy {
     });
   }
 
-  private createPowerUps() {
-    this.powerUps.push(new SpeedPowerUp(100, 100));
-    this.powerUps.push(new TripleMagazinePowerUp(200, 200));
+
+  private createPowerUpsFromDTO(data: IncomingPowerUpDTO) {
+    console.log(data);
+    data.powerUp.forEach(powerUp => {
+      switch (powerUp.type) {
+        case 1:
+          this.powerUps.push(new SpeedPowerUp(powerUp.x, powerUp.y));
+          break;
+        case 2:
+          this.powerUps.push(new TripleMagazinePowerUp(powerUp.x, powerUp.y));
+          break;
+        case 3:
+          this.powerUps.push(new MagazineCapacityPowerUp(powerUp.x, powerUp.y));
+          break;
+        case 4:
+          this.powerUps.push(new SpeedPowerUp(powerUp.x, powerUp.y));
+          break;
+        case 5:
+          this.powerUps.push(new MagazineCapacityPowerUp(powerUp.x, powerUp.y));
+          break;
+      }
+    });
+
   }
 }
