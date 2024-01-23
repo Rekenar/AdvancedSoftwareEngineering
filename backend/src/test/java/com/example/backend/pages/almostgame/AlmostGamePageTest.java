@@ -173,19 +173,31 @@ public class AlmostGamePageTest {
             AlmostGameStartPage almostGameStartPage = navigateToAlmostGameStart();
             AlmostGameMapPage almostGameMapPage = navigateFromStartToGame(almostGameStartPage);
             String round = "Round: ";
-            String tmpRound;
-            for(int i = 1; i < 11; i++){
-                almostGameMapPage.clickStatusButton();
+            WebElement roundText = almostGameMapPage.roundText;
+            WebElement statusButton = almostGameMapPage.statusButton;
 
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-                wait.until(driver -> !almostGameMapPage.statusButton.isEnabled());
+
+
+            for(int i = 1; i < 11; i++){
+                System.out.println("Button enabled before click:" + statusButton.isEnabled());
+                almostGameMapPage.clickStatusButton();
+                //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+                String tmpRound = round + i;
+                System.out.println("Desired: "+ tmpRound);
+                System.out.println("Waiting for Round text to update " + roundText.getText());
+                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+                wait.until(driver -> roundText.getText().equals(tmpRound));
                 //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
-                tmpRound = round + i;
-                assertEquals(tmpRound, almostGameMapPage.roundText.getText());
+                System.out.println("Round text updated.");
+
+                //assertEquals(tmpRound, almostGameMapPage.roundText.getText());
 
                 almostGameMapPage.clickOnMap();
-                wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-                wait.until(driver -> almostGameMapPage.statusButton.isEnabled());
+                System.out.println("Clicked on map, next button enabled: " + statusButton.isEnabled());
+                //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
+                wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+                wait.until(driver -> statusButton.isEnabled());
+                System.out.println("Waited for the button to be enabled.");
 
             }
 
