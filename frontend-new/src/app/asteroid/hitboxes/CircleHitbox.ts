@@ -2,6 +2,7 @@ import {BaseHitbox} from "./BaseHitbox";
 import {IHitbox} from "./IHitbox";
 import {RectangleHitbox} from "./RectangleHitbox";
 
+
 export class CircleHitbox extends BaseHitbox {
 
   private radius: number;
@@ -36,4 +37,6 @@ export class CircleHitbox extends BaseHitbox {
     context.strokeStyle = 'blue';
     context.stroke();
   }
+
+
 }

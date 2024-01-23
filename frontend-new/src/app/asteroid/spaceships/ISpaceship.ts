@@ -10,6 +10,8 @@ export interface ISpaceship {
 
   getSpeed: number;
 
+  getMaxSpeed: number;
+
   getBullets: IMagazine;
 
   getLives: number;
@@ -29,6 +31,12 @@ export interface ISpaceship {
   getContext: CanvasRenderingContext2D;
 
   setSpeed(speed: number): void;
+
+  setMaxSpeed(maxSpeed: number): void;
+
+  setMagazineCapacity(): void;
+
+  getMagazineCapacity(): number;
 
   setMagazine(magazine: IMagazine): void;
 

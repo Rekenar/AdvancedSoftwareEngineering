@@ -8,6 +8,7 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {Game} from "../game.enum";
 
 @Component({
   selector: 'app-scoreboard',
@@ -67,6 +68,8 @@ export class ScoreboardComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  protected readonly Game = Game;
 }
 
 

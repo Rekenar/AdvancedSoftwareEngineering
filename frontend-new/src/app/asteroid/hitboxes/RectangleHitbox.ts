@@ -26,8 +26,7 @@ export class RectangleHitbox extends BaseHitbox {
         otherHitbox.x + otherHitbox.width < this.x ||
         otherHitbox.y > this.y + this.height ||
         otherHitbox.y + otherHitbox.height < this.y);
-    }
-    if (otherHitbox instanceof CircleHitbox) {
+    } else if (otherHitbox instanceof CircleHitbox) {
       let deltaX = otherHitbox.getX - Math.max(this.x, Math.min(otherHitbox.getX, this.x + this.width));
       let deltaY = otherHitbox.getY - Math.max(this.y, Math.min(otherHitbox.getY, this.y + this.height));
       return (deltaX * deltaX + deltaY * deltaY) < (otherHitbox.getRadius * otherHitbox.getRadius);
@@ -40,4 +39,6 @@ export class RectangleHitbox extends BaseHitbox {
     context.strokeStyle = 'red';
     context.strokeRect(this.x, this.y, this.width, this.height);
   }
+
+
 }
