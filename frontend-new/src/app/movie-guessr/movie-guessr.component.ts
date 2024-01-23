@@ -37,7 +37,7 @@ export class MovieGuessrComponent implements OnInit{
   myControl = new FormControl('');
   options: string[] = [];
   filteredOptions: Observable<string[]>;
-
+//
   ngOnInit(): void {
 
     this.http.get('assets/data/movies.txt', { responseType: 'text' }).subscribe(
