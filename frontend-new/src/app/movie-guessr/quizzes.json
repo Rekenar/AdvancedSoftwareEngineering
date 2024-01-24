@@ -1548,7 +1548,211 @@
         "cost": 2
       }
     ]
+  },
+  {
+    "title": "E.T. the Extra-Terrestrial",
+    "hints": [
+      {
+        "category": "Plot badly explained",
+        "hint": "A young botanist helps an illegal alien hide from the government.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A glowing fingertip.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "\"E.T. phone home.\"",
+        "cost": 5
+      },
+      {
+        "category": "Setting",
+        "hint": "Suburban California in the 1980s.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by Steven Spielberg.",
+        "cost": 4
+      },
+      {
+        "category": "Actor of a side character",
+        "hint": "C. Thomas Howell",
+        "cost": 2
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "This film famously caused a surge in the sales of a particular type of candy.",
+        "cost": 4
+      },
+      {
+        "category": "Music",
+        "hint": "The memorable score was composed by John Williams.",
+        "cost": 3
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Features a memorable bike flight across the moon.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Kingsman: The Secret Service",
+    "hints": [
+      {
+        "category": "Plot badly explained",
+        "hint": "A young man joins a tailor shop that offers more than just suits.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A deadly umbrella and sophisticated gadgets disguised as gentleman's accessories.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "\"Manners maketh man.\"",
+        "cost": 5
+      },
+      {
+        "category": "Setting",
+        "hint": "The story takes place in modern-day Britain and features a secret spy organization.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by Matthew Vaughn.",
+        "cost": 4
+      },
+      {
+        "category": "Actor of a side character",
+        "hint": "Mark Strong",
+        "cost": 2
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "This film is known for revitalizing the spy genre with a more modern, stylized, and comedic approach.",
+        "cost": 4
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Notable for its over-the-top action scenes and a controversial church fight sequence.",
+        "cost": 5
+      },
+      {
+        "category": "Genre",
+        "hint": "A blend of action, comedy, and spy thriller.",
+        "cost": 3
+      }
+    ]
+  },
+  {
+    "title": "Skyfall",
+    "hints": [
+      {
+        "category": "Plot badly explained",
+        "hint": "A government employee with a troubled past goes home to resolve a work dispute.",
+        "cost": 3
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A vintage car with an ejector seat.",
+        "cost": 4
+      },
+      {
+        "category": "Famous Line",
+        "hint": "\"Sometimes the old ways are the best.\"",
+        "cost": 5
+      },
+      {
+        "category": "Setting",
+        "hint": "The story spans from Istanbul to the Scottish Highlands.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by Sam Mendes.",
+        "cost": 4
+      },
+      {
+        "category": "Actor of a side character",
+        "hint": "Ben Whishaw as Q",
+        "cost": 2
+      },
+      {
+        "category": "Cultural Impact",
+        "hint": "Marked the 50th anniversary of a long-running and iconic film franchise.",
+        "cost": 4
+      },
+      {
+        "category": "Theme",
+        "hint": "Examines themes of aging, obsolescence, and loyalty in a high-stakes profession.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A fight scene is silhouetted against neon-lit Shanghai skyscrapers.",
+        "cost": 5
+      }
+    ]
+  },
+  {
+    "title": "Fight Club",
+    "hints": [
+      {
+        "category": "Plot badly explained",
+        "hint": "A man with insomnia starts a very unusual hobby with a charismatic soap salesman.",
+        "cost": 3
+      },
+      {
+        "category": "Famous Quote",
+        "hint": "\"The first rule _______... .\"",
+        "cost": 4
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by David Fincher.",
+        "cost": 3
+      },
+      {
+        "category": "Setting",
+        "hint": "Mostly set in underground locations and a dilapidated house.",
+        "cost": 2
+      },
+      {
+        "category": "Character Hint",
+        "hint": "The narrator, an insomniac office worker, and Tyler Durden, a soap salesman.",
+        "cost": 3
+      },
+      {
+        "category": "Actor of a side character",
+        "hint": "Meat Loaf",
+        "cost": 1
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "A scene where the protagonist's apartment is destroyed in a mysterious explosion.",
+        "cost": 4
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Known for its twist ending and exploration of themes like consumerism, identity, and masculinity.",
+        "cost": 3
+      },
+      {
+        "category": "Cinematography",
+        "hint": "Features a distinctive visual style with dark, gritty, and fast-paced editing.",
+        "cost": 2
+      }
+    ]
   }
+
+
+
+
 
 
 
