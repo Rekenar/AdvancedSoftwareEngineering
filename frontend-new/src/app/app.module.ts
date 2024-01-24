@@ -44,8 +44,8 @@ import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
 import { StartComponent } from './typing-game/start/start.component';
 
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+
+
 
 
 
