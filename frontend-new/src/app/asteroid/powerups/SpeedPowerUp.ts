@@ -7,8 +7,18 @@ export class SpeedPowerUp extends BasePowerUp {
   }
 
   override draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "yellow";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    super.draw(context);
+
+    context.beginPath();
+    context.moveTo(this.x + 15, this.y + 10);
+    context.lineTo(this.x + 15, this.y + 30);
+    context.lineTo(this.x + 30, this.y + 20);
+    context.closePath()
+
+    context.strokeStyle = 'white';
+    context.lineWidth = 2;
+    context.stroke();
+
   }
 
 

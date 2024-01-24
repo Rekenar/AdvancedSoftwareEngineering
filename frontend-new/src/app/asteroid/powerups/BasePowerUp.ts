@@ -28,9 +28,13 @@ export abstract class BasePowerUp implements IPowerUp {
 
 
   draw(context: CanvasRenderingContext2D): void {
-    context.fillStyle = "yellow";
-    context.fillRect(this.x, this.y, this.width, this.height);
+    context.beginPath();
+    context.rect(this.getX, this.getY, this.width, this.height); // x, y, width, height
+    context.fillStyle = 'black';
     context.fill();
+    context.lineWidth = 2;
+    context.strokeStyle = 'white';
+    context.stroke();
   }
 
   abstract apply(spaceship: ISpaceship): void;

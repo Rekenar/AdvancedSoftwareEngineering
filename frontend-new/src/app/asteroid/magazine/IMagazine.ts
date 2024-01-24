@@ -11,6 +11,4 @@ export interface IMagazine {
   drawBullets(): void;
 
   updateBullets(): void;
-
-
 }
