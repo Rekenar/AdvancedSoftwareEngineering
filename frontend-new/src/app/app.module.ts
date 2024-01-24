@@ -42,6 +42,12 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ResultComponent } from './typing-game/result/result.component';
 import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 
+import { StartComponent } from './typing-game/start/start.component';
+
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+
+
 
 @NgModule({
   declarations: [
@@ -58,6 +64,7 @@ import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
     AlmostModeComponent,
     GameComponent,
     ResultComponent,
+    StartComponent,
     PasswordResetComponent,
     ConfirmSignUpComponent,
     ChangePasswordComponent
@@ -83,7 +90,9 @@ import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
     ScoreboardComponent,
     TooltipModule.forRoot(),
     AsteroidComponent,
-    MovieGuessrComponent
+    MovieGuessrComponent,
+    MatDialogModule,
+    MatSnackBarModule,
   ],
 
   providers: [],

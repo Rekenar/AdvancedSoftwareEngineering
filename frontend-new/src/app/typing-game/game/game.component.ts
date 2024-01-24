@@ -1,4 +1,4 @@
-import { Component, OnInit , OnDestroy, Optional, SkipSelf, NgModule, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit , OnDestroy, Optional, SkipSelf, NgModule, ChangeDetectorRef ,Renderer2, ElementRef, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TypingService } from 'src/app/services/typing.service';
 import { CommunicationService } from 'src/app/services/typing.service';
@@ -15,21 +15,21 @@ type AudioFile = string;
 })
 
 
-export class GameComponent implements OnInit, OnDestroy {
+export class GameComponent implements OnInit, OnDestroy  {
   resultVisible: boolean = true;
-  constructor(private zone: NgZone, private cd: ChangeDetectorRef, @Optional() @SkipSelf() private typingService: TypingService) {
+  constructor(private renderer: Renderer2, private el: ElementRef, private zone: NgZone, private cd: ChangeDetectorRef, @Optional() @SkipSelf() private typingService: TypingService) {
 
     if (!this.typingService) {
   
     }
   }
 
-  
 
   audioFiles: AudioFile[] =  ['../../../assets/typing-game/Sounds/2.mp3', '../../../assets/typing-game/Sounds/3.mp3', '../../../assets/typing-game/Sounds/4.mp3', '../../../assets/typing-game/Sounds/6.mp3', '../../../assets/typing-game/Sounds/8.mp3', '../../../assets/typing-game/Sounds/9.mp3', '../../../assets/typing-game/Sounds/10.mp3'];
 
   words: string[] = [];
   showResult: boolean = false;
+  showStart:boolean = true;
   showGame: boolean = true;
   yourGameData: any[] = [];
 
@@ -51,9 +51,7 @@ export class GameComponent implements OnInit, OnDestroy {
   wordContainer:any;
   
   ngOnInit() {
-  this.startGame();
   this.wordContainer = document.getElementById('word-container');
-
   }
 
   async getData(): Promise<void> {
@@ -69,21 +67,21 @@ export class GameComponent implements OnInit, OnDestroy {
   async startGame() {
     try {
       await this.getData();
+      this.showStart=false;
       this.newGame();
-  
     } catch (error) {
       console.error('Error:', error);
     }
   }
-
-
 
   ngOnDestroy(): void {
 
   }
 
   newGame(): void {
-    if (!this.pause) {
+    if (this.pause) {
+      return;
+    }
       this.keepInputFocused();
       clearInterval(this.timerInterval);
       
@@ -100,7 +98,7 @@ export class GameComponent implements OnInit, OnDestroy {
       this.setTimeoutSeconds = 5000;
       this.inputText ='';
       this.createFallingWord(); 
-    }
+    
   }
 
   createFallingWord() {
@@ -130,14 +128,10 @@ export class GameComponent implements OnInit, OnDestroy {
     this.intervalForAnimation = setInterval(() => this.createFallingWord(),this.setTimeoutSeconds);
   }
 
-
   keepInputFocused() {
     const inputElement = document.getElementById('input') as HTMLInputElement;
-  
     if (inputElement) {
-
       inputElement.focus();
-
       inputElement.addEventListener('blur', function () {
         inputElement.focus();
       });
@@ -150,6 +144,11 @@ export class GameComponent implements OnInit, OnDestroy {
     audio.play();
   }
 
+  isAlphabetic(input: string): boolean {
+    const alphabetRegex = /^[a-zA-Z]*$/;
+    return alphabetRegex.test(input);
+  }
+
   checkInput(event: Event): void {
     if (this.pause) {
       return;
@@ -157,28 +156,32 @@ export class GameComponent implements OnInit, OnDestroy {
   
     const typedText: string = this.inputText.trim().toLowerCase();
     const charTyped: string = typedText.charAt(this.index);
-    this.totalTyped++;
   
-    const wordElements: Element[] = Array.from(this.wordContainer.getElementsByClassName('falling-word'));
+    if (this.isAlphabetic(this.inputText)) {
+      this.totalTyped++;
+      const wordElements: Element[] = Array.from(this.wordContainer.getElementsByClassName('falling-word'));
   
-    for (const wordElement of wordElements) {
-      const wordText: string = (wordElement.textContent ?? '').toLowerCase();
+      for (const wordElement of wordElements) {
+        const wordText: string = (wordElement.textContent ?? '').toLowerCase();
   
-      if (charTyped === wordText.charAt(this.index)) {
-        this.typeSound();
+        if (charTyped === wordText.charAt(this.index)) {
+          this.typeSound();
   
-        if (typedText === wordText) {
-          this.handleCorrectInput(wordElement);
+          if (typedText === wordText) {
+            this.handleCorrectInput(wordElement);
+          } else {
+            this.index++;
+          }
         } else {
-          this.index++;
+          this.handleIncorrectInput();
         }
-      } else {
-        this.handleIncorrectInput();
       }
+    } else {
+      this.clearInput();
     }
   }
   
-  private handleCorrectInput(wordElement: Element): void {
+   handleCorrectInput(wordElement: Element): void {
     this.score += 10 * this.multiplier;
     this.index = 0;
     this.multiplier += 0.2 * (wordElement.textContent?.length ?? 0);
@@ -189,19 +192,21 @@ export class GameComponent implements OnInit, OnDestroy {
     this.setTimeoutSeconds = this.setTimeoutSeconds > 1000 ? this.setTimeoutSeconds - 500 : this.setTimeoutSeconds;
   }
   
-  private handleIncorrectInput(): void {
+   handleIncorrectInput(): void {
+    this.clearInput();
+    this.index = 0; 
+    this.mistakes++;
+    this.multiplier = 1;
+    this.setTimeoutSeconds = this.setTimeoutSeconds < 5000 ? this.setTimeoutSeconds + 500 : this.setTimeoutSeconds;
+  }
+
+  clearInput(){
     this.zone.run(() => {
       setTimeout(() => {
         this.inputText = '';
         this.cd.detectChanges();
       }, 0);
     });
-    this.index = 0; 
-    this.mistakes++;
-    this.multiplier = 1;
-    this.setTimeoutSeconds = this.setTimeoutSeconds < 5000 ? this.setTimeoutSeconds + 500 : this.setTimeoutSeconds;
-    
-
   }
 
   updateTimer() {

@@ -1,17 +1,3 @@
-/* #word-container {
-    height: 65vh; 
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    top: -50px;
-    font-size: 36px;
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    white-space: nowrap;
-    animation: fallAnimation 10s linear infinite;
-} */
-
-
 
 @keyframes fallAnimation {
     0% {
@@ -62,14 +48,16 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     overflow:hidden;
-     /* Include padding and border in the element's total width and height */
 }
+
+
+
 .container{
-    z-index: 1; /* Place it above the blurred background */
+    z-index: 1;
     padding: 20px;
-    background-image: url("../../../assets/typing-game/img/BG.jpg"); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
-    background-size: cover; /* Ensure the background image covers the entire element */
-    background-repeat: no-repeat; /* Do not repeat the background image */ 
+    background-image: url("../../../assets/typing-game/img/BG.jpg"); 
+    background-size: cover; 
+    background-repeat: no-repeat; 
     overflow: hidden;
 }
 .blur-container {
@@ -78,13 +66,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(5px); /* Adjust the blur amount as needed */
+  backdrop-filter: blur(10px);
   z-index: -1; /* Place it above the content */
 }
-header {
-    text-align: center; /* Center align the heading */
-    margin: 20px 0; /* Add space above and below the heading */
-}
+
+
 
 #game-area {
     width: 100%;
@@ -92,26 +78,25 @@ header {
     margin-bottom: 20px; /* Add space below the game area */
 }
 
-/* #word-container {
-    overflow: hidden;
-    position: relative;
-    font-size: 36px;
-    color: #333;
-    white-space: nowrap;
-    animation: fallAnimation 5s linear infinite;
-} */
 
 :host {
   position: relative;
 }
 
-/* Adjust this style based on your layout and design */
+
 app-result {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1; /* Ensure the result component is above the game component */
+}
+app-start{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
 }
 
 #word-container {
@@ -128,31 +113,13 @@ app-result {
   position: relative;
   white-space: nowrap;
   width: 100%;
-  top: -50px;
+  top: -25px;
   height: 65vh; 
   }
 
 #input-area {
     text-align: center; /* Center align the input area */
 }
-
-
-#stats {
-    text-align: center; /* Center align the statistics section */
-    margin-bottom: 20px; /* Add space below the statistics section */
-}
-
-#stats p {
-    margin: 5px; /* Add space around each statistic */
-}
-
-footer {
-    text-align: center; /* Center align the footer */
-    margin-top: 20px; /* Add space above the footer */
-}
-
-
-
 
 
 #score,
@@ -170,14 +137,6 @@ footer {
 }
 
 
-
-/* 
-@font-face {
-    font-family: 'Roboto';
-    src: url('path_to_font_file.woff2') format('woff2'),  
-         url('path_to_font_file.woff') format('woff');  
-    
-  } */
 
 /* Informative Text */
 .info-text {
@@ -208,9 +167,6 @@ a:nth-child(1) {
     animation: neon1 1.5s ease-in-out infinite alternate;
   }
 
-
-
-
   /*Make stuff responsive*/
   
   @media (max-width: 650px) {
@@ -220,31 +176,7 @@ a:nth-child(1) {
   }
 
 
-
-
-
-
- /* @font-face {
-    src: url("https://www.axis-praxis.org/fonts/webfonts/MetaVariableDemo-Set.woff2")
-      format("woff2");
-    font-family: "Meta";
-    font-style: normal;
-    font-weight: normal;
-  } */
-
-
-
-
-
-
-
-
   #input {
- /*    font-size: 16px;
-    padding: 10px;
-    max-width: 600px; /* Maximum width */
- /*   border: none;
-    outline: none; /* Remove outline and custom on focus below */
     font-family: 'Roboto', sans-serif;
     color: #333;
     font-size: 1.2rem;

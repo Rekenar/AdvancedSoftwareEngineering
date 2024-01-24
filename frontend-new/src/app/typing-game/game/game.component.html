@@ -1,4 +1,6 @@
 <app-result *ngIf="showResult" [gameData]="yourGameData" (restartGameClicked)="restartGame()"></app-result>
+<app-start *ngIf="showStart" (startGameClicked)="startGame()"></app-start>
+
 
 <div id="content">
     <div class="blur-container"></div>
