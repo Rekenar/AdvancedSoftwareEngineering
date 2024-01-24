@@ -106,9 +106,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   private setupEventListeners(): void {
     this.renderer.listen('window', 'keydown', (event) => this.handleKeyDown(event));
     this.renderer.listen('window', 'keyup', (event) => this.handleKeyUp(event));
-    this.renderer.listen('window', 'click', (event) => this.handleClickEvent(event));
     const keydownListener = () => {
-      this.gameRunning = true;
       this.asteroidSubscription = interval(this.asteroidInterval).subscribe(() => this.fetchAsteroids());
       this.powerUpSubscription = interval(this.powerUpInterval).subscribe(() => this.fetchPowerUps());
       this.gameLoop();
@@ -147,19 +145,6 @@ export class AsteroidComponent implements OnInit, OnDestroy {
   }
 
 
-  private createStartScreen() {
-    //Create Start Screen with buttons for start and settings
-
-
-  }
-
-  private handleClickEvent(event: MouseEvent) {
-    //Check if mouse is over start button or settings button
-    //If mouse is over start button, start game
-    //If mouse is over settings button, open settings
-
-  }
-
   private drawBackground() {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
     this.context.fillStyle = '#000000';
@@ -168,7 +153,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
 
   private gameLoop() {
-    if (!this.gameRunning || this.spaceShip.getLives <= 0) {
+    if (this.spaceShip.getLives <= 0) {
       this.sendScore().subscribe();
       this.gameOverScreen();
       return;
