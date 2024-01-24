@@ -1,6 +1,6 @@
 import {Component, ElementRef, HostListener, OnDestroy, OnInit, Renderer2} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {IncomingAsteroidDTO} from "./asteroids/IncomingAsteroidDTO";
+import {IncomingAsteroidDTO} from "./DTO/IncomingAsteroidDTO";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {IAsteroid} from "./asteroids/IAsteroid";
 import {SmallAsteroid} from './asteroids/SmallAsteroid';
@@ -12,7 +12,7 @@ import {interval, Subscription} from "rxjs";
 import {IPowerUp} from "./powerups/IPowerUp";
 import {SpeedPowerUp} from "./powerups/SpeedPowerUp";
 import {TripleMagazinePowerUp} from "./powerups/TripleMagazinePowerUp";
-import {IncomingPowerUpDTO} from "./powerups/PowerUpDTO";
+import {IncomingPowerUpDTO} from "./DTO/PowerUpDTO";
 import {MagazineCapacityPowerUp} from "./powerups/MagazineCapacityPowerUp";
 
 @Component({
@@ -42,7 +42,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
   private asteroidInterval = 15000;
 
-  private powerUpInterval = 5000;
+  private powerUpInterval = 8000;
 
   private powerUpSubscription: Subscription;
 
@@ -126,6 +126,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
   private fetchPowerUps(): void {
     this.createPowerUps().subscribe(data => {
+
       this.processPowerUpData(data);
     });
   }
@@ -316,7 +317,7 @@ export class AsteroidComponent implements OnInit, OnDestroy {
 
 
   private createPowerUpsFromDTO(data: IncomingPowerUpDTO) {
-    console.log(data);
+    this.powerUps = [];
     data.powerUp.forEach(powerUp => {
       switch (powerUp.type) {
         case 1:
