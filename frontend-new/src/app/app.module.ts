@@ -44,6 +44,12 @@ import {MovieGuessrComponent} from "./movie-guessr/movie-guessr.component";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 
+import { StartComponent } from './typing-game/start/start.component';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -60,6 +66,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     AlmostModeComponent,
     GameComponent,
     ResultComponent,
+    StartComponent,
     PasswordResetComponent,
     ConfirmSignUpComponent,
     ChangePasswordComponent

@@ -1,9 +1,4 @@
-/* Style for the overlay background */
-.overlay {
 
-}
-
-/* Style for the popUpContainer */
 .popUpContainer {
   background: white;
   border-radius: 10px;
@@ -12,23 +7,17 @@
   text-align: center;
 }
 
-/* Style for the close button */
 .closeButton {
   position: absolute;
   top: 10px;
   right: 10px;
   cursor: pointer;
 }
-/* styles.css or your component's CSS file */
 
-/* styles.css or your component's CSS file */
-
-/* Style for the restart button container */
 .buttons {
   text-align: center;
 }
 
-/* Style for the restart button */
 .buttons button {
   background-color: #4CAF50;
   color: white;
@@ -41,7 +30,7 @@
 }
 
 .buttons button i {
-  margin-right: 8px; /* Adjust the margin based on your preference */
+  margin-right: 8px; 
 }
 
 .button-text {
@@ -51,11 +40,3 @@
 .buttons button:hover {
   background-color: #45a049;
 }
-
-
-/* Media query for responsiveness */
-/* @media (max-width: 600px) {
-  .popUpContainer {
-    width: 80%;
-  }
-} */
