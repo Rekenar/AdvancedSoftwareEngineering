@@ -60,7 +60,9 @@ export class ScoreboardComponent implements OnInit {
 
   applyGameFilter(game: string) {
     this.dataSource.filterPredicate = (data: Score, filter: string) => {
+
       return data.game.toLowerCase() === filter.toLowerCase();
+      
     };
     this.dataSource.filter = game.trim().toLowerCase();
 
