@@ -1,35 +1,28 @@
 package com.example.backend.services;
 
-import com.example.backend.models.AlmostCityEntity;
-import com.example.backend.repositories.AlmostCityRepo;
+import com.example.backend.repositories.TypingRepo;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-class AlmostCityServiceTest {
+class TypingGameServiceTest {
 
     @Mock
-    private AlmostCityRepo almostCityRepo;
+    private TypingRepo typingRepo;
 
     @InjectMocks
-    private AlmostCityService almostCityService;
+    private TypingService typingService;
     @Test
-    void loadSampleCities() {
-        almostCityService.loadSampleCities();
-        verify(almostCityRepo, times(1)).sampleCities();
+    void loadAllWords() {
+        typingService.loadAllWords();
+        verify(typingRepo, times(1)).findAll();
     }
 
-    @Test
-    void loadSampleCapitals() {
-        almostCityService.loadSampleCapitals();
-        verify(almostCityRepo, times(1)).sampleCapitals();
-    }
+
 }
