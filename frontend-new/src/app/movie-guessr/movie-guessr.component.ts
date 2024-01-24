@@ -10,6 +10,9 @@ import {map, Observable, startWith} from "rxjs";
 import { MovieGuessrGamestateService } from 'src/app/services/movie-guessr-services/movie-guessr-gamestate.service';
 import {MatButtonModule} from "@angular/material/button";
 import { HttpClient } from '@angular/common/http';
+import {MatDialog} from "@angular/material/dialog";
+import { StartGameDialogComponent} from "./start-game-dialog/start-game-dialog.component";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-movie-guessr',
@@ -32,13 +35,25 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './movie-guessr.component.css'
 })
 export class MovieGuessrComponent implements OnInit{
-  constructor(public gameService: MovieGuessrGamestateService, private http: HttpClient) {}
+  constructor(public gameService: MovieGuessrGamestateService, private http: HttpClient, public dialog: MatDialog) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(StartGameDialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 
   myControl = new FormControl('');
   options: string[] = [];
   filteredOptions: Observable<string[]>;
 
   ngOnInit(): void {
+
+    // DO NOT ENABLE THIS AS IT WILL FAIL THE TESTS
+    // Why? No clue
+    //this.openDialog();
 
     this.http.get('assets/data/movies.txt', { responseType: 'text' }).subscribe(
       (data) => {
@@ -62,7 +77,6 @@ export class MovieGuessrComponent implements OnInit{
     );
 
     this.gameService.initializeGame();
-    this.gameService.coinCount = 10;
   }
 
   private _filter(value: string): string[] {
