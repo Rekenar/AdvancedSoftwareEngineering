@@ -22,7 +22,7 @@ export class MovieGuessrGamestateService {
 
   initializeGame() {
     // Initialize the game state
-    this.roundCount = 0;
+    this.roundCount = -1;
     this.coinCount = 10;
     this.lives = 5;
     this.movies = quizzesData;
@@ -89,7 +89,7 @@ export class MovieGuessrGamestateService {
   }
 
   resetGame() {
-    this.roundCount = 0;
+    this.roundCount = -1;
     this.coinCount = 10;
     this.initializeGame()
   }
