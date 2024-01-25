@@ -1,0 +1,18 @@
+<div id="map"></div>
+<div id="map-ui">
+    <div id="ui-el">
+        <button (click)="quitClicked()" id="quit-button"><p>Quit</p></button>
+    </div>
+    <div id="ui-el">
+        <p id="round">Round: {{ round }}</p>
+    </div>
+    <div id="ui-el">
+        <p id="info">{{ infoString }}</p>
+    </div>
+    <div id="ui-el">
+        <p id="time">Time: </p><p>{{ timeLeftString }}</p>
+    </div>
+    <div id="ui-el">
+        <button (click)="nextClicked()" [disabled]="nextDisabled" id="status-button"><p>{{ statusButton[this.status] }}</p></button>
+    </div>
+</div>

@@ -24,7 +24,7 @@ public class ConfirmSignUpTokenService {
 
 
     public boolean validateConfirmPasswordToken(String token) throws Exception {
-        System.out.println("In validateConfirmPasswordToken: " + token);
+        //System.out.println("In validateConfirmPasswordToken: " + token);
         final Calendar cal = Calendar.getInstance();
         Optional<ConfirmSignUpTokenEntity> entity = confirmSignUpTokenRepo.findByToken(token);
         entity.orElseThrow(Exception::new); //PasswordResetTokenNotFoundException

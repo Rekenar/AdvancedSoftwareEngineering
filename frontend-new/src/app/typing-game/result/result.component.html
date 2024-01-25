@@ -1,0 +1,35 @@
+
+    <div class="popUpContainer">
+       <header>
+        <h2>GAME OVER!</h2>
+       </header>
+        <div id="container" class="text-center">
+                <div class="row">
+                    <div class="col mx-auto">
+                        <p id="totalScore">Score: {{score}}</p>
+                    </div>
+                    <div class="col mx-auto">
+                        <p id="mistakes">Mistakes: {{mistakes}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mx-auto">
+                        <p id="word-per-minute">WPM: {{wordPerMinute}}</p>
+                    </div>
+                    <div class="col mx-auto">
+                        <p id="accuracy">Accuracy: {{accuracy}}%</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class = "buttons">
+                            <button id="restart" class="neumorphic" (click)="restartGameClick()">
+                                <i class="fas fa-redo"></i>
+                                <span class="button-text">Restart</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    
+   </div>        

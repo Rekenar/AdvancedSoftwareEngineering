@@ -1,0 +1,31 @@
+
+
+#image-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+
+}
+
+img {
+    margin: 5% auto;
+    max-width: 50%;
+    height: auto;
+    background-color:rgba(255, 255, 255, 0.4);
+    padding: 2%;
+}
+
+button {
+    border: none;
+    appearance: none;
+    background-color: inherit;
+    cursor: url('../../../assets/images/marker-cursor.png'),auto;
+}
+
+#attr-button {
+    margin-top: 5%;
+    width: 50%;
+}
+
+

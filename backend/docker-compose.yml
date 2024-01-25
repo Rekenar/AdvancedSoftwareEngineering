@@ -10,7 +10,7 @@ services:
     environment:
       MYSQL_USER: user
       MYSQL_DATABASE: 'minigameshub_mysql_db'
-      MYSQL_PASSWORD: user
+      MYSQL_PASSWORD: 123456
       MYSQL_ROOT_PASSWORD: 123456
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: 123456
@@ -20,3 +20,20 @@ services:
       - ./database:/docker-entrypoint-initdb.d
     security_opt:
       - seccomp:unconfined
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml 
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes:
+      - ./monitoring/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources

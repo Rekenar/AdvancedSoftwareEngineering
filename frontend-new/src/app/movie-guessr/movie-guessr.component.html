@@ -1,0 +1,56 @@
+<div class="movie-guessr-background">
+  <div class="score-container">
+   <span class="mat-title" *ngFor="let life of [].constructor(gameService.lives) ">
+    <img src="assets/images/heart.png" class="heart-icon" alt="♥" width="50" height="50">
+  </span>
+    <br>
+    <span class="mat-title">
+      <img src="assets/images/coin.png" class="coin-icon" alt="$" width="50" height="50">
+      {{
+        gameService.coinCount.toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        })
+      }}</span>
+    <br>
+    <span class="mat-title">Correct: {{
+        gameService.roundCount.toLocaleString('en-US', {
+          minimumIntegerDigits: 2,
+          useGrouping: false
+        })
+      }}</span>
+
+  </div>
+
+
+  <div class="center-container">
+    <!-- Display the selected movie's hints and categories -->
+    <div class="game-container">
+      <mat-grid-list cols="3" rowHeight="1:1" class="grid-layout-custom">
+        <mat-grid-tile *ngFor="let hint of gameService.selectedMovie.hints; let i = index">
+          <div class="custom-tile-wrapper">
+            <app-tile [hintName]="hint.category + ' (Cost: ' + hint.cost + ')' " [hint]="hint.hint" [index]="i"></app-tile>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+
+    <form class="submit-form" (submit)="onInputSubmitted(myControl.value)">
+      <mat-form-field class="example-full-width">
+        <mat-label>Movie Name</mat-label>
+        <input class="submit-box"
+               type="text"
+               placeholder="at least 3 characters"
+               aria-label="movie-name"
+               matInput
+               [formControl]="myControl"
+               [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">{{ option }}</mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <br>
+      <button class="submit-button" mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+  </div>
+</div>

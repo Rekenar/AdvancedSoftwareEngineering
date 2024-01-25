@@ -18,7 +18,7 @@ export class AuthGuard {
   ): boolean {
     if (!this.authService.isLoggedIn) {
       console.log("not-logged-in");
-      window.alert('Zugriff nicht erlaubt! Keine aktive Session vorhanden. Bitte melden Sie sich erneut an.');
+      window.alert('Access denied! No present session. Please login again.');
       this.router.navigate(['/login']);
       return false;
     }
