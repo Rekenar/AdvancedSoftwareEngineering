@@ -1748,7 +1748,58 @@
         "cost": 2
       }
     ]
+  },
+  {
+    "title": "Dunkirk",
+    "hints": [
+      {
+        "category": "Plot badly explained",
+        "hint": "An intense beach holiday with unexpected fireworks and impromptu boating.",
+        "cost": 4
+      },
+      {
+        "category": "Iconic Object",
+        "hint": "A small, private boat becomes a vessel of hope amidst chaos.",
+        "cost": 5
+      },
+      {
+        "category": "Famous Line",
+        "hint": "\"At the point of crisis, at the point of annihilation, survival is victory.\"",
+        "cost": 4
+      },
+      {
+        "category": "Setting",
+        "hint": "A French beach and the English Channel become the stage for a historic event.",
+        "cost": 3
+      },
+      {
+        "category": "Unique Feature",
+        "hint": "Known for its minimal dialogue and intense focus on visual storytelling.",
+        "cost": 3
+      },
+      {
+        "category": "Director",
+        "hint": "Directed by a filmmaker renowned for his innovative approach to storytelling and visuals.",
+        "cost": 2
+      },
+      {
+        "category": "Actor of a side character",
+        "hint": "Tom Hardy.",
+        "cost": 3
+      },
+      {
+        "category": "Memorable Scene",
+        "hint": "An intense aerial dogfight with a view of the vast ocean below.",
+        "cost": 5
+      },
+      {
+        "category": "Character Hint",
+        "hint": "A young soldier desperate to get home by any means necessary.",
+        "cost": 4
+      }
+    ]
   }
+
 
 
 
