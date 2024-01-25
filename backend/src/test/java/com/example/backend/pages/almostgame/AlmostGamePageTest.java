@@ -167,7 +167,7 @@ public class AlmostGamePageTest {
         }
     }
 
-    /*
+
     // this test seems to be erratic
     @Test
     public void oneGamePlaythroughTest(){
@@ -177,10 +177,35 @@ public class AlmostGamePageTest {
             String round = "Round: ";
             WebElement roundText = almostGameMapPage.roundText;
             WebElement statusButton = almostGameMapPage.statusButton;
+            int cnt = 0;
+            int rndCnt = 1;
 
+            while(rndCnt != 11 || cnt == 20){
+                System.out.println("Button enabled before click:" + statusButton.isEnabled());
+                if(statusButton.isEnabled()){
+                    almostGameMapPage.clickStatusButton();
+                }
 
+                String tmpRound = round + rndCnt;
+                System.out.println("Desired: "+ tmpRound);
+                System.out.println("Waiting for Round text to update " + roundText.getText());
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
 
-            for(int i = 1; i < 11; i++){
+                if(roundText.getText().equals(tmpRound)){
+                    System.out.println("Round text updated.");
+                    rndCnt++;
+                }else{
+                    System.out.println("Round text not updated!");
+                }
+
+                almostGameMapPage.clickOnMap();
+                driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
+                System.out.println("Waited for the button to be enabled.");
+
+                cnt++;
+            }
+
+            /*for(int i = 1; i < 11; i++){
                 System.out.println("Button enabled before click:" + statusButton.isEnabled());
                 almostGameMapPage.clickStatusButton();
                 //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
@@ -208,7 +233,7 @@ public class AlmostGamePageTest {
                 wait.until(driver -> statusButton.isEnabled());
                 System.out.println("Waited for the button to be enabled.");
 
-            }
+            }*/
 
             assertEquals("Round: 0",almostGameMapPage.roundText.getText());
             assertEquals("Restart",almostGameMapPage.statusButton.getText());
@@ -220,7 +245,7 @@ public class AlmostGamePageTest {
             e.printStackTrace();
             throw new AssertionError("Almost Game playthrough failed.");
         }
-    }*/
+    }
 
 
     @AfterEach
