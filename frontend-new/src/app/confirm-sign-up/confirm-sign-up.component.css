@@ -7,7 +7,6 @@
   padding: 2rem 1rem;
 }
 
-.text {
-  text-align: center;
-  margin-top: 2rem;
+.confirm-signup-container{
+  padding-top: 40px;
 }
