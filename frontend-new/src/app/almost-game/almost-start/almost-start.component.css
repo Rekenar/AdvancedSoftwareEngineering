@@ -18,10 +18,9 @@ img {
 
 button {
     border: none;
-    cursor: pointer;
     appearance: none;
     background-color: inherit;
-    cursor: url('../../../assets/images/marker-cursor.png'), auto;
+    cursor: url('../../../assets/images/marker-cursor.png'),auto;
 }
 
 #attr-button {

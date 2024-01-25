@@ -22,7 +22,7 @@
           <mat-label> Password</mat-label>
           <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required minlength="8">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
+                  [attr.aria-pressed]="hide" type="button">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
           <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
@@ -41,7 +41,6 @@
       <p>Dont't have an account? <a routerLink="/register">Create one now!</a></p>
       <mat-divider></mat-divider>
       <div class="links">
-        <a routerLink="/home">Home</a>
         <a routerLink="/users/reset-password">Reset password</a>
       </div>
     </mat-card-content>
