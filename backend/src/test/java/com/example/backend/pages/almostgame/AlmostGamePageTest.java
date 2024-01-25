@@ -168,7 +168,6 @@ public class AlmostGamePageTest {
     }
 
 
-    // this test seems to be erratic
     @Test
     public void oneGamePlaythroughTest(){
         try {
@@ -204,36 +203,6 @@ public class AlmostGamePageTest {
 
                 cnt++;
             }
-
-            /*for(int i = 1; i < 11; i++){
-                System.out.println("Button enabled before click:" + statusButton.isEnabled());
-                almostGameMapPage.clickStatusButton();
-                //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
-                String tmpRound = round + i;
-                System.out.println("Desired: "+ tmpRound);
-                System.out.println("Waiting for Round text to update " + roundText.getText());
-                //click again if the click was not registered
-                if(!roundText.getText().equals(tmpRound)){
-                    almostGameMapPage.clickStatusButton();
-                }
-                WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-                wait.until(driver -> roundText.getText().equals(tmpRound));
-                //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
-                System.out.println("Round text updated.");
-
-                //assertEquals(tmpRound, almostGameMapPage.roundText.getText());
-                almostGameMapPage.clickOnMap();
-                System.out.println("Clicked on map, next button enabled: " + statusButton.isEnabled());
-                //click again if the click was not registered
-                if(!statusButton.isEnabled()){
-                    almostGameMapPage.clickOnMap();
-                }
-                //driver.manage().timeouts().implicitlyWait(Duration.ofMillis(200));
-                wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-                wait.until(driver -> statusButton.isEnabled());
-                System.out.println("Waited for the button to be enabled.");
-
-            }*/
 
             assertEquals("Round: 0",almostGameMapPage.roundText.getText());
             assertEquals("Restart",almostGameMapPage.statusButton.getText());
