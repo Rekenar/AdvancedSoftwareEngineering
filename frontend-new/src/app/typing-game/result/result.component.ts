@@ -1,7 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { TypingService } from 'src/app/services/typing.service';
-import { CommunicationService } from 'src/app/services/typing.service';
 
 @Component({
   selector: 'app-result',
@@ -13,7 +10,7 @@ export class ResultComponent {
   wordPerMinute = 0;
   accuracy = 0;
   score = 0;
-  @Input() gameData: any[] = [];;
+  @Input() gameData: any[] = [];
   @Output() restartGameClicked: EventEmitter<void> = new EventEmitter<void>();
 
   ngOnInit(): void {
@@ -40,6 +37,6 @@ export class ResultComponent {
   restartGameClick(): void {
     this.restartGameClicked.emit();
   }
-  
-  
+
+
 }
